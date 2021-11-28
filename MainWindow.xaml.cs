@@ -22,8 +22,6 @@ namespace Sekretariat_szkoły_WPF
         {
             OpenFileDialog LoadFile = new OpenFileDialog()
             {
-                CheckFileExists = true,
-                CheckPathExists = true,
                 DefaultExt = "txt",
                 Filter = "Text Files (.txt)|*.txt|All files (*.*)|*.*",
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
@@ -52,7 +50,14 @@ namespace Sekretariat_szkoły_WPF
 
         private void SaveIntoDatabase(string type, string data)
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\" + type + ".txt");
+            string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\");
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            path += type + ".txt";
 
             if (!File.Exists(path))
             {
