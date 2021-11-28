@@ -1,17 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Sekretariat_szkoły_WPF
 {
@@ -23,6 +16,50 @@ namespace Sekretariat_szkoły_WPF
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void LoadFromFile(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog LoadFile = new OpenFileDialog()
+            {
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = "txt",
+                Filter = "Text Files (.txt)|*.txt|All files (*.*)|*.*",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+            };
+
+            if(LoadFile.ShowDialog() == true)
+            {
+                IEnumerable<string> lines = File.ReadLines(LoadFile.FileName, Encoding.UTF8);
+
+                foreach(string line in lines)
+                {
+                    string Type = line.Substring(0,1);
+                    string RestOfData = line.Substring(2);
+
+                    Dictionary<string, string> types = new Dictionary<string, string>()
+                    {
+                        {"U", "Uczniowie"},
+                        {"N", "Nauczyciele" },
+                        {"P", "Pracownicy_obslugi" }
+                    };
+
+                    SaveIntoDatabase(types.GetValueOrDefault(Type), RestOfData);
+                }
+            }
+        }
+
+        private void SaveIntoDatabase(string type, string data)
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\" + type + ".txt");
+
+            if (!File.Exists(path))
+            {
+                File.Create(path).Dispose();
+            }
+
+            File.AppendAllText(path, data + Environment.NewLine);
         }
     }
 }
