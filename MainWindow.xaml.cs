@@ -66,7 +66,7 @@ namespace Sekretariat_szkoły_WPF
                     {
                         var pola = line.Split("\t").ToList();
 
-                        teachers.Add(new Nauczyciel()
+                        var teacher = new Nauczyciel()
                         {
                             Id = pola[0],
                             Imie = pola[1],
@@ -76,13 +76,16 @@ namespace Sekretariat_szkoły_WPF
                             Imie_matki = pola[5],
                             Imie_ojca = pola[6],
                             Pesel = pola[7],
+                            Zdjecie_url = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + pola[8]),
                             Plec = pola[9],
                             Data_urodzenia = pola[10],
                             Wychowawstwo = Convert.ToBoolean(pola[11]),
                             Przedmioty = pola[12],
                             Ile_naucza = pola[13],
                             Data_zatrudnienia = pola[14]
-                        });
+                        };
+
+                        teachers.Add(teacher);
                     }
                 }
             }
