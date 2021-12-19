@@ -7,14 +7,78 @@
         Title="Sekretariat szkolny"
         Width="1000"
         Height="600"
-        ResizeMode="NoResize">
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        FontSize="15">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="19*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="26*"/>
         </Grid.RowDefinitions>
-        <ToolBar>
-            <Button Name="LoadFromFileButton"  Content="Wczytaj z pliku" Click="LoadFromFile"/>
+        <Menu>
+            <MenuItem Header="Test"/>
+            <MenuItem Header="Test2"/>
+        </Menu>
+        <ToolBar Grid.Row="1" ToolBarTray.IsLocked="True">
+            <Button Name="LoadFromFileButton"  Content="Wczytaj z pliku" Click="LoadFromFileToDB"/>
         </ToolBar>
+        <TabControl Grid.Row="2">
+            <TabItem Header="Wyświetl nauczycieli">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid Grid.Column="1" Name="DG_Dane" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Imię" Binding="{Binding Imie}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Drugie imię" Binding="{Binding Imie_drugie}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nazwisko" Binding="{Binding Nazwisko}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nazwisko panieńskie" Binding="{Binding Nazwisko_panienskie}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Imię matki" Binding="{Binding Imie_matki}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Imię ojca" Binding="{Binding Imie_ojca}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="PESEL" Binding="{Binding Pesel}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Płeć" Binding="{Binding Plec}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Data urodzenia" Binding="{Binding Data_urodzenia}"></DataGridTextColumn>
+                            <DataGridCheckBoxColumn Header="Wychowawstwo" Binding="{Binding Wychowawstwo}"></DataGridCheckBoxColumn>
+                            <DataGridTextColumn Header="Przedmioty" Binding="{Binding Przedmioty}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Ile naucza" Binding="{Binding Ile_naucza}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Data zatrudnienia" Binding="{Binding Data_zatrudnienia}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Dodaj osobę">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Skróty klawiszowe">
+                <Grid>
+                    <GroupBox Header="Edycja skrótów" Width="500" Height="300">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center" Padding="3">Wczytaj dane <LineBreak/>z pliku do bazy</TextBlock>
+                            <TextBox Grid.Row="0" Grid.Column="1"></TextBox>
+                            <Button Grid.Row="0" Grid.Column="2" Content="Edytuj"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

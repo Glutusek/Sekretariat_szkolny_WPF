@@ -4,6 +4,7 @@ namespace Sekretariat_szko³y_WPF
 {
     public class Osoba
     {
+        public string Id { get; set; }
         public string Imie { get; set; }
         public string Imie_drugie { get; set; }
         public string Nazwisko { get; set; }
@@ -13,6 +14,6 @@ namespace Sekretariat_szko³y_WPF
         public string Pesel { get; set; }
         public string Zdjecie_url { get; set; }
         public string Plec { get; set; }
-        public DateTime Data_urodzenia { get; set; }
+        public string Data_urodzenia { get; set; }
     }
 }
