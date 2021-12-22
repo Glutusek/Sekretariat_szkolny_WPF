@@ -6,6 +6,6 @@ namespace Sekretariat_szko³y_WPF
     {
         public string Etat { get; set; }
         public string Opis_stanowiska { get; set; }
-        public DateTime Data_zatrudnienia { get; set; }
+        public string Data_zatrudnienia { get; set; }
     }
 }

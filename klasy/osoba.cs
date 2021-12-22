@@ -4,7 +4,6 @@ namespace Sekretariat_szko³y_WPF
 {
     public class Osoba
     {
-        public string Id { get; set; }
         public string Imie { get; set; }
         public string Imie_drugie { get; set; }
         public string Nazwisko { get; set; }

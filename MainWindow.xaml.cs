@@ -13,15 +13,21 @@ namespace Sekretariat_szkoły_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Uczen> students;
         List<Nauczyciel> teachers;
+        List<Pracownik_obslugi> staffMembers;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            students = new List<Uczen>();
             teachers = new List<Nauczyciel>();
+            staffMembers = new List<Pracownik_obslugi>();
 
-            DG_Dane.ItemsSource = ShowTeachers();
+            DG_Dane_Nauczyciele.ItemsSource = ShowTeachers();
+            DG_Dane_Uczniowie.ItemsSource = ShowStudents();
+            DG_Dane_PracownicyObslugi.ItemsSource = ShowStaffMembers();
         }
 
         private void LoadFromFileToDB(object sender, RoutedEventArgs e)
@@ -53,6 +59,42 @@ namespace Sekretariat_szkoły_WPF
             MessageBox.Show("Nie udało się załadować pliku!");
         }
 
+        private List<Uczen> ShowStudents()
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Uczniowie.txt");
+
+            if (File.Exists(path))
+            {
+                using (StreamReader reader = File.OpenText(path))
+                {
+                    string line = "";
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        var pola = line.Split("\t").ToList();
+
+                        var student = new Uczen()
+                        {
+                            Imie = pola[0],
+                            Imie_drugie = pola[1],
+                            Nazwisko = pola[2],
+                            Nazwisko_panienskie = pola[3],
+                            Imie_matki = pola[4],
+                            Imie_ojca = pola[5],
+                            Pesel = pola[6],
+                            Zdjecie_url = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + pola[7]),
+                            Plec = pola[8],
+                            Data_urodzenia = pola[9],
+                            Klasa = pola[10],
+                            Grupy = pola[11]
+                        };
+
+                        students.Add(student);
+                    }
+                }
+            }
+            return students;
+        }
+
         private List<Nauczyciel> ShowTeachers()
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Nauczyciele.txt");
@@ -68,21 +110,20 @@ namespace Sekretariat_szkoły_WPF
 
                         var teacher = new Nauczyciel()
                         {
-                            Id = pola[0],
-                            Imie = pola[1],
-                            Imie_drugie = pola[2],
-                            Nazwisko = pola[3],
-                            Nazwisko_panienskie = pola[4],
-                            Imie_matki = pola[5],
-                            Imie_ojca = pola[6],
-                            Pesel = pola[7],
-                            Zdjecie_url = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + pola[8]),
-                            Plec = pola[9],
-                            Data_urodzenia = pola[10],
-                            Wychowawstwo = Convert.ToBoolean(pola[11]),
-                            Przedmioty = pola[12],
-                            Ile_naucza = pola[13],
-                            Data_zatrudnienia = pola[14]
+                            Imie = pola[0],
+                            Imie_drugie = pola[1],
+                            Nazwisko = pola[2],
+                            Nazwisko_panienskie = pola[3],
+                            Imie_matki = pola[4],
+                            Imie_ojca = pola[5],
+                            Pesel = pola[6],
+                            Zdjecie_url = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + pola[7]),
+                            Plec = pola[8],
+                            Data_urodzenia = pola[9],
+                            Wychowawstwo = Convert.ToBoolean(pola[10]),
+                            Przedmioty = pola[11],
+                            Ile_naucza = pola[12],
+                            Data_zatrudnienia = pola[13]
                         };
 
                         teachers.Add(teacher);
@@ -90,6 +131,43 @@ namespace Sekretariat_szkoły_WPF
                 }
             }
             return teachers;
+        }
+
+        private List<Pracownik_obslugi> ShowStaffMembers()
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Nauczyciele.txt");
+
+            if (File.Exists(path))
+            {
+                using (StreamReader reader = File.OpenText(path))
+                {
+                    string line = "";
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        var pola = line.Split("\t").ToList();
+
+                        var staffMember = new Pracownik_obslugi()
+                        {
+                            Imie = pola[0],
+                            Imie_drugie = pola[1],
+                            Nazwisko = pola[2],
+                            Nazwisko_panienskie = pola[3],
+                            Imie_matki = pola[4],
+                            Imie_ojca = pola[5],
+                            Pesel = pola[6],
+                            Zdjecie_url = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + pola[7]),
+                            Plec = pola[8],
+                            Data_urodzenia = pola[9],
+                            Data_zatrudnienia = pola[10],
+                            Opis_stanowiska = pola[11],
+                            Etat = pola[12]
+                        };
+
+                        staffMembers.Add(staffMember);
+                    }
+                }
+            }
+            return staffMembers;
         }
 
         private static OpenFileDialog OpenTxtFileManually()
