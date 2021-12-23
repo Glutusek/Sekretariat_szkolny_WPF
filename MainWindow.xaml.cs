@@ -25,9 +25,18 @@ namespace Sekretariat_szkoły_WPF
             teachers = new List<Nauczyciel>();
             staffMembers = new List<Pracownik_obslugi>();
 
+            reportUpdate();
+        }
+
+        private void reportUpdate()
+        {
             DG_Dane_Nauczyciele.ItemsSource = ShowTeachers();
             DG_Dane_Uczniowie.ItemsSource = ShowStudents();
             DG_Dane_PracownicyObslugi.ItemsSource = ShowStaffMembers();
+
+            DG_Dane_Nauczyciele.Items.Refresh();
+            DG_Dane_Uczniowie.Items.Refresh();
+            DG_Dane_PracownicyObslugi.Items.Refresh();
         }
 
         private void LoadFromFileToDB(object sender, RoutedEventArgs e)
@@ -52,6 +61,7 @@ namespace Sekretariat_szkoły_WPF
 
                     SaveIntoDatabase(types.GetValueOrDefault(Type), RestOfData);
                 }
+                reportUpdate();
 
                 return;
             }
@@ -77,12 +87,12 @@ namespace Sekretariat_szkoły_WPF
                             Imie = pola[0],
                             Imie_drugie = pola[1],
                             Nazwisko = pola[2],
-                            Nazwisko_panienskie = pola[3],
+                            Nazwisko_rodowe = pola[3],
                             Imie_matki = pola[4],
                             Imie_ojca = pola[5],
-                            Pesel = pola[6],
-                            Plec = pola[7],
-                            Data_urodzenia = pola[8],
+                            Data_urodzenia = pola[6],
+                            Pesel = pola[7],
+                            Plec = pola[8],
                             Klasa = pola[9],
                             Grupy = pola[10],
                             Zdjecie_url = null
@@ -117,12 +127,12 @@ namespace Sekretariat_szkoły_WPF
                             Imie = pola[0],
                             Imie_drugie = pola[1],
                             Nazwisko = pola[2],
-                            Nazwisko_panienskie = pola[3],
+                            Nazwisko_rodowe = pola[3],
                             Imie_matki = pola[4],
                             Imie_ojca = pola[5],
-                            Pesel = pola[6],
-                            Plec = pola[7],
-                            Data_urodzenia = pola[8],
+                            Data_urodzenia = pola[6],
+                            Pesel = pola[7],
+                            Plec = pola[8],
                             Wychowawstwo = Convert.ToBoolean(pola[9]),
                             Przedmioty = pola[10],
                             Ile_naucza = pola[11],
@@ -159,14 +169,14 @@ namespace Sekretariat_szkoły_WPF
                             Imie = pola[0],
                             Imie_drugie = pola[1],
                             Nazwisko = pola[2],
-                            Nazwisko_panienskie = pola[3],
+                            Nazwisko_rodowe = pola[3],
                             Imie_matki = pola[4],
                             Imie_ojca = pola[5],
-                            Pesel = pola[6],
-                            Plec = pola[7],
-                            Data_urodzenia = pola[8],
-                            Opis_stanowiska = pola[9],
-                            Etat = pola[10],
+                            Data_urodzenia = pola[6],
+                            Pesel = pola[7],
+                            Plec = pola[8],
+                            Etat = pola[9],
+                            Opis_stanowiska = pola[10],
                             Data_zatrudnienia = pola[11],
                             Zdjecie_url = null
                         };

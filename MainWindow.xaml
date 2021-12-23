@@ -66,7 +66,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Nazwisko panieńskie" Binding="{Binding Nazwisko_panienskie}">
+                            <DataGridTextColumn Header="Nazwisko rodowe" Binding="{Binding Nazwisko_rodowe}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -184,7 +184,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Nazwisko panieńskie" Binding="{Binding Nazwisko_panienskie}">
+                            <DataGridTextColumn Header="Nazwisko rodowe" Binding="{Binding Nazwisko_rodowe}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -320,7 +320,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Nazwisko panieńskie" Binding="{Binding Nazwisko_panienskie}">
+                            <DataGridTextColumn Header="Nazwisko rodowe" Binding="{Binding Nazwisko_rodowe}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="VerticalAlignment" Value="Center"/>
