@@ -81,12 +81,16 @@ namespace Sekretariat_szkoły_WPF
                             Imie_matki = pola[4],
                             Imie_ojca = pola[5],
                             Pesel = pola[6],
-                            Zdjecie_url = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + pola[7]),
-                            Plec = pola[8],
-                            Data_urodzenia = pola[9],
-                            Klasa = pola[10],
-                            Grupy = pola[11]
+                            Plec = pola[7],
+                            Data_urodzenia = pola[8],
+                            Klasa = pola[9],
+                            Grupy = pola[10],
+                            Zdjecie_url = null
                         };
+
+                        student.Zdjecie_url = (pola.Count == 12)
+                            ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + pola[11])
+                            : noImage();
 
                         students.Add(student);
                     }
@@ -117,14 +121,18 @@ namespace Sekretariat_szkoły_WPF
                             Imie_matki = pola[4],
                             Imie_ojca = pola[5],
                             Pesel = pola[6],
-                            Zdjecie_url = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + pola[7]),
-                            Plec = pola[8],
-                            Data_urodzenia = pola[9],
-                            Wychowawstwo = Convert.ToBoolean(pola[10]),
-                            Przedmioty = pola[11],
-                            Ile_naucza = pola[12],
-                            Data_zatrudnienia = pola[13]
+                            Plec = pola[7],
+                            Data_urodzenia = pola[8],
+                            Wychowawstwo = Convert.ToBoolean(pola[9]),
+                            Przedmioty = pola[10],
+                            Ile_naucza = pola[11],
+                            Data_zatrudnienia = pola[12],
+                            Zdjecie_url = null
                         };
+
+                        teacher.Zdjecie_url = (pola.Count() == 14)
+                            ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + pola[13])
+                            : noImage();
 
                         teachers.Add(teacher);
                     }
@@ -135,7 +143,7 @@ namespace Sekretariat_szkoły_WPF
 
         private List<Pracownik_obslugi> ShowStaffMembers()
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Nauczyciele.txt");
+            string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Pracownicy_obslugi.txt");
 
             if (File.Exists(path))
             {
@@ -155,13 +163,17 @@ namespace Sekretariat_szkoły_WPF
                             Imie_matki = pola[4],
                             Imie_ojca = pola[5],
                             Pesel = pola[6],
-                            Zdjecie_url = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + pola[7]),
-                            Plec = pola[8],
-                            Data_urodzenia = pola[9],
-                            Data_zatrudnienia = pola[10],
-                            Opis_stanowiska = pola[11],
-                            Etat = pola[12]
+                            Plec = pola[7],
+                            Data_urodzenia = pola[8],
+                            Opis_stanowiska = pola[9],
+                            Etat = pola[10],
+                            Data_zatrudnienia = pola[11],
+                            Zdjecie_url = null
                         };
+
+                        staffMember.Zdjecie_url = (pola.Count == 13)
+                            ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + pola[13])
+                            : noImage();
 
                         staffMembers.Add(staffMember);
                     }
@@ -199,6 +211,23 @@ namespace Sekretariat_szkoły_WPF
             File.AppendAllText(path, data + Environment.NewLine);
         }
 
+        private void SaveIIntoDatabase(string img_url)
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\");
+
+            if (!Directory.Exists(path))
+            {
+                CreateDirectory(path);
+            }
+
+            path += img_url + ".png";
+
+            if (!File.Exists(path))
+            {
+                CreateFile(path);
+            }
+        }
+
         private static void CreateFile(string path)
         {
             File.Create(path).Dispose();
@@ -207,6 +236,11 @@ namespace Sekretariat_szkoły_WPF
         private static void CreateDirectory(string path)
         {
             Directory.CreateDirectory(path);
+        }
+
+        private string noImage()
+        {
+            return Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\NO_IMAGE.png");
         }
     }
 }

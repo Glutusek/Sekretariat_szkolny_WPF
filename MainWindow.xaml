@@ -405,14 +405,6 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Dodaj osobę">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                </Grid>
-            </TabItem>
             <TabItem Header="Skróty klawiszowe">
                 <Grid>
                     <GroupBox Header="Edycja skrótów" Width="500" Height="300">
