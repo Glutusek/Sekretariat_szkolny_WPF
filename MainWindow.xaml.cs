@@ -21,15 +21,15 @@ namespace Sekretariat_szkoły_WPF
         {
             InitializeComponent();
 
-            students = new List<Uczen>();
-            teachers = new List<Nauczyciel>();
-            staffMembers = new List<Pracownik_obslugi>();
-
             reportUpdate();
         }
 
         private void reportUpdate()
         {
+            students = new List<Uczen>();
+            teachers = new List<Nauczyciel>();
+            staffMembers = new List<Pracownik_obslugi>();
+
             DG_Dane_Nauczyciele.ItemsSource = ShowTeachers();
             DG_Dane_Uczniowie.ItemsSource = ShowStudents();
             DG_Dane_PracownicyObslugi.ItemsSource = ShowStaffMembers();
