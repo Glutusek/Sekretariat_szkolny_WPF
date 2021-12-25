@@ -30,12 +30,45 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Grid.Column="1" Name="DG_Dane_Uczniowie" IsReadOnly="True" AutoGenerateColumns="False">
+                    <StackPanel>
+                        <GroupBox Header="Sortowanie">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0">Wybierz kolumnę:</TextBlock>
+                                <ComboBox Name="Uczniowie_sortColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
+                                    <ComboBoxItem>Imię</ComboBoxItem>
+                                    <ComboBoxItem>Drugie imię</ComboBoxItem>
+                                    <ComboBoxItem>Nazwisko</ComboBoxItem>
+                                </ComboBox>
+                                <TextBlock Grid.Row="2">Rosnąco / malejąco:</TextBlock>
+                                <ComboBox Name="Uczniowie_sortAscDesc" Margin="0,0,0,20" Grid.Row="3" SelectedIndex="0">
+                                    <ComboBoxItem>Rosnąco</ComboBoxItem>
+                                    <ComboBoxItem>Malejąco</ComboBoxItem>
+                                </ComboBox>
+                                <Grid Grid.Row="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="Sortuj" Name="Uczniowie_SortButton" Grid.Column="0" Margin="20,0,20,5"/>
+                                    <Button Content="Wyczyść" Name="Uczniowie_ClearSortButton" Grid.Column="1" Margin="20,0,20,5"/>
+                                </Grid>
+                            </Grid>
+                        </GroupBox>
+                        <!--<Button Content="Zapisz" Name="Uczniowie_SaveButton"/>-->
+                    </StackPanel>
+                    <DataGrid Grid.Column="1" Name="DG_Dane_Uczniowie" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Zdjęcie" Width="200">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Source="{Binding Zdjecie_url}"/>
+                                        <Image Source="{Binding Zdjecie_absolute}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -148,12 +181,45 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Grid.Column="1" Name="DG_Dane_Nauczyciele" IsReadOnly="True" AutoGenerateColumns="False">
+                    <StackPanel>
+                        <GroupBox Header="Sortowanie">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0">Wybierz kolumnę:</TextBlock>
+                                <ComboBox Name="Nauczyciele_sortColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
+                                    <ComboBoxItem>Imię</ComboBoxItem>
+                                    <ComboBoxItem>Drugie imię</ComboBoxItem>
+                                    <ComboBoxItem>Nazwisko</ComboBoxItem>
+                                </ComboBox>
+                                <TextBlock Grid.Row="2">Rosnąco / malejąco:</TextBlock>
+                                <ComboBox Name="Nauczyciele_sortAscDesc" Margin="0,0,0,20" Grid.Row="3" SelectedIndex="0">
+                                    <ComboBoxItem>Rosnąco</ComboBoxItem>
+                                    <ComboBoxItem>Malejąco</ComboBoxItem>
+                                </ComboBox>
+                                <Grid Grid.Row="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="Sortuj" Name="Nauczyciele_SortButton" Grid.Column="0" Margin="20,0,20,5"/>
+                                    <Button Content="Wyczyść" Name="Nauczyciele_ClearSortButton" Grid.Column="1" Margin="20,0,20,5"/>
+                                </Grid>
+                            </Grid>
+                        </GroupBox>
+                        <!--<Button Content="Zapisz" Name="Uczniowie_SaveButton"/>-->
+                    </StackPanel>
+                    <DataGrid Grid.Column="1" Name="DG_Dane_Nauczyciele" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Zdjęcie" Width="200">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Source="{Binding Zdjecie_url}"/>
+                                        <Image Source="{Binding Zdjecie_absolute}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -243,7 +309,6 @@
                                     <Style TargetType="CheckBox">
                                         <Setter Property="VerticalAlignment" Value="Center"/>
                                         <Setter Property="HorizontalAlignment" Value="Center"/>
-                                        <Setter Property="IsHitTestVisible" Value="False"/>
                                     </Style>
                                 </DataGridCheckBoxColumn.ElementStyle>
                             </DataGridCheckBoxColumn>
@@ -284,12 +349,45 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Grid.Column="1" Name="DG_Dane_PracownicyObslugi" IsReadOnly="True" AutoGenerateColumns="False">
+                    <StackPanel>
+                        <GroupBox Header="Sortowanie">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0">Wybierz kolumnę:</TextBlock>
+                                <ComboBox Name="PracownicyObslugi_sortColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
+                                    <ComboBoxItem>Imię</ComboBoxItem>
+                                    <ComboBoxItem>Drugie imię</ComboBoxItem>
+                                    <ComboBoxItem>Nazwisko</ComboBoxItem>
+                                </ComboBox>
+                                <TextBlock Grid.Row="2">Rosnąco / malejąco:</TextBlock>
+                                <ComboBox Name="PracownicyObslugi_sortAscDesc" Margin="0,0,0,20" Grid.Row="3" SelectedIndex="0">
+                                    <ComboBoxItem>Rosnąco</ComboBoxItem>
+                                    <ComboBoxItem>Malejąco</ComboBoxItem>
+                                </ComboBox>
+                                <Grid Grid.Row="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="Sortuj" Name="PracownicyObslugi_SortButton" Grid.Column="0" Margin="20,0,20,5"/>
+                                    <Button Content="Wyczyść" Name="PracownicyObslugi_ClearSortButton" Grid.Column="1" Margin="20,0,20,5"/>
+                                </Grid>
+                            </Grid>
+                        </GroupBox>
+                        <!--<Button Content="Zapisz" Name="Uczniowie_SaveButton"/>-->
+                    </StackPanel>
+                    <DataGrid Grid.Column="1" Name="DG_Dane_PracownicyObslugi" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Zdjęcie" Width="200">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Source="{Binding Zdjecie_url}"/>
+                                        <Image Source="{Binding Zdjecie_absolute}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
