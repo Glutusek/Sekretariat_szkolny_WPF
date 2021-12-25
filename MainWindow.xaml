@@ -45,6 +45,14 @@
                                     <ComboBoxItem>Imię</ComboBoxItem>
                                     <ComboBoxItem>Drugie imię</ComboBoxItem>
                                     <ComboBoxItem>Nazwisko</ComboBoxItem>
+                                    <ComboBoxItem>Nazwisko rodowe</ComboBoxItem>
+                                    <ComboBoxItem>Imię matki</ComboBoxItem>
+                                    <ComboBoxItem>Imię ojca</ComboBoxItem>
+                                    <ComboBoxItem>Data urodzenia</ComboBoxItem>
+                                    <ComboBoxItem>PESEL</ComboBoxItem>
+                                    <ComboBoxItem>Płeć</ComboBoxItem>
+                                    <ComboBoxItem>Klasa</ComboBoxItem>
+                                    <ComboBoxItem>Grupy</ComboBoxItem>
                                 </ComboBox>
                                 <TextBlock Grid.Row="2">Rosnąco / malejąco:</TextBlock>
                                 <ComboBox Name="Uczniowie_sortAscDesc" Margin="0,0,0,20" Grid.Row="3" SelectedIndex="0">
@@ -63,7 +71,7 @@
                         </GroupBox>
                         <!--<Button Content="Zapisz" Name="Uczniowie_SaveButton"/>-->
                     </StackPanel>
-                    <DataGrid Grid.Column="1" Name="DG_Dane_Uczniowie" AutoGenerateColumns="False" CanUserSortColumns="False">
+                    <DataGrid Grid.Column="1" Name="DG_Dane_Uczniowie" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Zdjęcie" Width="200">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -196,6 +204,16 @@
                                     <ComboBoxItem>Imię</ComboBoxItem>
                                     <ComboBoxItem>Drugie imię</ComboBoxItem>
                                     <ComboBoxItem>Nazwisko</ComboBoxItem>
+                                    <ComboBoxItem>Nazwisko rodowe</ComboBoxItem>
+                                    <ComboBoxItem>Imię matki</ComboBoxItem>
+                                    <ComboBoxItem>Imię ojca</ComboBoxItem>
+                                    <ComboBoxItem>Data urodzenia</ComboBoxItem>
+                                    <ComboBoxItem>PESEL</ComboBoxItem>
+                                    <ComboBoxItem>Płeć</ComboBoxItem>
+                                    <ComboBoxItem>Wychowawstwo</ComboBoxItem>
+                                    <ComboBoxItem>Przedmioty</ComboBoxItem>
+                                    <ComboBoxItem>Ile naucza</ComboBoxItem>
+                                    <ComboBoxItem>Data zatrudnienia</ComboBoxItem>
                                 </ComboBox>
                                 <TextBlock Grid.Row="2">Rosnąco / malejąco:</TextBlock>
                                 <ComboBox Name="Nauczyciele_sortAscDesc" Margin="0,0,0,20" Grid.Row="3" SelectedIndex="0">
@@ -214,7 +232,7 @@
                         </GroupBox>
                         <!--<Button Content="Zapisz" Name="Uczniowie_SaveButton"/>-->
                     </StackPanel>
-                    <DataGrid Grid.Column="1" Name="DG_Dane_Nauczyciele" AutoGenerateColumns="False" CanUserSortColumns="False">
+                    <DataGrid Grid.Column="1" Name="DG_Dane_Nauczyciele" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Zdjęcie" Width="200">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -309,6 +327,7 @@
                                     <Style TargetType="CheckBox">
                                         <Setter Property="VerticalAlignment" Value="Center"/>
                                         <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="IsHitTestVisible" Value="False"/>
                                     </Style>
                                 </DataGridCheckBoxColumn.ElementStyle>
                             </DataGridCheckBoxColumn>
@@ -364,6 +383,15 @@
                                     <ComboBoxItem>Imię</ComboBoxItem>
                                     <ComboBoxItem>Drugie imię</ComboBoxItem>
                                     <ComboBoxItem>Nazwisko</ComboBoxItem>
+                                    <ComboBoxItem>Nazwisko rodowe</ComboBoxItem>
+                                    <ComboBoxItem>Imię matki</ComboBoxItem>
+                                    <ComboBoxItem>Imię ojca</ComboBoxItem>
+                                    <ComboBoxItem>Data urodzenia</ComboBoxItem>
+                                    <ComboBoxItem>PESEL</ComboBoxItem>
+                                    <ComboBoxItem>Płeć</ComboBoxItem>
+                                    <ComboBoxItem>Etat</ComboBoxItem>
+                                    <ComboBoxItem>Opis stanowiska</ComboBoxItem>
+                                    <ComboBoxItem>Data zatrudnienia</ComboBoxItem>
                                 </ComboBox>
                                 <TextBlock Grid.Row="2">Rosnąco / malejąco:</TextBlock>
                                 <ComboBox Name="PracownicyObslugi_sortAscDesc" Margin="0,0,0,20" Grid.Row="3" SelectedIndex="0">
@@ -382,7 +410,7 @@
                         </GroupBox>
                         <!--<Button Content="Zapisz" Name="Uczniowie_SaveButton"/>-->
                     </StackPanel>
-                    <DataGrid Grid.Column="1" Name="DG_Dane_PracownicyObslugi" AutoGenerateColumns="False" CanUserSortColumns="False">
+                    <DataGrid Grid.Column="1" Name="DG_Dane_PracownicyObslugi" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Zdjęcie" Width="200">
                                 <DataGridTemplateColumn.CellTemplate>
