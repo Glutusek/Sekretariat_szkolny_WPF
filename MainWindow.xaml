@@ -63,7 +63,7 @@
                         </GroupBox>
                         <!--<Button Content="Zapisz" Name="Uczniowie_SaveButton"/>-->
                     </StackPanel>
-                    <DataGrid Grid.Column="1" Name="DG_Dane_Uczniowie" AutoGenerateColumns="False">
+                    <DataGrid Grid.Column="1" Name="DG_Dane_Uczniowie" AutoGenerateColumns="False" CanUserSortColumns="False">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Zdjęcie" Width="200">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -214,7 +214,7 @@
                         </GroupBox>
                         <!--<Button Content="Zapisz" Name="Uczniowie_SaveButton"/>-->
                     </StackPanel>
-                    <DataGrid Grid.Column="1" Name="DG_Dane_Nauczyciele" AutoGenerateColumns="False">
+                    <DataGrid Grid.Column="1" Name="DG_Dane_Nauczyciele" AutoGenerateColumns="False" CanUserSortColumns="False">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Zdjęcie" Width="200">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -382,7 +382,7 @@
                         </GroupBox>
                         <!--<Button Content="Zapisz" Name="Uczniowie_SaveButton"/>-->
                     </StackPanel>
-                    <DataGrid Grid.Column="1" Name="DG_Dane_PracownicyObslugi" AutoGenerateColumns="False">
+                    <DataGrid Grid.Column="1" Name="DG_Dane_PracownicyObslugi" AutoGenerateColumns="False" CanUserSortColumns="False">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Zdjęcie" Width="200">
                                 <DataGridTemplateColumn.CellTemplate>
