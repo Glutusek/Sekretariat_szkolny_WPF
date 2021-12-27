@@ -23,21 +23,49 @@ namespace Sekretariat_szkoły_WPF
         {
             InitializeComponent();
 
-            reportUpdate();
+            ReportUpdate();
 
-            Uczniowie_SortButton.Click += sortUczniowie;
-            Nauczyciele_SortButton.Click += sortNauczyciele;
-            Uczniowie_ClearSortButton.Click += clearSortUczniowie;
-            Nauczyciele_ClearSortButton.Click += clearSortNauczyciele;
-            PracownicyObslugi_SortButton.Click += sortPracownicyObslugi;
-            PracownicyObslugi_ClearSortButton.Click += clearSortPracownicyObslugi;
+            Uczniowie_SortButton.Click += Uczniowie_SortButtonClick;
+            Nauczyciele_SortButton.Click += Nauczyciele_SortButtonClick;
+            PracownicyObslugi_SortButton.Click += PracownicyObslugi_SortButtonClick;
+
+            Uczniowie_ClearSortButton.Click += Uczniowie_ClearSortButtonClick;
+            Nauczyciele_ClearSortButton.Click += Nauczyciele_ClearSortButtonClick;
+            PracownicyObslugi_ClearSortButton.Click += PracownicyObslugi_ClearSortButtonClick;
+
+            Uczniowie_SearchButton.Click += SearchUczniowie;
+            Uczniowie_ClearSearchButton.Click += ClearSearchUczniowie;
 
             //Uczniowie_SaveButton.Click += dataUpdate;
         }
 
-        private void sortUczniowie(object sender, RoutedEventArgs e)
+        private void SearchUczniowie(object sender, RoutedEventArgs e)
         {
-            if(Uczniowie_sortColNum.SelectedItem != null && Uczniowie_sortAscDesc.SelectedItem != null)
+            ClearSortUczniowie();
+            students = new List<Uczen>();
+            DG_Dane_Uczniowie.ItemsSource = SearchStudents();
+            DG_Dane_Uczniowie.Items.Refresh();
+        }
+
+        private void ClearSearchUczniowie(object sender, RoutedEventArgs e)
+        {
+            ClearSortUczniowie();
+            Uczniowie_searchColNum.SelectedIndex = 0;
+            Uczniowie_SearchText.IsEnabled = true;
+            Uczniowie_SearchText.Text = "";
+            Uczniowie_SearchMoreOrLess.IsEnabled = false;
+            Uczniowie_SearchMoreOrLess.SelectedIndex = 0;
+            ReportUpdate();
+        }
+
+        private void Uczniowie_SortButtonClick(object sender, RoutedEventArgs e)
+        {
+            SortUczniowie();
+        }
+
+        private void SortUczniowie()
+        {
+            if (Uczniowie_sortColNum.SelectedItem != null && Uczniowie_sortAscDesc.SelectedItem != null)
                 SortDataGrid(DG_Dane_Uczniowie,
                     Uczniowie_sortColNum.SelectedIndex + 1,
                     (Uczniowie_sortAscDesc.SelectedIndex == 0)
@@ -46,7 +74,12 @@ namespace Sekretariat_szkoły_WPF
                 );
         }
 
-        private void sortNauczyciele(object sender, RoutedEventArgs e)
+        private void Nauczyciele_SortButtonClick(object sender, RoutedEventArgs e)
+        {
+            SortNauczyciele();
+        }
+
+        private void SortNauczyciele()
         {
             if (Nauczyciele_sortColNum.SelectedItem != null && Nauczyciele_sortAscDesc.SelectedItem != null)
                 SortDataGrid(DG_Dane_Nauczyciele,
@@ -57,7 +90,12 @@ namespace Sekretariat_szkoły_WPF
                 );
         }
 
-        private void sortPracownicyObslugi(object sender, RoutedEventArgs e)
+        private void PracownicyObslugi_SortButtonClick(object sender, RoutedEventArgs e)
+        {
+            PracownicyObslugiSort();
+        }
+
+        private void PracownicyObslugiSort()
         {
             if (PracownicyObslugi_sortColNum.SelectedItem != null && PracownicyObslugi_sortAscDesc.SelectedItem != null)
                 SortDataGrid(DG_Dane_PracownicyObslugi,
@@ -68,28 +106,43 @@ namespace Sekretariat_szkoły_WPF
                 );
         }
 
-        private void clearSortUczniowie(object sender, RoutedEventArgs e)
+        private void Uczniowie_ClearSortButtonClick(object sender, RoutedEventArgs e)
+        {
+            ClearSortUczniowie();
+        }
+
+        private void ClearSortUczniowie()
         {
             Uczniowie_sortColNum.SelectedIndex = 0;
             Uczniowie_sortAscDesc.SelectedIndex = 0;
             ClearSortDataGrid(DG_Dane_Uczniowie);
         }
 
-        private void clearSortNauczyciele(object sender, RoutedEventArgs e)
+        private void Nauczyciele_ClearSortButtonClick(object sender, RoutedEventArgs e)
+        {
+            ClearSortNauczyciele();
+        }
+
+        private void ClearSortNauczyciele()
         {
             Nauczyciele_sortColNum.SelectedIndex = 0;
             Nauczyciele_sortAscDesc.SelectedIndex = 0;
             ClearSortDataGrid(DG_Dane_Nauczyciele);
         }
 
-        private void clearSortPracownicyObslugi(object sender, RoutedEventArgs e)
+        private void PracownicyObslugi_ClearSortButtonClick(object sender, RoutedEventArgs e)
+        {
+            ClearSortPracownicyObslugi();
+        }
+
+        private void ClearSortPracownicyObslugi()
         {
             PracownicyObslugi_sortColNum.SelectedIndex = 0;
             PracownicyObslugi_sortAscDesc.SelectedIndex = 0;
             ClearSortDataGrid(DG_Dane_PracownicyObslugi);
         }
 
-        private void reportUpdate()
+        private void ReportUpdate()
         {
             students = new List<Uczen>();
             teachers = new List<Nauczyciel>();
@@ -148,7 +201,7 @@ namespace Sekretariat_szkoły_WPF
 
                     SaveIntoDatabase(types.GetValueOrDefault(Type), RestOfData, true);
                 }
-                reportUpdate();
+                ReportUpdate();
 
                 return;
             }
@@ -189,12 +242,143 @@ namespace Sekretariat_szkoły_WPF
                         student.Zdjecie_relative = (pola.Count == 12)
                             ? pola[11]
                             : null;
-                            
+
                         student.Zdjecie_absolute = (student.Zdjecie_relative != null)
                             ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + student.Zdjecie_relative)
                             : noImage();
 
                         students.Add(student);
+                    }
+                }
+            }
+            return students;
+        }
+
+        private List<Uczen> SearchStudents()
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Uczniowie.txt");
+
+            if (File.Exists(path))
+            {
+                using (StreamReader reader = File.OpenText(path))
+                {
+                    string line = "";
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        var pola = line.Split("\t").ToList();
+
+                        var student = new Uczen()
+                        {
+                            Imie = pola[0],
+                            Imie_drugie = pola[1],
+                            Nazwisko = pola[2],
+                            Nazwisko_rodowe = pola[3],
+                            Imie_matki = pola[4],
+                            Imie_ojca = pola[5],
+                            Data_urodzenia = pola[6],
+                            Pesel = pola[7],
+                            Plec = pola[8],
+                            Klasa = pola[9],
+                            Grupy = pola[10],
+                            Zdjecie_absolute = null,
+                            Zdjecie_relative = null
+                        };
+
+                        student.Zdjecie_relative = (pola.Count == 12)
+                            ? pola[11]
+                            : null;
+
+                        student.Zdjecie_absolute = (student.Zdjecie_relative != null)
+                            ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + student.Zdjecie_relative)
+                            : noImage();
+
+                        bool toShow = false;
+
+                        if (Uczniowie_searchColNum.SelectedIndex != 6 && Uczniowie_SearchText.Text != null)
+                        {
+                            switch(Uczniowie_searchColNum.SelectedIndex)
+                            {
+                                case 0:
+                                    {
+                                        if (!student.Imie.Equals(Uczniowie_SearchText.Text))
+                                            toShow = true;
+                                        break;
+                                    }
+                                case 1:
+                                    {
+                                        if (!student.Imie_drugie.Equals(Uczniowie_SearchText.Text))
+                                            toShow = true;
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        if (!student.Nazwisko.Equals(Uczniowie_SearchText.Text))
+                                            toShow = true;
+                                        break;
+                                    }
+                                case 3:
+                                    {
+                                        if (!student.Nazwisko_rodowe.Equals(Uczniowie_SearchText.Text))
+                                            toShow = true;
+                                        break;
+                                    }
+                                case 4:
+                                    {
+                                        if (!student.Imie_matki.Equals(Uczniowie_SearchText.Text))
+                                            toShow = true;
+                                        break;
+                                    }
+                                case 5:
+                                    {
+                                        if (!student.Imie_ojca.Equals(Uczniowie_SearchText.Text))
+                                            toShow = true;
+                                        break;
+                                    }
+                                case 7:
+                                    {
+                                        if (!student.Pesel.Equals(Uczniowie_SearchText.Text))
+                                            toShow = true;
+                                        break;
+                                    }
+                                case 8:
+                                    {
+                                        if (!student.Plec.Equals(Uczniowie_SearchText.Text))
+                                            toShow = true;
+                                        break;
+                                    }
+                                case 9:
+                                    {
+                                        if (!student.Klasa.Equals(Uczniowie_SearchText.Text))
+                                            toShow = true;
+                                        break;
+                                    }
+                                case 10:
+                                    {
+                                        if(!student.Grupy.Equals(Uczniowie_SearchText.Text))
+                                        {
+                                            string[] groups = student.Grupy.Split(", ");
+                                            bool anyGroupGood = false;
+
+                                            foreach (string group in groups)
+                                            {
+                                                if (group.Equals(Uczniowie_SearchText.Text))
+                                                {
+                                                    anyGroupGood = true;
+                                                    break;
+                                                }
+                                            }
+
+                                            if (anyGroupGood)
+                                                toShow = true;
+                                        }
+
+                                        break;
+                                    }
+                            }
+                        }
+
+                        if(!toShow)
+                            students.Add(student);
                     }
                 }
             }
@@ -326,7 +510,7 @@ namespace Sekretariat_szkoły_WPF
                 File.WriteAllText(path, data + Environment.NewLine);
         }
 
-        private void SaveImageIntoDatabase(string img_url)
+        /*private void SaveImageIntoDatabase(string img_url)
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\");
 
@@ -341,7 +525,7 @@ namespace Sekretariat_szkoły_WPF
             {
                 CreateFile(path);
             }
-        }
+        }*/
 
         private static void CreateFile(string path)
         {
@@ -358,7 +542,7 @@ namespace Sekretariat_szkoły_WPF
             return Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\NO_IMAGE.png");
         }
 
-        private void copyImage(string sourcePath, string destinationPath) => File.Copy(sourcePath, destinationPath);
+        private void CopyImage(string sourcePath, string destinationPath) => File.Copy(sourcePath, destinationPath);
 
         private static void SortDataGrid(DataGrid DG, int colIndex = 0, ListSortDirection sortDirection = ListSortDirection.Ascending)
         {

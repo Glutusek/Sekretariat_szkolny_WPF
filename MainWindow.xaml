@@ -34,11 +34,11 @@
                         <GroupBox Header="Sortowanie">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0">Wybierz kolumnę:</TextBlock>
                                 <ComboBox Name="Uczniowie_sortColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
@@ -61,11 +61,56 @@
                                 </ComboBox>
                                 <Grid Grid.Row="4">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Button Content="Sortuj" Name="Uczniowie_SortButton" Grid.Column="0" Margin="20,0,20,5"/>
                                     <Button Content="Wyczyść" Name="Uczniowie_ClearSortButton" Grid.Column="1" Margin="20,0,20,5"/>
+                                </Grid>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="Wyszukiwanie">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0">Wybierz kolumnę:</TextBlock>
+                                <ComboBox Name="Uczniowie_searchColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
+                                    <ComboBoxItem>Imię</ComboBoxItem>
+                                    <ComboBoxItem>Drugie imię</ComboBoxItem>
+                                    <ComboBoxItem>Nazwisko</ComboBoxItem>
+                                    <ComboBoxItem>Nazwisko rodowe</ComboBoxItem>
+                                    <ComboBoxItem>Imię matki</ComboBoxItem>
+                                    <ComboBoxItem>Imię ojca</ComboBoxItem>
+                                    <ComboBoxItem>Data urodzenia</ComboBoxItem>
+                                    <ComboBoxItem>PESEL</ComboBoxItem>
+                                    <ComboBoxItem>Płeć</ComboBoxItem>
+                                    <ComboBoxItem>Klasa</ComboBoxItem>
+                                    <ComboBoxItem>Grupy</ComboBoxItem>
+                                </ComboBox>
+                                <TextBlock Grid.Row="2">Tekst do wyszukania:</TextBlock>
+                                <TextBox Name="Uczniowie_SearchText" Margin="0,0,0,20" Grid.Row="3" IsEnabled="True"/>
+                                <TextBlock Grid.Row="4">Warunek wyszukiwania (dla daty):</TextBlock>
+                                <ComboBox Name="Uczniowie_SearchMoreOrLess" Margin="0,0,0,20" Grid.Row="5" IsEnabled="False" SelectedIndex="0">
+                                    <ComboBoxItem>Mniejsze</ComboBoxItem>
+                                    <ComboBoxItem>Mniejsze lub równe</ComboBoxItem>
+                                    <ComboBoxItem>Większe</ComboBoxItem>
+                                    <ComboBoxItem>Większe lub równe</ComboBoxItem>
+                                    <ComboBoxItem>Równe</ComboBoxItem>
+                                </ComboBox>
+                                <Grid Grid.Row="6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Name="Uczniowie_SearchButton" Margin="20,0,20,5">Wyszukaj</Button>
+                                    <Button Name="Uczniowie_ClearSearchButton" Grid.Column="1" Margin="20,0,20,5">Wyczyść</Button>
                                 </Grid>
                             </Grid>
                         </GroupBox>
