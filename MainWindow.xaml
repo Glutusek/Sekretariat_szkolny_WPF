@@ -97,7 +97,7 @@
                                 <TextBlock Grid.Row="2">Tekst do wyszukania:</TextBlock>
                                 <TextBox Name="Uczniowie_SearchText" Margin="0,0,0,20" Grid.Row="3" IsEnabled="True"/>
                                 <TextBlock Grid.Row="4">Warunek wyszukiwania (dla daty):</TextBlock>
-                                <ComboBox Name="Uczniowie_SearchMoreOrLess" Margin="0,0,0,20" Grid.Row="5" IsEnabled="False" SelectedIndex="0">
+                                <ComboBox Name="Uczniowie_SearchForDate" Margin="0,0,0,20" Grid.Row="5" IsEnabled="False" SelectedIndex="0">
                                     <ComboBoxItem>Mniejsze</ComboBoxItem>
                                     <ComboBoxItem>Mniejsze lub równe</ComboBoxItem>
                                     <ComboBoxItem>Większe</ComboBoxItem>

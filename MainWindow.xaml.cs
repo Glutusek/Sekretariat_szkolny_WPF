@@ -33,10 +33,22 @@ namespace Sekretariat_szkoły_WPF
             Nauczyciele_ClearSortButton.Click += Nauczyciele_ClearSortButtonClick;
             PracownicyObslugi_ClearSortButton.Click += PracownicyObslugi_ClearSortButtonClick;
 
+            Uczniowie_searchColNum.SelectionChanged += Uczniowie_ComboBoxChange;
             Uczniowie_SearchButton.Click += SearchUczniowie;
             Uczniowie_ClearSearchButton.Click += ClearSearchUczniowie;
 
             //Uczniowie_SaveButton.Click += dataUpdate;
+        }
+
+        private void Uczniowie_ComboBoxChange(object sender, SelectionChangedEventArgs e)
+        {
+            var CB = sender as ComboBox;
+
+            Uczniowie_SearchText.IsEnabled = CB.SelectedIndex != 6;
+            Uczniowie_SearchForDate.IsEnabled = !(CB.SelectedIndex != 6);
+
+            Uczniowie_SearchText.Text = "";
+            Uczniowie_SearchForDate.SelectedIndex = 0;
         }
 
         private void SearchUczniowie(object sender, RoutedEventArgs e)
@@ -53,8 +65,8 @@ namespace Sekretariat_szkoły_WPF
             Uczniowie_searchColNum.SelectedIndex = 0;
             Uczniowie_SearchText.IsEnabled = true;
             Uczniowie_SearchText.Text = "";
-            Uczniowie_SearchMoreOrLess.IsEnabled = false;
-            Uczniowie_SearchMoreOrLess.SelectedIndex = 0;
+            Uczniowie_SearchForDate.IsEnabled = false;
+            Uczniowie_SearchForDate.SelectedIndex = 0;
             ReportUpdate();
         }
 
