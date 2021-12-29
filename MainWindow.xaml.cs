@@ -46,9 +46,11 @@ namespace Sekretariat_szkoły_WPF
 
             Uczniowie_SearchText.IsEnabled = CB.SelectedIndex != 6;
             Uczniowie_SearchForDate.IsEnabled = !(CB.SelectedIndex != 6);
+            Uczniowie_SelectedDate.IsEnabled = !(CB.SelectedIndex != 6);
 
             Uczniowie_SearchText.Text = "";
             Uczniowie_SearchForDate.SelectedIndex = 0;
+            Uczniowie_SelectedDate.SelectedDate = default;
         }
 
         private void SearchUczniowie(object sender, RoutedEventArgs e)
@@ -218,7 +220,7 @@ namespace Sekretariat_szkoły_WPF
                 return;
             }
             
-            MessageBox.Show("Nie udało się załadować pliku!");
+            MessageBox.Show("Przerwano proces wczytywania pliku!");
         }
 
         private List<Uczen> ShowStudents()
@@ -391,15 +393,34 @@ namespace Sekretariat_szkoły_WPF
                                     }
                             }
                         }
-                        /*else if (Uczniowie_SearchColNum.SelectedIndex == 6)
+                        else if (Uczniowie_SearchColNum.SelectedIndex == 6 && Uczniowie_SelectedDate.SelectedDate != null)
                         {
-
+                            DateTime studentDate = DateTime.Parse(student.Data_urodzenia);
+                            DateTime selectedDate = (DateTime)Uczniowie_SelectedDate.SelectedDate;
 
                             switch (Uczniowie_SearchForDate.SelectedIndex)
                             {
                                 case 0:
+                                    toShow = studentDate < selectedDate;
+                                    break;
+
+                                case 1:
+                                    toShow = studentDate <= selectedDate;
+                                    break;
+
+                                case 2:
+                                    toShow = selectedDate < studentDate;
+                                    break;
+
+                                case 3:
+                                    toShow = selectedDate <= studentDate;
+                                    break;
+
+                                case 4:
+                                    toShow = studentDate == selectedDate;
+                                    break;
                             }
-                        }*/
+                        }
 
                         if(toShow)
                             students.Add(student);

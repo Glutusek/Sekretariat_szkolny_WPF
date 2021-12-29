@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Sekretariat szkolny"
-        Width="1000"
-        Height="600"
+        Width="1220"
+        Height="610"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         FontSize="15">
@@ -79,6 +79,7 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>
+                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0">Wybierz kolumnę:</TextBlock>
                                 <ComboBox Name="Uczniowie_SearchColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
@@ -98,13 +99,14 @@
                                 <TextBox Name="Uczniowie_SearchText" Margin="0,0,0,20" Grid.Row="3" IsEnabled="True"/>
                                 <TextBlock Grid.Row="4">Warunek wyszukiwania (dla daty):</TextBlock>
                                 <ComboBox Name="Uczniowie_SearchForDate" Margin="0,0,0,20" Grid.Row="5" IsEnabled="False" SelectedIndex="0">
-                                    <ComboBoxItem>Mniejsze</ComboBoxItem>
-                                    <ComboBoxItem>Mniejsze lub równe</ComboBoxItem>
-                                    <ComboBoxItem>Większe</ComboBoxItem>
-                                    <ComboBoxItem>Większe lub równe</ComboBoxItem>
-                                    <ComboBoxItem>Równe</ComboBoxItem>
+                                    <ComboBoxItem>Wcześniej niż (wyłącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Wcześniej niż (włącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Później niż (wyłącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Później niż (włącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Konkretnego dnia</ComboBoxItem>
                                 </ComboBox>
-                                <Grid Grid.Row="6">
+                                <DatePicker Name="Uczniowie_SelectedDate"  Grid.Row="6" Margin="0,0,0,20" IsEnabled="False"/>
+                                <Grid Grid.Row="7">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
