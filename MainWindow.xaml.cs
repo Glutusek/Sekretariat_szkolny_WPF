@@ -33,7 +33,7 @@ namespace Sekretariat_szkoły_WPF
             Nauczyciele_ClearSortButton.Click += Nauczyciele_ClearSortButtonClick;
             PracownicyObslugi_ClearSortButton.Click += PracownicyObslugi_ClearSortButtonClick;
 
-            Uczniowie_searchColNum.SelectionChanged += Uczniowie_ComboBoxChange;
+            Uczniowie_SearchColNum.SelectionChanged += Uczniowie_ComboBoxChange;
             Uczniowie_SearchButton.Click += SearchUczniowie;
             Uczniowie_ClearSearchButton.Click += ClearSearchUczniowie;
 
@@ -62,7 +62,7 @@ namespace Sekretariat_szkoły_WPF
         private void ClearSearchUczniowie(object sender, RoutedEventArgs e)
         {
             ClearSortUczniowie();
-            Uczniowie_searchColNum.SelectedIndex = 0;
+            Uczniowie_SearchColNum.SelectedIndex = 0;
             Uczniowie_SearchText.IsEnabled = true;
             Uczniowie_SearchText.Text = "";
             Uczniowie_SearchForDate.IsEnabled = false;
@@ -306,90 +306,102 @@ namespace Sekretariat_szkoły_WPF
 
                         bool toShow = false;
 
-                        if (Uczniowie_searchColNum.SelectedIndex != 6 && Uczniowie_SearchText.Text != null)
+                        if (Uczniowie_SearchColNum.SelectedIndex != 6 && Uczniowie_SearchText.Text != null)
                         {
-                            switch(Uczniowie_searchColNum.SelectedIndex)
+                            switch(Uczniowie_SearchColNum.SelectedIndex)
                             {
                                 case 0:
                                     {
-                                        if (!student.Imie.Equals(Uczniowie_SearchText.Text))
+                                        if (student.Imie.Equals(Uczniowie_SearchText.Text))
                                             toShow = true;
                                         break;
                                     }
                                 case 1:
                                     {
-                                        if (!student.Imie_drugie.Equals(Uczniowie_SearchText.Text))
+                                        if (student.Imie_drugie.Equals(Uczniowie_SearchText.Text))
                                             toShow = true;
                                         break;
                                     }
                                 case 2:
                                     {
-                                        if (!student.Nazwisko.Equals(Uczniowie_SearchText.Text))
+                                        if (student.Nazwisko.Equals(Uczniowie_SearchText.Text))
                                             toShow = true;
                                         break;
                                     }
                                 case 3:
                                     {
-                                        if (!student.Nazwisko_rodowe.Equals(Uczniowie_SearchText.Text))
+                                        if (student.Nazwisko_rodowe.Equals(Uczniowie_SearchText.Text))
                                             toShow = true;
                                         break;
                                     }
                                 case 4:
                                     {
-                                        if (!student.Imie_matki.Equals(Uczniowie_SearchText.Text))
+                                        if (student.Imie_matki.Equals(Uczniowie_SearchText.Text))
                                             toShow = true;
                                         break;
                                     }
                                 case 5:
                                     {
-                                        if (!student.Imie_ojca.Equals(Uczniowie_SearchText.Text))
+                                        if (student.Imie_ojca.Equals(Uczniowie_SearchText.Text))
                                             toShow = true;
                                         break;
                                     }
                                 case 7:
                                     {
-                                        if (!student.Pesel.Equals(Uczniowie_SearchText.Text))
+                                        if (student.Pesel.Equals(Uczniowie_SearchText.Text))
                                             toShow = true;
                                         break;
                                     }
                                 case 8:
                                     {
-                                        if (!student.Plec.Equals(Uczniowie_SearchText.Text))
+                                        if (student.Plec.Equals(Uczniowie_SearchText.Text))
                                             toShow = true;
                                         break;
                                     }
                                 case 9:
                                     {
-                                        if (!student.Klasa.Equals(Uczniowie_SearchText.Text))
+                                        if (student.Klasa.Equals(Uczniowie_SearchText.Text))
                                             toShow = true;
                                         break;
                                     }
                                 case 10:
                                     {
-                                        if(!student.Grupy.Equals(Uczniowie_SearchText.Text))
+                                        if (student.Grupy.Equals(Uczniowie_SearchText.Text))
                                         {
-                                            string[] groups = student.Grupy.Split(", ");
-                                            bool anyGroupGood = false;
-
-                                            foreach (string group in groups)
-                                            {
-                                                if (group.Equals(Uczniowie_SearchText.Text))
-                                                {
-                                                    anyGroupGood = true;
-                                                    break;
-                                                }
-                                            }
-
-                                            if (anyGroupGood)
-                                                toShow = true;
+                                            toShow = true;
+                                            break;
                                         }
+
+                                        string[] groups = student.Grupy.Split(", ");
+                                        bool anyGroupGood = false;
+
+                                        foreach (string group in groups)
+                                        {
+                                            if (group.Equals(Uczniowie_SearchText.Text))
+                                            {
+                                                anyGroupGood = true;
+                                                break;
+                                            }
+                                        }
+
+                                        if (anyGroupGood)
+                                            toShow = true;
 
                                         break;
                                     }
                             }
                         }
+                        /*else if (Uczniowie_SearchColNum.SelectedIndex == 6)
+                        {
 
-                        if(!toShow)
+
+                            switch (Uczniowie_SearchForDate.SelectedIndex)
+                            {
+                                case 0:
+                            }
+                        }*/
+
+                        if(toShow)
                             students.Add(student);
                     }
                 }

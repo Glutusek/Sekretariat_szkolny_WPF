@@ -81,7 +81,7 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0">Wybierz kolumnę:</TextBlock>
-                                <ComboBox Name="Uczniowie_searchColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
+                                <ComboBox Name="Uczniowie_SearchColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
                                     <ComboBoxItem>Imię</ComboBoxItem>
                                     <ComboBoxItem>Drugie imię</ComboBoxItem>
                                     <ComboBoxItem>Nazwisko</ComboBoxItem>
