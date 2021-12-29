@@ -16,15 +16,31 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="26*"/>
         </Grid.RowDefinitions>
+        
+        <!--#region Menu-->
+        
         <Menu>
             <MenuItem Header="Test"/>
             <MenuItem Header="Test2"/>
         </Menu>
+        
+        <!--#endregion-->
+        
+        <!--#region Toolbar-->
+        
         <ToolBar Grid.Row="1" ToolBarTray.IsLocked="True">
             <Button Name="LoadFromFileButton"  Content="Wczytaj z pliku" Click="LoadFromFileToDB"/>
         </ToolBar>
+        
+        <!--#endregion-->
+        
+        <!--#region Sekretariat-->
+        
         <TabControl Grid.Row="2">
-            <TabItem Header="Wyświetl uczniów">
+            
+            <!--#region Uczniowie-->
+            
+            <TabItem Header="Uczniowie">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -230,7 +246,12 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Wyświetl nauczycieli">
+            
+            <!--#endregion-->
+            
+            <!--#region Nauczyciele-->
+            
+            <TabItem Header="Nauczyciele">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -409,7 +430,12 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Wyświetl pracowników obsługi">
+            
+            <!--#endregion-->
+            
+            <!--#region Pracownicy obsługi-->
+            
+            <TabItem Header="Pracownicy obsługi">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -578,6 +604,11 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
+            
+            <!--#endregion-->
+            
+            <!--#region Skróty klawiszowe-->
+            
             <TabItem Header="Skróty klawiszowe">
                 <Grid>
                     <GroupBox Header="Edycja skrótów" Width="500" Height="300">
@@ -599,6 +630,12 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
+            
+            <!--#endregion-->
+            
         </TabControl>
+        
+        <!--#endregion-->
+        
     </Grid>
 </Window>
