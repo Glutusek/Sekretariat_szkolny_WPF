@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -191,6 +190,102 @@ namespace Sekretariat_szkoły_WPF
 
             DG.Items.SortDescriptions.Clear();
             DG.Items.Refresh();
+        }
+
+        private string GetSelectedTabName()
+        {
+            return ((TabItem)Sekretariat.SelectedItem).Header.ToString();
+        }
+
+        private void GenerateWindowReportButton_Click(object sender, RoutedEventArgs e) => GenerateReport(GetSelectedTabName());
+
+        private void GenerateAllDBReportButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GenerateReport(string type)
+        {
+            MessageBox.Show("Pamiętaj, że raport będzie zawierać układ zgodny z wyświetlonym, tzn. może zawierać sortowanie lub wyszukiwanie dokonane przez Ciebie!");
+
+            switch (type)
+            {
+                case "Uczniowie":
+                    {
+                        SaveFileDialog SFD = new SaveFileDialog()
+                        {
+                            InitialDirectory = Environment.SpecialFolder.Desktop.ToString(),
+                            AddExtension = true,
+                            DefaultExt = "txt",
+                            FileName = DateTime.Now.ToString("dd.M.yyyy HH.mm.ss") + " - raport uczniów"
+                        };
+
+                        if (SFD.ShowDialog() == true)
+                        {
+                            string textToSave = "";
+
+                            foreach (Uczen u in DG_Dane_Uczniowie.ItemsSource)
+                            {
+                                textToSave += u.ToString() + Environment.NewLine;
+                            }
+
+                            File.WriteAllText(SFD.FileName, textToSave);
+                        }
+                        break;
+                    }
+
+                case "Nauczyciele":
+                    {
+                        SaveFileDialog SFD = new SaveFileDialog()
+                        {
+                            InitialDirectory = Environment.SpecialFolder.Desktop.ToString(),
+                            AddExtension = true,
+                            DefaultExt = "txt",
+                            FileName = DateTime.Now.ToString("dd.M.yyyy HH.mm.ss") + " - raport nauczycieli"
+                        };
+
+                        if (SFD.ShowDialog() == true)
+                        {
+                            string textToSave = "";
+
+                            foreach (Nauczyciel n in DG_Dane_Nauczyciele.ItemsSource)
+                            {
+                                textToSave += n.ToString() + Environment.NewLine;
+                            }
+
+                            File.WriteAllText(SFD.FileName, textToSave);
+                        }
+                        break;
+                    }
+
+                case "Pracownicy obsługi":
+                    {
+                        SaveFileDialog SFD = new SaveFileDialog()
+                        {
+                            InitialDirectory = Environment.SpecialFolder.Desktop.ToString(),
+                            AddExtension = true,
+                            DefaultExt = "txt",
+                            FileName = DateTime.Now.ToString("dd.M.yyyy HH.mm.ss") + " - raport pracowników obsługi"
+                        };
+
+                        if (SFD.ShowDialog() == true)
+                        {
+                            string textToSave = "";
+
+                            foreach (Pracownik_obslugi p in DG_Dane_PracownicyObslugi.ItemsSource)
+                            {
+                                textToSave += p.ToString() + Environment.NewLine;
+                            }
+
+                            File.WriteAllText(SFD.FileName, textToSave);
+                        }
+                        break;
+                    }
+
+                default:
+                    MessageBox.Show("Nie możesz dokonać raportu tego okna!");
+                    break;
+            }
         }
     }
 }

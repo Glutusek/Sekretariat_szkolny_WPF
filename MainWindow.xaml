@@ -14,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="26*"/>
+            <RowDefinition Height="35*"/>
         </Grid.RowDefinitions>
         
         <!--#region Menu-->
@@ -27,16 +27,20 @@
         <!--#endregion-->
         
         <!--#region Toolbar-->
-        
-        <ToolBar Grid.Row="1" ToolBarTray.IsLocked="True">
-            <Button Name="LoadFromFileButton"  Content="Wczytaj z pliku" Click="LoadFromFileToDB"/>
-        </ToolBar>
+
+        <ToolBarTray Grid.Row="1" >
+            <ToolBar ToolBarTray.IsLocked="True">
+                <Button Name="LoadFromFileButton"  Content="Wczytaj z pliku" Click="LoadFromFileToDB"/>
+                <Button Name="GenerateWindowReportButton"  Content="Generuj raport tego okna" Click="GenerateWindowReportButton_Click"/>
+                <Button Name="GenerateAllDBReportButton"  Content="Generuj raport całej bazy" Click="GenerateAllDBReportButton_Click"/>
+            </ToolBar>
+        </ToolBarTray>
         
         <!--#endregion-->
         
         <!--#region Sekretariat-->
         
-        <TabControl Grid.Row="2">
+        <TabControl Name="Sekretariat" Grid.Row="2">
             
             <!--#region Uczniowie-->
             
