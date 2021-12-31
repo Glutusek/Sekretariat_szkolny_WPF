@@ -6,9 +6,8 @@
         mc:Ignorable="d"
         Title="Sekretariat szkolny"
         Width="1220"
-        Height="610"
+        Height="750"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize"
         FontSize="15">
     <Grid>
         <Grid.RowDefinitions>
@@ -61,7 +60,7 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0">Wybierz kolumnę:</TextBlock>
-                                <ComboBox Name="Uczniowie_sortColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
+                                <ComboBox Name="Uczniowie_SortColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
                                     <ComboBoxItem>Imię</ComboBoxItem>
                                     <ComboBoxItem>Drugie imię</ComboBoxItem>
                                     <ComboBoxItem>Nazwisko</ComboBoxItem>
@@ -75,7 +74,7 @@
                                     <ComboBoxItem>Grupy</ComboBoxItem>
                                 </ComboBox>
                                 <TextBlock Grid.Row="2">Rosnąco / malejąco:</TextBlock>
-                                <ComboBox Name="Uczniowie_sortAscDesc" Margin="0,0,0,20" Grid.Row="3" SelectedIndex="0">
+                                <ComboBox Name="Uczniowie_SortAscDesc" Margin="0,0,0,20" Grid.Row="3" SelectedIndex="0">
                                     <ComboBoxItem>Rosnąco</ComboBoxItem>
                                     <ComboBoxItem>Malejąco</ComboBoxItem>
                                 </ComboBox>
@@ -136,7 +135,6 @@
                                 </Grid>
                             </Grid>
                         </GroupBox>
-                        <!--<Button Content="Zapisz" Name="Uczniowie_SaveButton"/>-->
                     </StackPanel>
                     <DataGrid Grid.Column="1" Name="DG_Dane_Uczniowie" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False">
                         <DataGrid.Columns>
@@ -265,14 +263,14 @@
                         <GroupBox Header="Sortowanie">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0">Wybierz kolumnę:</TextBlock>
-                                <ComboBox Name="Nauczyciele_sortColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
+                                <ComboBox Name="Nauczyciele_SortColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
                                     <ComboBoxItem>Imię</ComboBoxItem>
                                     <ComboBoxItem>Drugie imię</ComboBoxItem>
                                     <ComboBoxItem>Nazwisko</ComboBoxItem>
@@ -288,21 +286,83 @@
                                     <ComboBoxItem>Data zatrudnienia</ComboBoxItem>
                                 </ComboBox>
                                 <TextBlock Grid.Row="2">Rosnąco / malejąco:</TextBlock>
-                                <ComboBox Name="Nauczyciele_sortAscDesc" Margin="0,0,0,20" Grid.Row="3" SelectedIndex="0">
+                                <ComboBox Name="Nauczyciele_SortAscDesc" Margin="0,0,0,20" Grid.Row="3" SelectedIndex="0">
                                     <ComboBoxItem>Rosnąco</ComboBoxItem>
                                     <ComboBoxItem>Malejąco</ComboBoxItem>
                                 </ComboBox>
                                 <Grid Grid.Row="4">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Button Content="Sortuj" Name="Nauczyciele_SortButton" Grid.Column="0" Margin="20,0,20,5"/>
                                     <Button Content="Wyczyść" Name="Nauczyciele_ClearSortButton" Grid.Column="1" Margin="20,0,20,5"/>
                                 </Grid>
                             </Grid>
                         </GroupBox>
-                        <!--<Button Content="Zapisz" Name="Uczniowie_SaveButton"/>-->
+                        <GroupBox Header="Wyszukiwanie">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0">Wybierz kolumnę:</TextBlock>
+                                <ComboBox Name="Nauczyciele_SearchColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
+                                    <ComboBoxItem>Imię</ComboBoxItem>
+                                    <ComboBoxItem>Drugie imię</ComboBoxItem>
+                                    <ComboBoxItem>Nazwisko</ComboBoxItem>
+                                    <ComboBoxItem>Nazwisko rodowe</ComboBoxItem>
+                                    <ComboBoxItem>Imię matki</ComboBoxItem>
+                                    <ComboBoxItem>Imię ojca</ComboBoxItem>
+                                    <ComboBoxItem>Data urodzenia</ComboBoxItem>
+                                    <ComboBoxItem>PESEL</ComboBoxItem>
+                                    <ComboBoxItem>Płeć</ComboBoxItem>
+                                    <ComboBoxItem>Wychowawstwo</ComboBoxItem>
+                                    <ComboBoxItem>Przedmioty</ComboBoxItem>
+                                    <ComboBoxItem>Ile naucza</ComboBoxItem>
+                                    <ComboBoxItem>Data zatrudnienia</ComboBoxItem>
+                                </ComboBox>
+                                <TextBlock Grid.Row="2">Tekst do wyszukania:</TextBlock>
+                                <TextBox Name="Nauczyciele_SearchText" Margin="0,0,0,20" Grid.Row="3" IsEnabled="True"/>
+                                <TextBlock Grid.Row="4">Warunek wyszukiwania (dla godzin nauczania):</TextBlock>
+                                <ComboBox Name="Nauczyciele_SearchHours" Margin="0,0,0,20" Grid.Row="5" IsEnabled="False" SelectedIndex="0">
+                                    <ComboBoxItem>Wcześniej niż (wyłącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Wcześniej niż (włącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Później niż (wyłącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Później niż (włącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Konkretnego dnia</ComboBoxItem>
+                                </ComboBox>
+                                <TextBlock Grid.Row="6">Wprowadź ilość godzin:</TextBlock>
+                                <TextBox Name="Nauczyciele_SearchHoursNum" Margin="0,0,0,20" Grid.Row="7" IsEnabled="False"/>
+                                <TextBlock Grid.Row="8">Warunek wyszukiwania (dla daty):</TextBlock>
+                                <ComboBox Name="Nauczyciele_SearchForDate" Margin="0,0,0,20" Grid.Row="9" IsEnabled="False" SelectedIndex="0">
+                                    <ComboBoxItem>Wcześniej niż (wyłącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Wcześniej niż (włącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Później niż (wyłącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Później niż (włącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Konkretnego dnia</ComboBoxItem>
+                                </ComboBox>
+                                <DatePicker Name="Nauczyciele_SelectedDate"  Grid.Row="10" Margin="0,0,0,20" IsEnabled="False"/>
+                                <Grid Grid.Row="11">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Name="Nauczyciele_SearchButton" Margin="20,0,20,5">Wyszukaj</Button>
+                                    <Button Name="Nauczyciele_ClearSearchButton" Grid.Column="1" Margin="20,0,20,5">Wyczyść</Button>
+                                </Grid>
+                            </Grid>
+                        </GroupBox>
                     </StackPanel>
                     <DataGrid Grid.Column="1" Name="DG_Dane_Nauczyciele" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False">
                         <DataGrid.Columns>
@@ -449,14 +509,14 @@
                         <GroupBox Header="Sortowanie">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0">Wybierz kolumnę:</TextBlock>
-                                <ComboBox Name="PracownicyObslugi_sortColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
+                                <ComboBox Name="PracownicyObslugi_SortColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
                                     <ComboBoxItem>Imię</ComboBoxItem>
                                     <ComboBoxItem>Drugie imię</ComboBoxItem>
                                     <ComboBoxItem>Nazwisko</ComboBoxItem>
@@ -471,21 +531,68 @@
                                     <ComboBoxItem>Data zatrudnienia</ComboBoxItem>
                                 </ComboBox>
                                 <TextBlock Grid.Row="2">Rosnąco / malejąco:</TextBlock>
-                                <ComboBox Name="PracownicyObslugi_sortAscDesc" Margin="0,0,0,20" Grid.Row="3" SelectedIndex="0">
+                                <ComboBox Name="PracownicyObslugi_SortAscDesc" Margin="0,0,0,20" Grid.Row="3" SelectedIndex="0">
                                     <ComboBoxItem>Rosnąco</ComboBoxItem>
                                     <ComboBoxItem>Malejąco</ComboBoxItem>
                                 </ComboBox>
                                 <Grid Grid.Row="4">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Button Content="Sortuj" Name="PracownicyObslugi_SortButton" Grid.Column="0" Margin="20,0,20,5"/>
                                     <Button Content="Wyczyść" Name="PracownicyObslugi_ClearSortButton" Grid.Column="1" Margin="20,0,20,5"/>
                                 </Grid>
                             </Grid>
                         </GroupBox>
-                        <!--<Button Content="Zapisz" Name="Uczniowie_SaveButton"/>-->
+                        <GroupBox Header="Wyszukiwanie">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0">Wybierz kolumnę:</TextBlock>
+                                <ComboBox Name="PracownicyObslugi_SearchColNum" Margin="0,0,0,20" Grid.Row="1" SelectedIndex="0">
+                                    <ComboBoxItem>Imię</ComboBoxItem>
+                                    <ComboBoxItem>Drugie imię</ComboBoxItem>
+                                    <ComboBoxItem>Nazwisko</ComboBoxItem>
+                                    <ComboBoxItem>Nazwisko rodowe</ComboBoxItem>
+                                    <ComboBoxItem>Imię matki</ComboBoxItem>
+                                    <ComboBoxItem>Imię ojca</ComboBoxItem>
+                                    <ComboBoxItem>Data urodzenia</ComboBoxItem>
+                                    <ComboBoxItem>PESEL</ComboBoxItem>
+                                    <ComboBoxItem>Płeć</ComboBoxItem>
+                                    <ComboBoxItem>Etat</ComboBoxItem>
+                                    <ComboBoxItem>Opis stanowiska</ComboBoxItem>
+                                    <ComboBoxItem>Data zatrudnienia</ComboBoxItem>
+                                </ComboBox>
+                                <TextBlock Grid.Row="2">Tekst do wyszukania:</TextBlock>
+                                <TextBox Name="PracownicyObslugi_SearchText" Margin="0,0,0,20" Grid.Row="3" IsEnabled="True"/>
+                                <TextBlock Grid.Row="4">Warunek wyszukiwania (dla daty):</TextBlock>
+                                <ComboBox Name="PracownicyObslugi_SearchForDate" Margin="0,0,0,20" Grid.Row="5" IsEnabled="False" SelectedIndex="0">
+                                    <ComboBoxItem>Wcześniej niż (wyłącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Wcześniej niż (włącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Później niż (wyłącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Później niż (włącznie)</ComboBoxItem>
+                                    <ComboBoxItem>Konkretnego dnia</ComboBoxItem>
+                                </ComboBox>
+                                <DatePicker Name="PracownicyObslugi_SelectedDate"  Grid.Row="6" Margin="0,0,0,20" IsEnabled="False"/>
+                                <Grid Grid.Row="7">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Name="PracownicyObslugi_SearchButton" Margin="20,0,20,5">Wyszukaj</Button>
+                                    <Button Name="PracownicyObslugi_ClearSearchButton" Grid.Column="1" Margin="20,0,20,5">Wyczyść</Button>
+                                </Grid>
+                            </Grid>
+                        </GroupBox>
                     </StackPanel>
                     <DataGrid Grid.Column="1" Name="DG_Dane_PracownicyObslugi" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False">
                         <DataGrid.Columns>
@@ -568,15 +675,6 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Data urodzenia" Binding="{Binding Data_urodzenia}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="VerticalAlignment" Value="Center"/>
-                                        <Setter Property="HorizontalAlignment" Value="Center"/>
-                                        <Setter Property="Padding" Value="10"/>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
                             <DataGridTextColumn Header="Data zatrudnienia" Binding="{Binding Data_zatrudnienia}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
@@ -596,6 +694,15 @@
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
                             <DataGridTextColumn Header="Etat" Binding="{Binding Etat}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="Padding" Value="10"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Data urodzenia" Binding="{Binding Data_urodzenia}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="VerticalAlignment" Value="Center"/>

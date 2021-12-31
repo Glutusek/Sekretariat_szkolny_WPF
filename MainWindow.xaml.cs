@@ -25,16 +25,22 @@ namespace Sekretariat_szkoły_WPF
             ReportUpdate();
 
             Uczniowie_SortButton.Click += Uczniowie_SortButtonClick;
-            Nauczyciele_SortButton.Click += Nauczyciele_SortButtonClick;
-            PracownicyObslugi_SortButton.Click += PracownicyObslugi_SortButtonClick;
-
             Uczniowie_ClearSortButton.Click += Uczniowie_ClearSortButtonClick;
-            Nauczyciele_ClearSortButton.Click += Nauczyciele_ClearSortButtonClick;
-            PracownicyObslugi_ClearSortButton.Click += PracownicyObslugi_ClearSortButtonClick;
-
             Uczniowie_SearchColNum.SelectionChanged += Uczniowie_ComboBoxChange;
             Uczniowie_SearchButton.Click += SearchUczniowie;
             Uczniowie_ClearSearchButton.Click += ClearSearchUczniowie;
+
+            Nauczyciele_SortButton.Click += Nauczyciele_SortButtonClick;
+            Nauczyciele_ClearSortButton.Click += Nauczyciele_ClearSortButtonClick;
+            Nauczyciele_SearchColNum.SelectionChanged += Nauczyciele_ComboBoxChange;
+            Nauczyciele_SearchButton.Click += SearchNauczyciele;
+            Nauczyciele_ClearSearchButton.Click += ClearSearchNauczyciele;
+
+            PracownicyObslugi_SortButton.Click += PracownicyObslugi_SortButtonClick;
+            PracownicyObslugi_ClearSortButton.Click += PracownicyObslugi_ClearSortButtonClick;
+            PracownicyObslugi_SearchColNum.SelectionChanged += PracownicyObslugi_ComboBoxChange;
+            PracownicyObslugi_SearchButton.Click += SearchPracownicyObslugi;
+            PracownicyObslugi_ClearSearchButton.Click += ClearSearchPracownicyObslugi;
 
             //Uczniowie_SaveButton.Click += dataUpdate;
         }
@@ -161,7 +167,37 @@ namespace Sekretariat_szkoły_WPF
 
         private string NoImage => Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\NO_IMAGE.png");
 
-        private void CopyImage(string sourcePath, string destinationPath) => File.Copy(sourcePath, destinationPath);
+        private void CopyFile(string sourcePath, string destinationPath) => File.Copy(sourcePath, destinationPath);
+
+        private static void CopyDirectory(string sourcePath, string destinationPath)
+        {
+            DirectoryInfo dir = new DirectoryInfo(sourcePath);
+
+            if(!dir.Exists)
+            {
+                MessageBox.Show("Nie można znaleźć ścieżki!");
+            }
+            else
+            {
+                DirectoryInfo[] dirs = dir.GetDirectories();
+
+                Directory.CreateDirectory(destinationPath);
+
+                FileInfo[] files = dir.GetFiles();
+
+                foreach (FileInfo file in files)
+                {
+                    string path = Path.Combine(destinationPath, file.Name);
+                    file.CopyTo(path, false);
+                }
+
+                foreach(DirectoryInfo subdir in dirs)
+                {
+                    string path = Path.Combine(destinationPath, subdir.Name);
+                    CopyDirectory(subdir.FullName, path);
+                }
+            }
+        }
 
         private static void SortDataGrid(DataGrid DG, int colIndex = 0, ListSortDirection sortDirection = ListSortDirection.Ascending)
         {
@@ -192,33 +228,47 @@ namespace Sekretariat_szkoły_WPF
             DG.Items.Refresh();
         }
 
-        private string GetSelectedTabName()
-        {
-            return ((TabItem)Sekretariat.SelectedItem).Header.ToString();
-        }
+        private string GetSelectedTabName() => ((TabItem)Sekretariat.SelectedItem).Header.ToString();
 
         private void GenerateWindowReportButton_Click(object sender, RoutedEventArgs e) => GenerateReport(GetSelectedTabName());
 
         private void GenerateAllDBReportButton_Click(object sender, RoutedEventArgs e)
         {
+            string sourcePath = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\");
 
+            SaveFileDialog SFD = new SaveFileDialog()
+            {
+                InitialDirectory = Environment.SpecialFolder.Desktop.ToString(),
+                FileName = DateTime.Now.ToString("dd.M.yyyy HH.mm.ss") + " - backup bazy danych"
+            };
+
+            MessageBox.Show("Przy backupie bazy danych skup się tylko na miejscu docelowym zapisu oraz nazwaniu bazy. Zostanie utworzony specjalny folder z podaną nazwą!");
+
+            if(SFD.ShowDialog() == true)
+            {
+                string chosenName = SFD.FileName.Substring(SFD.FileName.LastIndexOf("\\"));
+                string destinationPath = Path.GetDirectoryName(SFD.FileName) + chosenName;
+
+                CopyDirectory(sourcePath, destinationPath);
+            }
         }
 
         private void GenerateReport(string type)
         {
             MessageBox.Show("Pamiętaj, że raport będzie zawierać układ zgodny z wyświetlonym, tzn. może zawierać sortowanie lub wyszukiwanie dokonane przez Ciebie!");
 
+            SaveFileDialog SFD = new SaveFileDialog()
+            {
+                InitialDirectory = Environment.SpecialFolder.Desktop.ToString(),
+                AddExtension = true,
+                DefaultExt = "txt"
+            };
+
             switch (type)
             {
                 case "Uczniowie":
                     {
-                        SaveFileDialog SFD = new SaveFileDialog()
-                        {
-                            InitialDirectory = Environment.SpecialFolder.Desktop.ToString(),
-                            AddExtension = true,
-                            DefaultExt = "txt",
-                            FileName = DateTime.Now.ToString("dd.M.yyyy HH.mm.ss") + " - raport uczniów"
-                        };
+                        SFD.FileName = DateTime.Now.ToString("dd.M.yyyy HH.mm.ss") + " - raport uczniów";
 
                         if (SFD.ShowDialog() == true)
                         {
@@ -236,13 +286,7 @@ namespace Sekretariat_szkoły_WPF
 
                 case "Nauczyciele":
                     {
-                        SaveFileDialog SFD = new SaveFileDialog()
-                        {
-                            InitialDirectory = Environment.SpecialFolder.Desktop.ToString(),
-                            AddExtension = true,
-                            DefaultExt = "txt",
-                            FileName = DateTime.Now.ToString("dd.M.yyyy HH.mm.ss") + " - raport nauczycieli"
-                        };
+                        SFD.FileName = DateTime.Now.ToString("dd.M.yyyy HH.mm.ss") + " - raport nauczycieli";
 
                         if (SFD.ShowDialog() == true)
                         {
@@ -260,13 +304,7 @@ namespace Sekretariat_szkoły_WPF
 
                 case "Pracownicy obsługi":
                     {
-                        SaveFileDialog SFD = new SaveFileDialog()
-                        {
-                            InitialDirectory = Environment.SpecialFolder.Desktop.ToString(),
-                            AddExtension = true,
-                            DefaultExt = "txt",
-                            FileName = DateTime.Now.ToString("dd.M.yyyy HH.mm.ss") + " - raport pracowników obsługi"
-                        };
+                        SFD.FileName = DateTime.Now.ToString("dd.M.yyyy HH.mm.ss") + " - raport pracowników obsługi";
 
                         if (SFD.ShowDialog() == true)
                         {

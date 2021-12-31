@@ -224,8 +224,8 @@ namespace Sekretariat_szko³y_WPF
 
         private void ClearSortUczniowie()
         {
-            Uczniowie_sortColNum.SelectedIndex = 0;
-            Uczniowie_sortAscDesc.SelectedIndex = 0;
+            Uczniowie_SortColNum.SelectedIndex = 0;
+            Uczniowie_SortAscDesc.SelectedIndex = 0;
             ClearSortDataGrid(DG_Dane_Uczniowie);
         }
 
@@ -234,8 +234,8 @@ namespace Sekretariat_szko³y_WPF
             var CB = sender as ComboBox;
 
             Uczniowie_SearchText.IsEnabled = CB.SelectedIndex != 6;
-            Uczniowie_SearchForDate.IsEnabled = !(CB.SelectedIndex != 6);
-            Uczniowie_SelectedDate.IsEnabled = !(CB.SelectedIndex != 6);
+            Uczniowie_SearchForDate.IsEnabled = CB.SelectedIndex == 6;
+            Uczniowie_SelectedDate.IsEnabled = CB.SelectedIndex == 6;
 
             Uczniowie_SearchText.Text = "";
             Uczniowie_SearchForDate.SelectedIndex = 0;
@@ -268,10 +268,10 @@ namespace Sekretariat_szko³y_WPF
 
         private void SortUczniowie()
         {
-            if (Uczniowie_sortColNum.SelectedItem != null && Uczniowie_sortAscDesc.SelectedItem != null)
+            if (Uczniowie_SortColNum.SelectedItem != null && Uczniowie_SortAscDesc.SelectedItem != null)
                 SortDataGrid(DG_Dane_Uczniowie,
-                    Uczniowie_sortColNum.SelectedIndex + 1,
-                    (Uczniowie_sortAscDesc.SelectedIndex == 0)
+                    Uczniowie_SortColNum.SelectedIndex + 1,
+                    (Uczniowie_SortAscDesc.SelectedIndex == 0)
                         ? ListSortDirection.Ascending
                         : ListSortDirection.Descending
                 );
