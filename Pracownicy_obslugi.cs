@@ -12,6 +12,8 @@ namespace Sekretariat_szko³y_WPF
     {
         private List<Pracownik_obslugi> ShowStaffMembers()
         {
+            staffMembers.Clear();
+
             string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Pracownicy_obslugi.txt");
 
             if (File.Exists(path))
@@ -58,6 +60,8 @@ namespace Sekretariat_szko³y_WPF
 
         private List<Pracownik_obslugi> SearchStaffMembers()
         {
+            staffMembers.Clear();
+
             string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Pracownicy_obslugi.txt");
 
             if (File.Exists(path))
@@ -222,7 +226,6 @@ namespace Sekretariat_szko³y_WPF
         private void SearchPracownicyObslugi(object sender, RoutedEventArgs e)
         {
             ClearSortPracownicyObslugi();
-            staffMembers = new List<Pracownik_obslugi>();
             DG_Dane_PracownicyObslugi.ItemsSource = SearchStaffMembers();
             DG_Dane_PracownicyObslugi.Items.Refresh();
         }

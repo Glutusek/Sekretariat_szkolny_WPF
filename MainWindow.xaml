@@ -336,11 +336,11 @@
                                 <TextBox Name="Nauczyciele_SearchText" Margin="0,0,0,20" Grid.Row="3" IsEnabled="True"/>
                                 <TextBlock Grid.Row="4">Warunek wyszukiwania (dla godzin nauczania):</TextBlock>
                                 <ComboBox Name="Nauczyciele_SearchHours" Margin="0,0,0,20" Grid.Row="5" IsEnabled="False" SelectedIndex="0">
-                                    <ComboBoxItem>Wcześniej niż (wyłącznie)</ComboBoxItem>
-                                    <ComboBoxItem>Wcześniej niż (włącznie)</ComboBoxItem>
-                                    <ComboBoxItem>Później niż (wyłącznie)</ComboBoxItem>
-                                    <ComboBoxItem>Później niż (włącznie)</ComboBoxItem>
-                                    <ComboBoxItem>Konkretnego dnia</ComboBoxItem>
+                                    <ComboBoxItem>Mniej niż</ComboBoxItem>
+                                    <ComboBoxItem>Mniej niż lub równo</ComboBoxItem>
+                                    <ComboBoxItem>Więcej niż</ComboBoxItem>
+                                    <ComboBoxItem>Więcej niż lub równo</ComboBoxItem>
+                                    <ComboBoxItem>Równo</ComboBoxItem>
                                 </ComboBox>
                                 <TextBlock Grid.Row="6">Wprowadź ilość godzin:</TextBlock>
                                 <TextBox Name="Nauczyciele_SearchHoursNum" Margin="0,0,0,20" Grid.Row="7" IsEnabled="False"/>

@@ -12,6 +12,8 @@ namespace Sekretariat_szko³y_WPF
     {
         private List<Uczen> GetStudents()
         {
+            students.Clear();
+
             string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Uczniowie.txt");
 
             if (File.Exists(path))
@@ -57,6 +59,8 @@ namespace Sekretariat_szko³y_WPF
 
         private List<Uczen> SearchStudents()
         {
+            students.Clear();
+
             string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Uczniowie.txt");
 
             if (File.Exists(path))
@@ -245,7 +249,6 @@ namespace Sekretariat_szko³y_WPF
         private void SearchUczniowie(object sender, RoutedEventArgs e)
         {
             ClearSortUczniowie();
-            students = new List<Uczen>();
             DG_Dane_Uczniowie.ItemsSource = SearchStudents();
             DG_Dane_Uczniowie.Items.Refresh();
         }

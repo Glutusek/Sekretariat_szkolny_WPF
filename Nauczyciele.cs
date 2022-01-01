@@ -12,6 +12,8 @@ namespace Sekretariat_szko³y_WPF
     {
         private List<Nauczyciel> ShowTeachers()
         {
+            teachers.Clear();
+
             string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Nauczyciele.txt");
 
             if (File.Exists(path))
@@ -59,6 +61,10 @@ namespace Sekretariat_szko³y_WPF
 
         private List<Nauczyciel> SearchTeachers()
         {
+            bool error = false;
+
+            teachers.Clear();
+
             string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Nauczyciele.txt");
 
             if (File.Exists(path))
@@ -66,7 +72,7 @@ namespace Sekretariat_szko³y_WPF
                 using (StreamReader reader = File.OpenText(path))
                 {
                     string line = "";
-                    while ((line = reader.ReadLine()) != null)
+                    while ((line = reader.ReadLine()) != null && !error)
                     {
                         var pola = line.Split("\t").ToList();
 
@@ -99,7 +105,7 @@ namespace Sekretariat_szko³y_WPF
 
                         bool toShow = false;
 
-                        if (Nauczyciele_SearchColNum.SelectedIndex != 6 && Nauczyciele_SearchColNum.SelectedIndex != 12 && Nauczyciele_SearchText.Text != null)
+                        if (Nauczyciele_SearchColNum.SelectedIndex != 6 && Nauczyciele_SearchColNum.SelectedIndex != 11 && Nauczyciele_SearchColNum.SelectedIndex != 12 && Nauczyciele_SearchText.Text != null)
                         {
                             switch (Nauczyciele_SearchColNum.SelectedIndex)
                             {
@@ -161,6 +167,7 @@ namespace Sekretariat_szko³y_WPF
                                         catch (FormatException)
                                         {
                                             MessageBox.Show("Wychowawstwo przyjmuje tylko wartoœci True lub False!");
+                                            error = true;
                                         }
                                         break;
                                     }
@@ -195,12 +202,44 @@ namespace Sekretariat_szko³y_WPF
                         {
                             try
                             {
-                                int hours = int.Parse(Nauczyciele_SearchHoursNum.Text);
+                                int searchHours = int.Parse(Nauczyciele_SearchHoursNum.Text);
 
+                                int sumOfHours = 0;
+
+                                string[] classes = teacher.Ile_naucza.Split(", ");
+
+                                foreach (string c in classes)
+                                {
+                                    sumOfHours += int.Parse(c.Split(" ")[1]);
+                                }
+
+                                switch (Nauczyciele_SearchHours.SelectedIndex)
+                                {
+                                    case 0:
+                                        toShow = sumOfHours < searchHours;
+                                        break;
+
+                                    case 1:
+                                        toShow = sumOfHours <= searchHours;
+                                        break;
+
+                                    case 2:
+                                        toShow = searchHours < sumOfHours;
+                                        break;
+
+                                    case 3:
+                                        toShow = searchHours <= sumOfHours;
+                                        break;
+
+                                    case 4:
+                                        toShow = sumOfHours == searchHours;
+                                        break;
+                                }
                             }
                             catch (Exception)
                             {
                                 MessageBox.Show("Niepoprawna liczba!");
+                                error = true;
                             }
                         }
                         else if ((Nauczyciele_SearchColNum.SelectedIndex == 6 || Nauczyciele_SearchColNum.SelectedIndex == 12) && Nauczyciele_SelectedDate.SelectedDate != null)
@@ -243,6 +282,7 @@ namespace Sekretariat_szko³y_WPF
                     }
                 }
             }
+
             return teachers;
         }
 
@@ -262,11 +302,15 @@ namespace Sekretariat_szko³y_WPF
         {
             var CB = sender as ComboBox;
 
-            Nauczyciele_SearchText.IsEnabled = CB.SelectedIndex != 6 && CB.SelectedIndex != 12;
-            Nauczyciele_SearchForDate.IsEnabled = !(CB.SelectedIndex != 6 && CB.SelectedIndex != 12);
-            Nauczyciele_SelectedDate.IsEnabled = !(CB.SelectedIndex != 6 && CB.SelectedIndex != 12);
+            Nauczyciele_SearchText.IsEnabled = CB.SelectedIndex != 6 && CB.SelectedIndex != 11 && CB.SelectedIndex != 12;
+            Nauczyciele_SearchHours.IsEnabled = CB.SelectedIndex == 11;
+            Nauczyciele_SearchHoursNum.IsEnabled = CB.SelectedIndex == 11;
+            Nauczyciele_SearchForDate.IsEnabled = CB.SelectedIndex == 6 || CB.SelectedIndex == 12;
+            Nauczyciele_SelectedDate.IsEnabled = CB.SelectedIndex == 6 || CB.SelectedIndex == 12;
 
             Nauczyciele_SearchText.Text = "";
+            Nauczyciele_SearchHours.SelectedIndex = 0;
+            Nauczyciele_SearchHoursNum.Text = "";
             Nauczyciele_SearchForDate.SelectedIndex = 0;
             Nauczyciele_SelectedDate.SelectedDate = default;
         }
@@ -274,7 +318,6 @@ namespace Sekretariat_szko³y_WPF
         private void SearchNauczyciele(object sender, RoutedEventArgs e)
         {
             ClearSortNauczyciele();
-            teachers = new List<Nauczyciel>();
             DG_Dane_Nauczyciele.ItemsSource = SearchTeachers();
             DG_Dane_Nauczyciele.Items.Refresh();
         }
