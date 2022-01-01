@@ -9,9 +9,6 @@ using System.Windows.Controls;
 
 namespace Sekretariat_szkoły_WPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         List<Uczen> students;
@@ -41,8 +38,6 @@ namespace Sekretariat_szkoły_WPF
             PracownicyObslugi_SearchColNum.SelectionChanged += PracownicyObslugi_ComboBoxChange;
             PracownicyObslugi_SearchButton.Click += SearchPracownicyObslugi;
             PracownicyObslugi_ClearSearchButton.Click += ClearSearchPracownicyObslugi;
-
-            //Uczniowie_SaveButton.Click += dataUpdate;
         }
 
         private void ReportUpdate()
@@ -52,35 +47,13 @@ namespace Sekretariat_szkoły_WPF
             staffMembers = new List<Pracownik_obslugi>();
 
             DG_Dane_Uczniowie.ItemsSource = GetStudents();
-            DG_Dane_Nauczyciele.ItemsSource = ShowTeachers();
-            DG_Dane_PracownicyObslugi.ItemsSource = ShowStaffMembers();
+            DG_Dane_Nauczyciele.ItemsSource = GetTeachers();
+            DG_Dane_PracownicyObslugi.ItemsSource = GetStaffMembers();
 
             DG_Dane_Uczniowie.Items.Refresh();
             DG_Dane_Nauczyciele.Items.Refresh();
             DG_Dane_PracownicyObslugi.Items.Refresh();
         }
-
-        /*private void dataUpdate(object sender, RoutedEventArgs e)
-        {
-            switch((sender as Button).Name)
-            {
-                case "Uczniowie_SaveButton":
-                    {
-                        string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Uczniowie.txt");
-                        bool append = false;
-
-                        foreach (Uczen u in students)
-                        {
-                            string data = u.ToString();
-
-                            SaveIntoDatabase("Uczniowie", data, append);
-
-                            append = true;
-                        }
-                    }
-                break;
-            }
-        }*/
 
         private void LoadFromFileToDB(object sender, RoutedEventArgs e)
         {
@@ -143,23 +116,6 @@ namespace Sekretariat_szkoły_WPF
             else
                 File.WriteAllText(path, data + Environment.NewLine);
         }
-
-        /*private void SaveImageIntoDatabase(string img_url)
-        {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\");
-
-            if (!Directory.Exists(path))
-            {
-                CreateDirectory(path);
-            }
-
-            path += img_url + ".png";
-
-            if (!File.Exists(path))
-            {
-                CreateFile(path);
-            }
-        }*/
 
         private static void CreateFile(string path) => File.Create(path).Dispose();
 

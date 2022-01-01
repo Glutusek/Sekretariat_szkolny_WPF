@@ -10,7 +10,7 @@ namespace Sekretariat_szko³y_WPF
 {
     public partial class MainWindow : Window
     {
-        private List<Pracownik_obslugi> ShowStaffMembers()
+        private List<Pracownik_obslugi> GetStaffMembers()
         {
             staffMembers.Clear();
 

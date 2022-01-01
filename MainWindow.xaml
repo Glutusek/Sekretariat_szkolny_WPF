@@ -717,6 +717,54 @@
             </TabItem>
             
             <!--#endregion-->
+
+            <TabItem Header="Dodaj ucznia">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock FontSize="40" FontWeight="Black" Margin="10" HorizontalAlignment="Center">Dodawanie ucznia</TextBlock>
+                    <Grid Grid.Row="1" Width="600" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontSize="30" HorizontalAlignment="Center">Imię</TextBlock>
+                        <TextBox Name="DodajImie" Grid.Column="1" FontSize="25" VerticalAlignment="Center"></TextBox>
+                        <TextBlock Grid.Row="1" FontSize="30" HorizontalAlignment="Center">Drugie imię</TextBlock>
+                        <TextBox Name="DodajDrugieImie" Grid.Row="1" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" FontSize="30" HorizontalAlignment="Center">Nazwisko</TextBlock>
+                        <TextBox Name="DodajNazwisko" Grid.Row="2" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="3" FontSize="30" HorizontalAlignment="Center">Nazwisko rodowe</TextBlock>
+                        <TextBox Name="DodajNazwiskoRodowe" Grid.Row="3" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="4" FontSize="30" HorizontalAlignment="Center">Imię matki</TextBlock>
+                        <TextBox Name="DodajImieMatki" Grid.Row="4" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="5" FontSize="30" HorizontalAlignment="Center">Imię ojca</TextBlock>
+                        <TextBox Name="DodajImieOjca" Grid.Row="5" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="6" FontSize="30" HorizontalAlignment="Center">Data urodzenia</TextBlock>
+                        <DatePicker Name="DodajDateUrodzenia" Grid.Row="6" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="7" FontSize="30" HorizontalAlignment="Center">Płeć</TextBlock>
+                        <TextBox Name="DodajPlec" Grid.Row="7" Grid.Column="4" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="10" FontSize="30" HorizontalAlignment="Center">Zdjęcie</TextBlock>
+                        <Button Grid.Row="10" Grid.Column="1" Width="200">Zaimportuj zdjęcie</Button>
+                    </Grid>
+                </Grid>
+            </TabItem>
             
             <!--#region Skróty klawiszowe-->
             
