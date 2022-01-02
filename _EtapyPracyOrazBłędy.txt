@@ -1,0 +1,83 @@
+Ogólne rozpisanie etapów pracy:
+
+24.11.2021:
+	- Zaciekawienie projektem, zrobienie czytelnego pliku ReadMe
+
+25.11.2021
+	- Wprowadzenie klas Uczen, Nauczyciel, Pracownik_obslugi
+
+
+28.11.2021
+	- Zrobienie prostej bazy danych oraz możliwości wprowadzania danych z pliku
+
+... Chwilowa przerwa ...
+...
+...
+...
+... Prawie miesiąc obijania się ...
+...
+...
+...
+... Deadline się zbliża ..
+
+19.12.2021
+	- Zmiany w strukturze klas
+
+... Jeszcze chwilka przerwy ...
+
+22.12.2021
+	- Wprowadzenie wyświetlania danych poszczególnych osób
+
+23.12.2021
+	- Naprawa błędów w wyświetlaniu, np. dublowanie rekordów
+	- Zmiana nazwiska panieńskiego na rodowe (trochę dziwnie by np. mężczyzna miał przy sobie pole "nazwisko panieńskie")
+	
+24.12.2021
+... Wigilia, oficjalny termin oddania, ale bez spiny, są drugie terminy ...
+
+25.12.2021
+	- Nadpisanie metody ToString() w klasach do łatwiejszego wyświetlania
+	- Dodanie sortowania oraz nanoszenie poprawek
+
+27.12.2021
+	- Wprowadzenie wyszukiwania dla Uczniów
+
+28.12.2021
+	- Wstępne wprowadzenie wyszukiwania dla uczniów po datach
+
+29.12.2021
+	- Poprawki do wyszukiwania u Uczniów, poprawne działanie dla dat
+
+30.12.2021
+	- Pozdział głównej klasy na kilka plików
+	- Wprowadzenie generowania raportów danego okna
+
+31.12.2021
+	- Wprowadzenie generowania raportu całej bazy
+	- Zmiana defaultowego obrazka
+	- Wprowadzenie sortowania i wyszukiwania dla nauczycieli i pracowników
+
+01.01.2022
+... Szczęśliwego Nowego Roku! Ale deadline goni ...
+	- Wyszukiwanie po ilości godzin dla Nauczycieli
+	- Wstępny formularz dodawania uczniów do bazy
+
+02.01.2022
+... Drugi deadline, pora przyspieszyć ...
+	- Formularz dodawania dla nauczycieli i pracowników obsługi
+	- Dodany import zdjęcia w formularzach dodawania osób
+	- Dodanie przycisków modyfikacji i usuwania rekordów
+	- Wprowadzenie działania przycisków do usuwania
+	- Wprowadzenie działania przycisków do modyfikacji
+	- Naprawa błędów związanych z niedomykającymi się plikami
+	- Dodatkowy przycisk na dodawanie zdjęć do bazy
+
+
+Testowanie:
+
+Testy nie były konkretnie zapisywane, ale były przeprowadzane przez niezależnych ekspertów (koledzy z gimnazjum, babcia), z których wyniknęły błędy m.in. związane z problemem obsługi plików, gdy są usunięte wszystkie rekordy. Również znalezione zostało dublowanie rekordów (wynikające z niepoprawnego działania programu, ręcznie dalej można je dublować).
+
+
+Znane błędy lub wymagania poprawek:
+
+Program opiera się na danych z niezaszyfrowanych plikach tekstowych, które mogą być "pomieszane", np. użycie spacji jako rozgraniczanie poszczególnych pól zamiast tabulatora, które nie jest kontrolowane, co może doprowadzić do późniejszych błędów z odczytem danych (np. dane z kilku pól w jednym polu).
