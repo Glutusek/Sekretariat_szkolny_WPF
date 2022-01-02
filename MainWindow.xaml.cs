@@ -17,6 +17,7 @@ namespace Sekretariat_szkoły_WPF
         List<Pracownik_obslugi> staffMembers;
 
         Uczen StudentToEdit;
+        Nauczyciel TeacherToEdit;
 
         public MainWindow()
         {
@@ -307,6 +308,8 @@ namespace Sekretariat_szkoły_WPF
 
         private void ImportTeacherImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("Nauczyciel", Nauczyciel_Zdjecie);
 
+        private void EditTeacherImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("Nauczyciel", Nauczyciel_EdytujZdjecie);
+
         private void ImportStaffMemberImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("PracownikObslugi", PracownikObslugi_Zdjecie);
 
         private void Sekretariat_TabChanged(object sender, RoutedEventArgs e)
@@ -376,5 +379,30 @@ namespace Sekretariat_szkoły_WPF
         private void EditStudentButton_Click(object sender, RoutedEventArgs e) => EditStudent(StudentToEdit);
 
         private void DeleteStudentButton_Click(object sender, RoutedEventArgs e) => DeleteStudent(((FrameworkElement)sender).DataContext as Uczen);
+
+        private void ModifyTeacherButton_Click(object sender, RoutedEventArgs e)
+        {
+            TeacherToEdit = ((FrameworkElement)sender).DataContext as Nauczyciel;
+            Sekretariat.SelectedIndex = 6;
+
+            Nauczyciel_EdytujImie.Text = TeacherToEdit.Imie;
+            Nauczyciel_EdytujDrugieImie.Text = TeacherToEdit.Imie_drugie;
+            Nauczyciel_EdytujNazwisko.Text = TeacherToEdit.Nazwisko;
+            Nauczyciel_EdytujNazwiskoRodowe.Text = TeacherToEdit.Nazwisko_rodowe;
+            Nauczyciel_EdytujImieMatki.Text = TeacherToEdit.Imie_matki;
+            Nauczyciel_EdytujImieOjca.Text = TeacherToEdit.Imie_ojca;
+            Nauczyciel_EdytujDateUrodzenia.Text = TeacherToEdit.Data_urodzenia;
+            Nauczyciel_EdytujPesel.Text = TeacherToEdit.Pesel;
+            Nauczyciel_EdytujPlec.Text = TeacherToEdit.Plec;
+            Nauczyciel_EdytujWychowawstwo.IsChecked = TeacherToEdit.Wychowawstwo;
+            Nauczyciel_EdytujPrzedmioty.Text = TeacherToEdit.Przedmioty;
+            Nauczyciel_EdytujIleNaucza.Text = TeacherToEdit.Ile_naucza;
+            Nauczyciel_EdytujDateZatrudnienia.Text = TeacherToEdit.Data_zatrudnienia;
+            Nauczyciel_EdytujZdjecie.Source = new ImageSourceConverter().ConvertFromString(TeacherToEdit.Zdjecie_absolute) as ImageSource;
+        }
+
+        private void EditTeacherButton_Click(object sender, RoutedEventArgs e) => EditTeacher(TeacherToEdit);
+
+        private void DeleteTeacherButton_Click(object sender, RoutedEventArgs e) => DeleteTeacher(((FrameworkElement)sender).DataContext as Nauczyciel);
     }
 }

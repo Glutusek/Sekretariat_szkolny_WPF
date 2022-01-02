@@ -388,5 +388,96 @@ namespace Sekretariat_szko³y_WPF
 
             MessageBox.Show("Nauczyciel dodany do bazy danych!");
         }
+
+        private void DeleteTeacher(Nauczyciel TeacherToDelete)
+        {
+            List<Nauczyciel> AllTeachers = GetTeachers();
+
+            string TeachersToSave = "";
+
+            foreach (Nauczyciel tempTeacher in AllTeachers)
+            {
+                if (TeacherToDelete.ToString() != tempTeacher.ToString())
+                    TeachersToSave += tempTeacher.ToString() + Environment.NewLine;
+            }
+
+            TeachersToSave = TeachersToSave.Trim();
+
+            SaveIntoDatabase("Nauczyciele", TeachersToSave, false);
+
+            ReportUpdate();
+        }
+
+        private void EditTeacher(Nauczyciel TeacherToEdit)
+        {
+            List<string> properties = new List<string>()
+            {
+                Nauczyciel_EdytujImie.Text,
+                Nauczyciel_EdytujDrugieImie.Text,
+                Nauczyciel_EdytujNazwisko.Text,
+                Nauczyciel_EdytujNazwiskoRodowe.Text,
+                Nauczyciel_EdytujImieMatki.Text,
+                Nauczyciel_EdytujImieOjca.Text,
+                Nauczyciel_EdytujDateUrodzenia.Text,
+                Nauczyciel_EdytujPesel.Text,
+                Nauczyciel_EdytujPlec.Text,
+                Nauczyciel_EdytujWychowawstwo.IsChecked.ToString(),
+                Nauczyciel_EdytujPrzedmioty.Text,
+                Nauczyciel_EdytujIleNaucza.Text,
+                Nauczyciel_EdytujDateZatrudnienia.Text
+            };
+
+            foreach (string prop in properties)
+            {
+                if (prop == "")
+                {
+                    MessageBox.Show("Proszê wype³niæ wszystkie pola!");
+                    return;
+                }
+            }
+
+            string img = Nauczyciel_EdytujZdjecie.Source.ToString()[(Nauczyciel_EdytujZdjecie.Source.ToString().LastIndexOf("/") + 1)..];
+
+            if (img != "NO_IMAGE.png")
+                properties.Add(img);
+
+            List<Nauczyciel> AllTeachers = GetTeachers();
+
+            string TeachersToSave = "";
+
+            foreach (Nauczyciel tempTeacher in AllTeachers)
+            {
+                if (TeacherToEdit.ToString() == tempTeacher.ToString())
+                {
+                    tempTeacher.Imie = properties[0];
+                    tempTeacher.Imie_drugie = properties[1];
+                    tempTeacher.Nazwisko = properties[2];
+                    tempTeacher.Nazwisko_rodowe = properties[3];
+                    tempTeacher.Imie_matki = properties[4];
+                    tempTeacher.Imie_ojca = properties[5];
+                    tempTeacher.Data_urodzenia = properties[6];
+                    tempTeacher.Pesel = properties[7];
+                    tempTeacher.Plec = properties[8];
+                    tempTeacher.Wychowawstwo = bool.Parse(properties[9]);
+                    tempTeacher.Przedmioty = properties[10];
+                    tempTeacher.Ile_naucza = properties[11];
+                    tempTeacher.Data_zatrudnienia = properties[12];
+
+                    if (properties.Count == 14)
+                        tempTeacher.Zdjecie_relative = properties[13];
+                }
+
+                TeachersToSave += tempTeacher.ToString() + Environment.NewLine;
+            }
+
+            TeachersToSave = TeachersToSave.Trim();
+
+            SaveIntoDatabase("Nauczyciele", TeachersToSave, false);
+
+            MessageBox.Show("Nauczyciel zosta³ zmodyfikowany!");
+
+            ReportUpdate();
+            Sekretariat.SelectedIndex = 1;
+        }
     }
 }
