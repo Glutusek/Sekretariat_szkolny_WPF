@@ -138,10 +138,24 @@
                     </StackPanel>
                     <DataGrid Grid.Column="1" Name="DG_Dane_Uczniowie" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Zdjęcie" Width="200">
+                            <DataGridTemplateColumn Header="Edycja">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Source="{Binding Zdjecie_absolute}"/>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Button Width="100" VerticalAlignment="Center" Click="ModifyStudentButton_Click">Modyfikuj</Button>
+                                            <Button Grid.Row="1" Width="100" VerticalAlignment="Center" Click="DeleteStudentButton_Click">Usuń</Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Zdjęcie">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Width="200" Height="200" Source="{Binding Zdjecie_absolute}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -366,10 +380,10 @@
                     </StackPanel>
                     <DataGrid Grid.Column="1" Name="DG_Dane_Nauczyciele" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Zdjęcie" Width="200">
+                            <DataGridTemplateColumn Header="Zdjęcie">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Source="{Binding Zdjecie_absolute}"/>
+                                        <Image Width="200" Height="200"  Source="{Binding Zdjecie_absolute}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -596,10 +610,10 @@
                     </StackPanel>
                     <DataGrid Grid.Column="1" Name="DG_Dane_PracownicyObslugi" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Zdjęcie" Width="200">
+                            <DataGridTemplateColumn Header="Zdjęcie">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Source="{Binding Zdjecie_absolute}"/>
+                                        <Image Width="200" Height="200" Source="{Binding Zdjecie_absolute}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -786,9 +800,80 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            
+
             <!--#endregion-->
-            
+
+            <!--#region Edytuj ucznia-->
+
+            <TabItem Header="Edytuj ucznia" Selector.Selected="Sekretariat_TabChanged" IsEnabled="False" Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.ColumnSpan="2" FontSize="40" FontWeight="Black" Margin="10" HorizontalAlignment="Center">Edytowanie ucznia</TextBlock>
+                    <Grid Grid.Row="1" Width="600" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontSize="30" HorizontalAlignment="Center">Imię</TextBlock>
+                        <TextBox Name="Uczen_EdytujImie" Grid.Column="1" FontSize="25" VerticalAlignment="Center"></TextBox>
+                        <TextBlock Grid.Row="1" FontSize="30" HorizontalAlignment="Center">Drugie imię</TextBlock>
+                        <TextBox Name="Uczen_EdytujDrugieImie" Grid.Row="1" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" FontSize="30" HorizontalAlignment="Center">Nazwisko</TextBlock>
+                        <TextBox Name="Uczen_EdytujNazwisko" Grid.Row="2" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="3" FontSize="30" HorizontalAlignment="Center">Nazwisko rodowe</TextBlock>
+                        <TextBox Name="Uczen_EdytujNazwiskoRodowe" Grid.Row="3" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="4" FontSize="30" HorizontalAlignment="Center">Imię matki</TextBlock>
+                        <TextBox Name="Uczen_EdytujImieMatki" Grid.Row="4" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="5" FontSize="30" HorizontalAlignment="Center">Imię ojca</TextBlock>
+                        <TextBox Name="Uczen_EdytujImieOjca" Grid.Row="5" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="6" FontSize="30" HorizontalAlignment="Center">Data urodzenia</TextBlock>
+                        <DatePicker Name="Uczen_EdytujDateUrodzenia" Grid.Row="6" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="7" FontSize="30" HorizontalAlignment="Center">PESEL</TextBlock>
+                        <TextBox Name="Uczen_EdytujPesel" Grid.Row="7" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="8" FontSize="30" HorizontalAlignment="Center">Płeć</TextBlock>
+                        <TextBox Name="Uczen_EdytujPlec" Grid.Row="8" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="9" FontSize="30" HorizontalAlignment="Center">Klasa</TextBlock>
+                        <TextBox Name="Uczen_EdytujKlase" Grid.Row="9" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="10" FontSize="30" HorizontalAlignment="Center">Grupy</TextBlock>
+                        <TextBox Name="Uczen_EdytujGrupy" Grid.Row="10" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="11" FontSize="30" HorizontalAlignment="Center">Zdjęcie</TextBlock>
+                        <Button Grid.Row="11" Grid.Column="1" Width="200" Click="ImportStudentImageButton_Click">Zaimportuj zdjęcie</Button>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Image Name="Uczen_EdytujZdjecie" Width="300" Height="300" Margin="10"/>
+                        <Button Grid.Row="1" FontSize="30" Padding="20" HorizontalAlignment="Center" VerticalAlignment="Center" Click="EditStudentButton_Click">Edytuj ucznia</Button>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!--#endregion-->
+
             <!--#region Dodaj nauczyciela-->
 
             <TabItem Header="Dodaj nauczyciela" Selector.Selected="Sekretariat_TabChanged">

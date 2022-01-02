@@ -16,6 +16,8 @@ namespace Sekretariat_szkoły_WPF
         List<Nauczyciel> teachers;
         List<Pracownik_obslugi> staffMembers;
 
+        Uczen StudentToEdit;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -348,6 +350,32 @@ namespace Sekretariat_szkoły_WPF
                         return;
                 }
             }
+        }
+
+        private void ModifyStudentButton_Click(object sender, RoutedEventArgs e)
+        {
+            StudentToEdit = ((FrameworkElement)sender).DataContext as Uczen;
+            Sekretariat.SelectedIndex = 4;
+
+            Uczen_EdytujImie.Text = StudentToEdit.Imie;
+            Uczen_EdytujDrugieImie.Text = StudentToEdit.Imie_drugie;
+            Uczen_EdytujNazwisko.Text = StudentToEdit.Nazwisko;
+            Uczen_EdytujNazwiskoRodowe.Text = StudentToEdit.Nazwisko_rodowe;
+            Uczen_EdytujImieMatki.Text = StudentToEdit.Imie_matki;
+            Uczen_EdytujImieOjca.Text = StudentToEdit.Imie_ojca;
+            Uczen_EdytujDateUrodzenia.Text = StudentToEdit.Data_urodzenia;
+            Uczen_EdytujPesel.Text = StudentToEdit.Pesel;
+            Uczen_EdytujPlec.Text = StudentToEdit.Plec;
+            Uczen_EdytujKlase.Text = StudentToEdit.Klasa;
+            Uczen_EdytujGrupy.Text = StudentToEdit.Grupy;
+            Uczen_EdytujZdjecie.Source = new ImageSourceConverter().ConvertFromString(StudentToEdit.Zdjecie_absolute) as ImageSource;
+        }
+
+        private void EditStudentButton_Click(object sender, RoutedEventArgs e) => EditStudent(StudentToEdit);
+
+        private void EditStudent(Uczen StudentToEdit)
+        {
+            
         }
     }
 }

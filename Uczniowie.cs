@@ -56,6 +56,7 @@ namespace Sekretariat_szko³y_WPF
                     }
                 }
             }
+
             return students;
         }
 
@@ -312,6 +313,30 @@ namespace Sekretariat_szko³y_WPF
             SaveIntoDatabase("Uczniowie", studentProperties, true);
 
             MessageBox.Show("Uczeñ dodany do bazy danych!");
+        }
+
+        private void DeleteStudent(Uczen StudentToDelete)
+        {
+            List<Uczen> AllStudents = GetStudents();
+
+            string StudentsToSave = "";
+
+            foreach (Uczen tempStudent in AllStudents)
+            {
+                if (StudentToDelete.ToString() != tempStudent.ToString())
+                    StudentsToSave += tempStudent.ToString() + Environment.NewLine;
+            }
+
+            StudentsToSave = StudentsToSave.Trim();
+
+            SaveIntoDatabase("Uczniowie", StudentsToSave, false);
+
+            ReportUpdate();
+        }
+
+        private void EditStudent(Uczen StudentToEdit)
+        {
+
         }
     }
 }
