@@ -17,44 +17,61 @@ namespace Sekretariat_szko³y_WPF
             students.Clear();
 
             string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Uczniowie.txt");
+            bool clearFile = false;
 
             if (File.Exists(path))
             {
-                using (StreamReader reader = File.OpenText(path))
+                try
                 {
-                    string line = "";
-                    while ((line = reader.ReadLine()) != null)
+                    using (StreamReader reader = File.OpenText(path))
                     {
-                        var pola = line.Split("\t").ToList();
-
-                        var student = new Uczen()
+                        string line = "";
+                        while ((line = reader.ReadLine()) != null)
                         {
-                            Imie = pola[0],
-                            Imie_drugie = pola[1],
-                            Nazwisko = pola[2],
-                            Nazwisko_rodowe = pola[3],
-                            Imie_matki = pola[4],
-                            Imie_ojca = pola[5],
-                            Data_urodzenia = pola[6],
-                            Pesel = pola[7],
-                            Plec = pola[8],
-                            Klasa = pola[9],
-                            Grupy = pola[10],
-                            Zdjecie_absolute = null,
-                            Zdjecie_relative = null
-                        };
+                            if (line == "")
+                            {
+                                clearFile = true;
+                                break;
+                            }
 
-                        student.Zdjecie_relative = (pola.Count == 12)
-                            ? pola[11]
-                            : null;
+                            var pola = line.Split("\t").ToList();
 
-                        student.Zdjecie_absolute = (student.Zdjecie_relative != null)
-                            ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + student.Zdjecie_relative)
-                            : NoImage;
+                            var student = new Uczen()
+                            {
+                                Imie = pola[0],
+                                Imie_drugie = pola[1],
+                                Nazwisko = pola[2],
+                                Nazwisko_rodowe = pola[3],
+                                Imie_matki = pola[4],
+                                Imie_ojca = pola[5],
+                                Data_urodzenia = pola[6],
+                                Pesel = pola[7],
+                                Plec = pola[8],
+                                Klasa = pola[9],
+                                Grupy = pola[10],
+                                Zdjecie_absolute = null,
+                                Zdjecie_relative = null
+                            };
 
-                        students.Add(student);
+                            student.Zdjecie_relative = (pola.Count == 12)
+                                ? pola[11]
+                                : null;
+
+                            student.Zdjecie_absolute = (student.Zdjecie_relative != null)
+                                ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + student.Zdjecie_relative)
+                                : NoImage;
+
+                            students.Add(student);
+                        }
                     }
                 }
+                catch (Exception)
+                {
+                    MessageBox.Show("Chwilka na domkniêcie pliku!");
+                }
+
+                if (clearFile)
+                    File.Create(path);
             }
 
             return students;
@@ -65,161 +82,178 @@ namespace Sekretariat_szko³y_WPF
             students.Clear();
 
             string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Uczniowie.txt");
+            bool clearFile = false;
 
             if (File.Exists(path))
             {
-                using (StreamReader reader = File.OpenText(path))
+                try
                 {
-                    string line = "";
-                    while ((line = reader.ReadLine()) != null)
+                    using (StreamReader reader = File.OpenText(path))
                     {
-                        var pola = line.Split("\t").ToList();
-
-                        var student = new Uczen()
+                        string line = "";
+                        while ((line = reader.ReadLine()) != null)
                         {
-                            Imie = pola[0],
-                            Imie_drugie = pola[1],
-                            Nazwisko = pola[2],
-                            Nazwisko_rodowe = pola[3],
-                            Imie_matki = pola[4],
-                            Imie_ojca = pola[5],
-                            Data_urodzenia = pola[6],
-                            Pesel = pola[7],
-                            Plec = pola[8],
-                            Klasa = pola[9],
-                            Grupy = pola[10],
-                            Zdjecie_absolute = null,
-                            Zdjecie_relative = null
-                        };
-
-                        student.Zdjecie_relative = (pola.Count == 12)
-                            ? pola[11]
-                            : null;
-
-                        student.Zdjecie_absolute = (student.Zdjecie_relative != null)
-                            ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + student.Zdjecie_relative)
-                            : NoImage;
-
-                        bool toShow = false;
-
-                        if (Uczniowie_SearchColNum.SelectedIndex != 6 && Uczniowie_SearchText.Text != null)
-                        {
-                            switch (Uczniowie_SearchColNum.SelectedIndex)
+                            if (line == "")
                             {
-                                case 0:
-                                    {
-                                        if (student.Imie.Equals(Uczniowie_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 1:
-                                    {
-                                        if (student.Imie_drugie.Equals(Uczniowie_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 2:
-                                    {
-                                        if (student.Nazwisko.Equals(Uczniowie_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 3:
-                                    {
-                                        if (student.Nazwisko_rodowe.Equals(Uczniowie_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 4:
-                                    {
-                                        if (student.Imie_matki.Equals(Uczniowie_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 5:
-                                    {
-                                        if (student.Imie_ojca.Equals(Uczniowie_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 7:
-                                    {
-                                        if (student.Pesel.Equals(Uczniowie_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 8:
-                                    {
-                                        if (student.Plec.Equals(Uczniowie_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 9:
-                                    {
-                                        if (student.Klasa.Equals(Uczniowie_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 10:
-                                    {
-                                        if (student.Grupy.Equals(Uczniowie_SearchText.Text))
+                                clearFile = true;
+                                break;
+                            }
+
+                            var pola = line.Split("\t").ToList();
+
+                            var student = new Uczen()
+                            {
+                                Imie = pola[0],
+                                Imie_drugie = pola[1],
+                                Nazwisko = pola[2],
+                                Nazwisko_rodowe = pola[3],
+                                Imie_matki = pola[4],
+                                Imie_ojca = pola[5],
+                                Data_urodzenia = pola[6],
+                                Pesel = pola[7],
+                                Plec = pola[8],
+                                Klasa = pola[9],
+                                Grupy = pola[10],
+                                Zdjecie_absolute = null,
+                                Zdjecie_relative = null
+                            };
+
+                            student.Zdjecie_relative = (pola.Count == 12)
+                                ? pola[11]
+                                : null;
+
+                            student.Zdjecie_absolute = (student.Zdjecie_relative != null)
+                                ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + student.Zdjecie_relative)
+                                : NoImage;
+
+                            bool toShow = false;
+
+                            if (Uczniowie_SearchColNum.SelectedIndex != 6 && Uczniowie_SearchText.Text != null)
+                            {
+                                switch (Uczniowie_SearchColNum.SelectedIndex)
+                                {
+                                    case 0:
                                         {
-                                            toShow = true;
+                                            if (student.Imie.Equals(Uczniowie_SearchText.Text))
+                                                toShow = true;
                                             break;
                                         }
-
-                                        string[] groups = student.Grupy.Split(", ");
-                                        bool anyGroupGood = false;
-
-                                        foreach (string group in groups)
+                                    case 1:
                                         {
-                                            if (group.Equals(Uczniowie_SearchText.Text))
+                                            if (student.Imie_drugie.Equals(Uczniowie_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 2:
+                                        {
+                                            if (student.Nazwisko.Equals(Uczniowie_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 3:
+                                        {
+                                            if (student.Nazwisko_rodowe.Equals(Uczniowie_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 4:
+                                        {
+                                            if (student.Imie_matki.Equals(Uczniowie_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 5:
+                                        {
+                                            if (student.Imie_ojca.Equals(Uczniowie_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 7:
+                                        {
+                                            if (student.Pesel.Equals(Uczniowie_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 8:
+                                        {
+                                            if (student.Plec.Equals(Uczniowie_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 9:
+                                        {
+                                            if (student.Klasa.Equals(Uczniowie_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 10:
+                                        {
+                                            if (student.Grupy.Equals(Uczniowie_SearchText.Text))
                                             {
-                                                anyGroupGood = true;
+                                                toShow = true;
                                                 break;
                                             }
+
+                                            string[] groups = student.Grupy.Split(", ");
+                                            bool anyGroupGood = false;
+
+                                            foreach (string group in groups)
+                                            {
+                                                if (group.Equals(Uczniowie_SearchText.Text))
+                                                {
+                                                    anyGroupGood = true;
+                                                    break;
+                                                }
+                                            }
+
+                                            if (anyGroupGood)
+                                                toShow = true;
+
+                                            break;
                                         }
-
-                                        if (anyGroupGood)
-                                            toShow = true;
-
-                                        break;
-                                    }
+                                }
                             }
-                        }
-                        else if (Uczniowie_SearchColNum.SelectedIndex == 6 && Uczniowie_SelectedDate.SelectedDate != null)
-                        {
-                            DateTime studentDate = DateTime.Parse(student.Data_urodzenia);
-                            DateTime selectedDate = (DateTime)Uczniowie_SelectedDate.SelectedDate;
-
-                            switch (Uczniowie_SearchForDate.SelectedIndex)
+                            else if (Uczniowie_SearchColNum.SelectedIndex == 6 && Uczniowie_SelectedDate.SelectedDate != null)
                             {
-                                case 0:
-                                    toShow = studentDate < selectedDate;
-                                    break;
+                                DateTime studentDate = DateTime.Parse(student.Data_urodzenia);
+                                DateTime selectedDate = (DateTime)Uczniowie_SelectedDate.SelectedDate;
 
-                                case 1:
-                                    toShow = studentDate <= selectedDate;
-                                    break;
+                                switch (Uczniowie_SearchForDate.SelectedIndex)
+                                {
+                                    case 0:
+                                        toShow = studentDate < selectedDate;
+                                        break;
 
-                                case 2:
-                                    toShow = selectedDate < studentDate;
-                                    break;
+                                    case 1:
+                                        toShow = studentDate <= selectedDate;
+                                        break;
 
-                                case 3:
-                                    toShow = selectedDate <= studentDate;
-                                    break;
+                                    case 2:
+                                        toShow = selectedDate < studentDate;
+                                        break;
 
-                                case 4:
-                                    toShow = studentDate == selectedDate;
-                                    break;
+                                    case 3:
+                                        toShow = selectedDate <= studentDate;
+                                        break;
+
+                                    case 4:
+                                        toShow = studentDate == selectedDate;
+                                        break;
+                                }
                             }
-                        }
 
-                        if (toShow)
-                            students.Add(student);
+                            if (toShow)
+                                students.Add(student);
+                        }
                     }
                 }
+                catch (Exception)
+                {
+                    MessageBox.Show("Chwilka na domkniêcie pliku!");
+                }
+
+                if (clearFile)
+                    File.Create(path);
             }
             return students;
         }

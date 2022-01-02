@@ -15,44 +15,63 @@ namespace Sekretariat_szko³y_WPF
             staffMembers.Clear();
 
             string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Pracownicy_obslugi.txt");
+            bool clearFile = false;
 
             if (File.Exists(path))
             {
-                using (StreamReader reader = File.OpenText(path))
+                try
                 {
-                    string line = "";
-                    while ((line = reader.ReadLine()) != null)
+                    using (StreamReader reader = File.OpenText(path))
                     {
-                        var pola = line.Split("\t").ToList();
-
-                        var staffMember = new Pracownik_obslugi()
+                        string line = "";
+                        while ((line = reader.ReadLine()) != null)
                         {
-                            Imie = pola[0],
-                            Imie_drugie = pola[1],
-                            Nazwisko = pola[2],
-                            Nazwisko_rodowe = pola[3],
-                            Imie_matki = pola[4],
-                            Imie_ojca = pola[5],
-                            Data_urodzenia = pola[6],
-                            Pesel = pola[7],
-                            Plec = pola[8],
-                            Etat = pola[9],
-                            Opis_stanowiska = pola[10],
-                            Data_zatrudnienia = pola[11],
-                            Zdjecie_absolute = null,
-                            Zdjecie_relative = null
-                        };
+                            if (line == "")
+                            {
+                                clearFile = true;
+                                break;
+                            }
 
-                        staffMember.Zdjecie_relative = (pola.Count == 13)
-                            ? pola[12]
-                            : null;
+                            var pola = line.Split("\t").ToList();
 
-                        staffMember.Zdjecie_absolute = (staffMember.Zdjecie_relative != null)
-                            ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + staffMember.Zdjecie_relative)
-                            : NoImage;
+                            var staffMember = new Pracownik_obslugi()
+                            {
+                                Imie = pola[0],
+                                Imie_drugie = pola[1],
+                                Nazwisko = pola[2],
+                                Nazwisko_rodowe = pola[3],
+                                Imie_matki = pola[4],
+                                Imie_ojca = pola[5],
+                                Data_urodzenia = pola[6],
+                                Pesel = pola[7],
+                                Plec = pola[8],
+                                Etat = pola[9],
+                                Opis_stanowiska = pola[10],
+                                Data_zatrudnienia = pola[11],
+                                Zdjecie_absolute = null,
+                                Zdjecie_relative = null
+                            };
 
-                        staffMembers.Add(staffMember);
+                            staffMember.Zdjecie_relative = (pola.Count == 13)
+                                ? pola[12]
+                                : null;
+
+                            staffMember.Zdjecie_absolute = (staffMember.Zdjecie_relative != null)
+                                ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + staffMember.Zdjecie_relative)
+                                : NoImage;
+
+                            staffMembers.Add(staffMember);
+                        }
                     }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Chwilka na domkniêcie pliku!");
+                }
+
+                if (clearFile)
+                {
+                    File.Create(path);
                 }
             }
             return staffMembers;
@@ -63,149 +82,166 @@ namespace Sekretariat_szko³y_WPF
             staffMembers.Clear();
 
             string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Pracownicy_obslugi.txt");
+            bool clearFile = false;
 
             if (File.Exists(path))
             {
-                using (StreamReader reader = File.OpenText(path))
+                try
                 {
-                    string line = "";
-                    while ((line = reader.ReadLine()) != null)
+                    using (StreamReader reader = File.OpenText(path))
                     {
-                        var pola = line.Split("\t").ToList();
-
-                        var staffMember = new Pracownik_obslugi()
+                        string line = "";
+                        while ((line = reader.ReadLine()) != null)
                         {
-                            Imie = pola[0],
-                            Imie_drugie = pola[1],
-                            Nazwisko = pola[2],
-                            Nazwisko_rodowe = pola[3],
-                            Imie_matki = pola[4],
-                            Imie_ojca = pola[5],
-                            Data_urodzenia = pola[6],
-                            Pesel = pola[7],
-                            Plec = pola[8],
-                            Etat = pola[9],
-                            Opis_stanowiska = pola[10],
-                            Data_zatrudnienia = pola[11],
-                            Zdjecie_absolute = null,
-                            Zdjecie_relative = null
-                        };
-
-                        staffMember.Zdjecie_relative = (pola.Count == 13)
-                            ? pola[12]
-                            : null;
-
-                        staffMember.Zdjecie_absolute = (staffMember.Zdjecie_relative != null)
-                            ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + staffMember.Zdjecie_relative)
-                            : NoImage;
-
-                        bool toShow = false;
-
-                        if (PracownicyObslugi_SearchColNum.SelectedIndex != 6 && PracownicyObslugi_SearchColNum.SelectedIndex != 11 && PracownicyObslugi_SearchText.Text != null)
-                        {
-                            switch (PracownicyObslugi_SearchColNum.SelectedIndex)
+                            if (line == "")
                             {
-                                case 0:
-                                    {
-                                        if (staffMember.Imie.Equals(PracownicyObslugi_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 1:
-                                    {
-                                        if (staffMember.Imie_drugie.Equals(PracownicyObslugi_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 2:
-                                    {
-                                        if (staffMember.Nazwisko.Equals(PracownicyObslugi_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 3:
-                                    {
-                                        if (staffMember.Nazwisko_rodowe.Equals(PracownicyObslugi_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 4:
-                                    {
-                                        if (staffMember.Imie_matki.Equals(PracownicyObslugi_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 5:
-                                    {
-                                        if (staffMember.Imie_ojca.Equals(PracownicyObslugi_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 7:
-                                    {
-                                        if (staffMember.Pesel.Equals(PracownicyObslugi_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 8:
-                                    {
-                                        if (staffMember.Plec.Equals(PracownicyObslugi_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 9:
-                                    {
-                                        if (staffMember.Etat.Equals(PracownicyObslugi_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 10:
-                                    {
-                                        if (staffMember.Opis_stanowiska.Equals(PracownicyObslugi_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
+                                clearFile = true;
+                                break;
                             }
-                        }
-                        else if ((PracownicyObslugi_SearchColNum.SelectedIndex == 6 || PracownicyObslugi_SearchColNum.SelectedIndex == 11) && PracownicyObslugi_SelectedDate.SelectedDate != null)
-                        {
-                            DateTime staffMemberDate;
 
-                            if(PracownicyObslugi_SearchColNum.SelectedIndex == 6)
-                                staffMemberDate = DateTime.Parse(staffMember.Data_urodzenia);
-                            else
-                                staffMemberDate = DateTime.Parse(staffMember.Data_zatrudnienia);
+                            var pola = line.Split("\t").ToList();
 
-                            DateTime selectedDate = (DateTime)PracownicyObslugi_SelectedDate.SelectedDate;
-
-                            switch (PracownicyObslugi_SearchForDate.SelectedIndex)
+                            var staffMember = new Pracownik_obslugi()
                             {
-                                case 0:
-                                    toShow = staffMemberDate < selectedDate;
-                                    break;
+                                Imie = pola[0],
+                                Imie_drugie = pola[1],
+                                Nazwisko = pola[2],
+                                Nazwisko_rodowe = pola[3],
+                                Imie_matki = pola[4],
+                                Imie_ojca = pola[5],
+                                Data_urodzenia = pola[6],
+                                Pesel = pola[7],
+                                Plec = pola[8],
+                                Etat = pola[9],
+                                Opis_stanowiska = pola[10],
+                                Data_zatrudnienia = pola[11],
+                                Zdjecie_absolute = null,
+                                Zdjecie_relative = null
+                            };
 
-                                case 1:
-                                    toShow = staffMemberDate <= selectedDate;
-                                    break;
+                            staffMember.Zdjecie_relative = (pola.Count == 13)
+                                ? pola[12]
+                                : null;
 
-                                case 2:
-                                    toShow = selectedDate < staffMemberDate;
-                                    break;
+                            staffMember.Zdjecie_absolute = (staffMember.Zdjecie_relative != null)
+                                ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + staffMember.Zdjecie_relative)
+                                : NoImage;
 
-                                case 3:
-                                    toShow = selectedDate <= staffMemberDate;
-                                    break;
+                            bool toShow = false;
 
-                                case 4:
-                                    toShow = staffMemberDate == selectedDate;
-                                    break;
+                            if (PracownicyObslugi_SearchColNum.SelectedIndex != 6 && PracownicyObslugi_SearchColNum.SelectedIndex != 11 && PracownicyObslugi_SearchText.Text != null)
+                            {
+                                switch (PracownicyObslugi_SearchColNum.SelectedIndex)
+                                {
+                                    case 0:
+                                        {
+                                            if (staffMember.Imie.Equals(PracownicyObslugi_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            if (staffMember.Imie_drugie.Equals(PracownicyObslugi_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 2:
+                                        {
+                                            if (staffMember.Nazwisko.Equals(PracownicyObslugi_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 3:
+                                        {
+                                            if (staffMember.Nazwisko_rodowe.Equals(PracownicyObslugi_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 4:
+                                        {
+                                            if (staffMember.Imie_matki.Equals(PracownicyObslugi_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 5:
+                                        {
+                                            if (staffMember.Imie_ojca.Equals(PracownicyObslugi_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 7:
+                                        {
+                                            if (staffMember.Pesel.Equals(PracownicyObslugi_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 8:
+                                        {
+                                            if (staffMember.Plec.Equals(PracownicyObslugi_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 9:
+                                        {
+                                            if (staffMember.Etat.Equals(PracownicyObslugi_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 10:
+                                        {
+                                            if (staffMember.Opis_stanowiska.Equals(PracownicyObslugi_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                }
                             }
-                        }
+                            else if ((PracownicyObslugi_SearchColNum.SelectedIndex == 6 || PracownicyObslugi_SearchColNum.SelectedIndex == 11) && PracownicyObslugi_SelectedDate.SelectedDate != null)
+                            {
+                                DateTime staffMemberDate;
 
-                        if (toShow)
-                            staffMembers.Add(staffMember);
+                                if (PracownicyObslugi_SearchColNum.SelectedIndex == 6)
+                                    staffMemberDate = DateTime.Parse(staffMember.Data_urodzenia);
+                                else
+                                    staffMemberDate = DateTime.Parse(staffMember.Data_zatrudnienia);
+
+                                DateTime selectedDate = (DateTime)PracownicyObslugi_SelectedDate.SelectedDate;
+
+                                switch (PracownicyObslugi_SearchForDate.SelectedIndex)
+                                {
+                                    case 0:
+                                        toShow = staffMemberDate < selectedDate;
+                                        break;
+
+                                    case 1:
+                                        toShow = staffMemberDate <= selectedDate;
+                                        break;
+
+                                    case 2:
+                                        toShow = selectedDate < staffMemberDate;
+                                        break;
+
+                                    case 3:
+                                        toShow = selectedDate <= staffMemberDate;
+                                        break;
+
+                                    case 4:
+                                        toShow = staffMemberDate == selectedDate;
+                                        break;
+                                }
+                            }
+
+                            if (toShow)
+                                staffMembers.Add(staffMember);
+                        }
                     }
                 }
+                catch (Exception)
+                {
+                    MessageBox.Show("Chwilka na domkniêcie pliku!");
+                }
+
+                if (clearFile)
+                    File.Create(path);
             }
             return staffMembers;
         }

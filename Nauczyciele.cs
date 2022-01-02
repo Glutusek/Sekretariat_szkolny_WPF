@@ -10,53 +10,68 @@ namespace Sekretariat_szko³y_WPF
 {
     public partial class MainWindow : Window
     {
-        public object Parse { get; private set; }
-
         private List<Nauczyciel> GetTeachers()
         {
             teachers.Clear();
 
             string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Nauczyciele.txt");
+            bool clearFile = false;
 
             if (File.Exists(path))
             {
-                using (StreamReader reader = File.OpenText(path))
+                try
                 {
-                    string line = "";
-                    while ((line = reader.ReadLine()) != null)
+                    using (StreamReader reader = File.OpenText(path))
                     {
-                        var pola = line.Split("\t").ToList();
-
-                        var teacher = new Nauczyciel()
+                        string line = "";
+                        while ((line = reader.ReadLine()) != null)
                         {
-                            Imie = pola[0],
-                            Imie_drugie = pola[1],
-                            Nazwisko = pola[2],
-                            Nazwisko_rodowe = pola[3],
-                            Imie_matki = pola[4],
-                            Imie_ojca = pola[5],
-                            Data_urodzenia = pola[6],
-                            Pesel = pola[7],
-                            Plec = pola[8],
-                            Wychowawstwo = Convert.ToBoolean(pola[9]),
-                            Przedmioty = pola[10],
-                            Ile_naucza = pola[11],
-                            Data_zatrudnienia = pola[12],
-                            Zdjecie_absolute = null,
-                            Zdjecie_relative = null
-                        };
+                            if (line == "")
+                            {
+                                clearFile = true;
+                                break;
+                            }
 
-                        teacher.Zdjecie_relative = (pola.Count == 14)
-                            ? pola[13]
-                            : null;
+                            var pola = line.Split("\t").ToList();
 
-                        teacher.Zdjecie_absolute = (teacher.Zdjecie_relative != null)
-                            ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + teacher.Zdjecie_relative)
-                            : NoImage;
+                            var teacher = new Nauczyciel()
+                            {
+                                Imie = pola[0],
+                                Imie_drugie = pola[1],
+                                Nazwisko = pola[2],
+                                Nazwisko_rodowe = pola[3],
+                                Imie_matki = pola[4],
+                                Imie_ojca = pola[5],
+                                Data_urodzenia = pola[6],
+                                Pesel = pola[7],
+                                Plec = pola[8],
+                                Wychowawstwo = Convert.ToBoolean(pola[9]),
+                                Przedmioty = pola[10],
+                                Ile_naucza = pola[11],
+                                Data_zatrudnienia = pola[12],
+                                Zdjecie_absolute = null,
+                                Zdjecie_relative = null
+                            };
 
-                        teachers.Add(teacher);
+                            teacher.Zdjecie_relative = (pola.Count == 14)
+                                ? pola[13]
+                                : null;
+
+                            teacher.Zdjecie_absolute = (teacher.Zdjecie_relative != null)
+                                ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + teacher.Zdjecie_relative)
+                                : NoImage;
+
+                            teachers.Add(teacher);
+                        }
                     }
                 }
+                catch(Exception)
+                {
+                    MessageBox.Show("Chwilka na domkniêcie pliku!");
+                }
+                
+                if (clearFile)
+                    File.Create(path);
             }
             return teachers;
         }
@@ -68,221 +83,238 @@ namespace Sekretariat_szko³y_WPF
             teachers.Clear();
 
             string path = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\Nauczyciele.txt");
+            bool clearFile = false;
 
             if (File.Exists(path))
             {
-                using (StreamReader reader = File.OpenText(path))
+                try
                 {
-                    string line = "";
-                    while ((line = reader.ReadLine()) != null && !error)
+                    using (StreamReader reader = File.OpenText(path))
                     {
-                        var pola = line.Split("\t").ToList();
-
-                        var teacher = new Nauczyciel()
+                        string line = "";
+                        while ((line = reader.ReadLine()) != null && !error)
                         {
-                            Imie = pola[0],
-                            Imie_drugie = pola[1],
-                            Nazwisko = pola[2],
-                            Nazwisko_rodowe = pola[3],
-                            Imie_matki = pola[4],
-                            Imie_ojca = pola[5],
-                            Data_urodzenia = pola[6],
-                            Pesel = pola[7],
-                            Plec = pola[8],
-                            Wychowawstwo = Convert.ToBoolean(pola[9]),
-                            Przedmioty = pola[10],
-                            Ile_naucza = pola[11],
-                            Data_zatrudnienia = pola[12],
-                            Zdjecie_absolute = null,
-                            Zdjecie_relative = null
-                        };
-
-                        teacher.Zdjecie_relative = (pola.Count == 12)
-                            ? pola[11]
-                            : null;
-
-                        teacher.Zdjecie_absolute = (teacher.Zdjecie_relative != null)
-                            ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + teacher.Zdjecie_relative)
-                            : NoImage;
-
-                        bool toShow = false;
-
-                        if (Nauczyciele_SearchColNum.SelectedIndex != 6 && Nauczyciele_SearchColNum.SelectedIndex != 11 && Nauczyciele_SearchColNum.SelectedIndex != 12 && Nauczyciele_SearchText.Text != null)
-                        {
-                            switch (Nauczyciele_SearchColNum.SelectedIndex)
+                            if (line == "")
                             {
-                                case 0:
-                                    {
-                                        if (teacher.Imie.Equals(Nauczyciele_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 1:
-                                    {
-                                        if (teacher.Imie_drugie.Equals(Nauczyciele_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 2:
-                                    {
-                                        if (teacher.Nazwisko.Equals(Nauczyciele_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 3:
-                                    {
-                                        if (teacher.Nazwisko_rodowe.Equals(Nauczyciele_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 4:
-                                    {
-                                        if (teacher.Imie_matki.Equals(Nauczyciele_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 5:
-                                    {
-                                        if (teacher.Imie_ojca.Equals(Nauczyciele_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 7:
-                                    {
-                                        if (teacher.Pesel.Equals(Nauczyciele_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 8:
-                                    {
-                                        if (teacher.Plec.Equals(Nauczyciele_SearchText.Text))
-                                            toShow = true;
-                                        break;
-                                    }
-                                case 9:
-                                    {
-                                        try
-                                        {
-                                            if (teacher.Wychowawstwo.Equals(Convert.ToBoolean(Nauczyciele_SearchText.Text)))
-                                                toShow = true;
-                                        }
-                                        catch (FormatException)
-                                        {
-                                            MessageBox.Show("Wychowawstwo przyjmuje tylko wartoœci True lub False!");
-                                            error = true;
-                                        }
-                                        break;
-                                    }
-                                case 10:
-                                    {
-                                        if (teacher.Przedmioty.Equals(Nauczyciele_SearchText.Text))
-                                        {
-                                            toShow = true;
-                                            break;
-                                        }
-
-                                        string[] subjects = teacher.Przedmioty.Split(", ");
-                                        bool anySubjectGood = false;
-
-                                        foreach (string subject in subjects)
-                                        {
-                                            if (subject.Equals(Nauczyciele_SearchText.Text))
-                                            {
-                                                anySubjectGood = true;
-                                                break;
-                                            }
-                                        }
-
-                                        if (anySubjectGood)
-                                            toShow = true;
-
-                                        break;
-                                    }
+                                clearFile = true;
+                                break;
                             }
-                        }
-                        else if (Nauczyciele_SearchColNum.SelectedIndex == 11 && Nauczyciele_SearchHoursNum != null)
-                        {
-                            try
+
+                            var pola = line.Split("\t").ToList();
+
+                            var teacher = new Nauczyciel()
                             {
-                                int searchHours = int.Parse(Nauczyciele_SearchHoursNum.Text);
+                                Imie = pola[0],
+                                Imie_drugie = pola[1],
+                                Nazwisko = pola[2],
+                                Nazwisko_rodowe = pola[3],
+                                Imie_matki = pola[4],
+                                Imie_ojca = pola[5],
+                                Data_urodzenia = pola[6],
+                                Pesel = pola[7],
+                                Plec = pola[8],
+                                Wychowawstwo = Convert.ToBoolean(pola[9]),
+                                Przedmioty = pola[10],
+                                Ile_naucza = pola[11],
+                                Data_zatrudnienia = pola[12],
+                                Zdjecie_absolute = null,
+                                Zdjecie_relative = null
+                            };
 
-                                int sumOfHours = 0;
+                            teacher.Zdjecie_relative = (pola.Count == 12)
+                                ? pola[11]
+                                : null;
 
-                                string[] classes = teacher.Ile_naucza.Split(", ");
+                            teacher.Zdjecie_absolute = (teacher.Zdjecie_relative != null)
+                                ? Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + teacher.Zdjecie_relative)
+                                : NoImage;
 
-                                foreach (string c in classes)
-                                {
-                                    sumOfHours += int.Parse(c.Split(" ")[1]);
-                                }
+                            bool toShow = false;
 
-                                switch (Nauczyciele_SearchHours.SelectedIndex)
+                            if (Nauczyciele_SearchColNum.SelectedIndex != 6 && Nauczyciele_SearchColNum.SelectedIndex != 11 && Nauczyciele_SearchColNum.SelectedIndex != 12 && Nauczyciele_SearchText.Text != null)
+                            {
+                                switch (Nauczyciele_SearchColNum.SelectedIndex)
                                 {
                                     case 0:
-                                        toShow = sumOfHours < searchHours;
+                                        {
+                                            if (teacher.Imie.Equals(Nauczyciele_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            if (teacher.Imie_drugie.Equals(Nauczyciele_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 2:
+                                        {
+                                            if (teacher.Nazwisko.Equals(Nauczyciele_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 3:
+                                        {
+                                            if (teacher.Nazwisko_rodowe.Equals(Nauczyciele_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 4:
+                                        {
+                                            if (teacher.Imie_matki.Equals(Nauczyciele_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 5:
+                                        {
+                                            if (teacher.Imie_ojca.Equals(Nauczyciele_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 7:
+                                        {
+                                            if (teacher.Pesel.Equals(Nauczyciele_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 8:
+                                        {
+                                            if (teacher.Plec.Equals(Nauczyciele_SearchText.Text))
+                                                toShow = true;
+                                            break;
+                                        }
+                                    case 9:
+                                        {
+                                            try
+                                            {
+                                                if (teacher.Wychowawstwo.Equals(Convert.ToBoolean(Nauczyciele_SearchText.Text)))
+                                                    toShow = true;
+                                            }
+                                            catch (FormatException)
+                                            {
+                                                MessageBox.Show("Wychowawstwo przyjmuje tylko wartoœci True lub False!");
+                                                error = true;
+                                            }
+                                            break;
+                                        }
+                                    case 10:
+                                        {
+                                            if (teacher.Przedmioty.Equals(Nauczyciele_SearchText.Text))
+                                            {
+                                                toShow = true;
+                                                break;
+                                            }
+
+                                            string[] subjects = teacher.Przedmioty.Split(", ");
+                                            bool anySubjectGood = false;
+
+                                            foreach (string subject in subjects)
+                                            {
+                                                if (subject.Equals(Nauczyciele_SearchText.Text))
+                                                {
+                                                    anySubjectGood = true;
+                                                    break;
+                                                }
+                                            }
+
+                                            if (anySubjectGood)
+                                                toShow = true;
+
+                                            break;
+                                        }
+                                }
+                            }
+                            else if (Nauczyciele_SearchColNum.SelectedIndex == 11 && Nauczyciele_SearchHoursNum != null)
+                            {
+                                try
+                                {
+                                    int searchHours = int.Parse(Nauczyciele_SearchHoursNum.Text);
+
+                                    int sumOfHours = 0;
+
+                                    string[] classes = teacher.Ile_naucza.Split(", ");
+
+                                    foreach (string c in classes)
+                                    {
+                                        sumOfHours += int.Parse(c.Split(" ")[1]);
+                                    }
+
+                                    switch (Nauczyciele_SearchHours.SelectedIndex)
+                                    {
+                                        case 0:
+                                            toShow = sumOfHours < searchHours;
+                                            break;
+
+                                        case 1:
+                                            toShow = sumOfHours <= searchHours;
+                                            break;
+
+                                        case 2:
+                                            toShow = searchHours < sumOfHours;
+                                            break;
+
+                                        case 3:
+                                            toShow = searchHours <= sumOfHours;
+                                            break;
+
+                                        case 4:
+                                            toShow = sumOfHours == searchHours;
+                                            break;
+                                    }
+                                }
+                                catch (Exception)
+                                {
+                                    MessageBox.Show("Niepoprawna liczba!");
+                                    error = true;
+                                }
+                            }
+                            else if ((Nauczyciele_SearchColNum.SelectedIndex == 6 || Nauczyciele_SearchColNum.SelectedIndex == 12) && Nauczyciele_SelectedDate.SelectedDate != null)
+                            {
+                                DateTime teacherDate;
+
+                                if (Nauczyciele_SearchColNum.SelectedIndex == 6)
+                                    teacherDate = DateTime.Parse(teacher.Data_urodzenia);
+                                else
+                                    teacherDate = DateTime.Parse(teacher.Data_zatrudnienia);
+
+                                DateTime selectedDate = (DateTime)Nauczyciele_SelectedDate.SelectedDate;
+
+                                switch (Nauczyciele_SearchForDate.SelectedIndex)
+                                {
+                                    case 0:
+                                        toShow = teacherDate < selectedDate;
                                         break;
 
                                     case 1:
-                                        toShow = sumOfHours <= searchHours;
+                                        toShow = teacherDate <= selectedDate;
                                         break;
 
                                     case 2:
-                                        toShow = searchHours < sumOfHours;
+                                        toShow = selectedDate < teacherDate;
                                         break;
 
                                     case 3:
-                                        toShow = searchHours <= sumOfHours;
+                                        toShow = selectedDate <= teacherDate;
                                         break;
 
                                     case 4:
-                                        toShow = sumOfHours == searchHours;
+                                        toShow = teacherDate == selectedDate;
                                         break;
                                 }
                             }
-                            catch (Exception)
-                            {
-                                MessageBox.Show("Niepoprawna liczba!");
-                                error = true;
-                            }
+
+                            if (toShow)
+                                teachers.Add(teacher);
                         }
-                        else if ((Nauczyciele_SearchColNum.SelectedIndex == 6 || Nauczyciele_SearchColNum.SelectedIndex == 12) && Nauczyciele_SelectedDate.SelectedDate != null)
-                        {
-                            DateTime teacherDate;
-
-                            if (Nauczyciele_SearchColNum.SelectedIndex == 6)
-                                teacherDate = DateTime.Parse(teacher.Data_urodzenia);
-                            else
-                                teacherDate = DateTime.Parse(teacher.Data_zatrudnienia);
-
-                            DateTime selectedDate = (DateTime)Nauczyciele_SelectedDate.SelectedDate;
-
-                            switch (Nauczyciele_SearchForDate.SelectedIndex)
-                            {
-                                case 0:
-                                    toShow = teacherDate < selectedDate;
-                                    break;
-
-                                case 1:
-                                    toShow = teacherDate <= selectedDate;
-                                    break;
-
-                                case 2:
-                                    toShow = selectedDate < teacherDate;
-                                    break;
-
-                                case 3:
-                                    toShow = selectedDate <= teacherDate;
-                                    break;
-
-                                case 4:
-                                    toShow = teacherDate == selectedDate;
-                                    break;
-                            }
-                        }
-
-                        if (toShow)
-                            teachers.Add(teacher);
                     }
                 }
+                catch (Exception)
+                {
+                    MessageBox.Show("Chwilka na domkniêcie pliku!");
+                }
+
+                if (clearFile)
+                    File.Create(path);
             }
 
             return teachers;
