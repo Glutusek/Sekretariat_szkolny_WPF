@@ -1,0 +1,62 @@
+Sekretariat szkolny
+
+Główne okno składa się z: 2 Menu, Toolbar'a oraz TabControl posiadającego 10 zakładek (3 ukryte dla użytkownika).
+
+
+Menu:
+- Wyświetlanie:
+	- Uczniowie - wyświetla zakładkę Uczniowie w TabControl
+	- Nauczyciele - wyświetla zakładkę Nauczyciele w TabControl
+	- Pracownicy obsługi - wyświetla zakładkę Pracownicy obsługi w TabControl
+	- Skróty klawiszowe - wyświetla zakładkę Skróty klawiszowe w TabControl	
+
+- Dodawanie:
+	- Dodaj ucznia - wyświetla zakładkę Dodaj ucznia w TabControl
+	- Dodaj nauczyciela - wyświetla zakładkę Dodaj nauczyciela w TabControl
+	- Dodaj pracownika obsługi - wyświetla zakładkę Dodaj pracownika obsługi w TabControl
+
+Toolbar:
+	- Wczytaj z pliku - przycisk pozwalający na wczytanie pliku z danymi uczniów, nauczycieli i pracowników obsługi
+	- Dodaj zdjęcie do bazy - przycisk pozwalający na dodanie zdjęcia do bazy danych
+	- Generuj raport tego okna - przycisk pozwalający na wygenerowanie raportu 
+	  z wyświetlanego okna uczniów lub nauczycieli lub pracowników obsługi wraz z zastosowanymi sortowaniami i wyszukiwaniami
+	- Generuj raport całej bazy - przycisk powzwalający na wygenerowanie kopii bazy danych
+
+TabControl:
+- Uczniowie - podstawowe okno wyświetlające bazę uczniów z możliwością sortowania i wyszukiwania
+- Nauczyciele- podstawowe okno wyświetlające bazę nauczycieli z możliwością sortowania i wyszukiwania
+- Pracownicy obsługi - podstawowe okno wyświetlające bazę pracowników obsługi z możliwością sortowania i wyszukiwania
+- Dodaj ucznia - formularz z możliwością dodania ucznia o wymaganych właściwościach
+- (Ukryte) Edytuj ucznia - formularz z możliwością edycji ucznia, dostępne tylko z poziomu przycisku "Modyfikuj" przy rekordach w zakładce Uczniowie
+- Dodaj nauczyciela - formularz z możliwością dodania nauczyciela o wymaganych właściwościach
+- (Ukryte) Edytuj nauczyciela - formularz z możliwością edycji nauczyciela, dostępne tylko z poziomu przycisku "Modyfikuj" przy rekordach w zakładce Nauczyciele
+- Dodaj pracownika obsługi - formularz z możliwością dodania pracownika o wymaganych właściwościach
+- (Ukryte) Edytuj pracownika obsługi - formularz z możliwością edycji pracownika obsługi,
+	dostępne tylko z poziomu przycisku "Modyfikuj" przy rekordach w zakładce Pracownicy obsługi
+- Skróty klawiszowe - okno umożliwiające wyświetlenie oraz edycję skrótów klawiszowych
+
+
+Program opiera się na kontakcie 3 plików tekstowych z listami obiektów klas Uczen, Nauczyciel, Pracownik_obslugi, a także folderem ze zdjęciami.
+Na bieżąco generuje on nowe listy w zależności od użytych sortowań lub wyszukiwań, a gdy potrzeba to odpowiednio modyfikuje pliki tekstowe w bazie danych.
+
+Sortowanie odbywa się na podstawie wyboru dowolnej kolumny (oprócz zdjęcia) oraz kierunku (rosnąco lub malejąco). Następnie przycisk Sortuj wykonuje sortowanie,
+przycisk Wyczyść przywraca listę do pierwotnej formy.
+
+Wyszukiwanie odbywa się na podstawie wyboru dowolnej kolumny (oprócz zdjęcia) i w zależności od przeszukiwanych obiektów różni się możliwościami.
+We wszystkich klasach jest możliwy tekst do wyszukania, który pozwala na znalezienie rekordów z konkretnym tekstem (jeżeli pole zakłada możliwość większej ilości danych
+wymienionych po ", ", to również je wyszukuje: np. wyszukiwany tekst "Geografia", sprawdzi się także gdy Nauczyciel ma w polu Przedmioty "Geografia, Biologia".
+Również we wszystkich klasach jest możliwość użycia pola z datą dla daty urodzenia bądź zatrudnienia.
+Tylko klasa Nauczyciele posiada możliwość użycia pola tekstowego z liczbami, które odnosi się bezpośrednio do pola "Ile_naucza",
+zawierającego w sobie klasę (np. 3pr, 2m) oraz przez ile godzin w tygodniu w niej uczy.
+
+Dane z bazy są wyświetlane w oknie obok w odpowiednich kolumnach. Nie można zmieniać kolejności kolumn, tylko ich szerokość.
+Na początku rekordów są przyciski "Modyfikuj" pozwalające na modyfikację danych wybranej osoby oraz "Usuń" usuwającej cały rekord.
+
+Zakładki z dodawaniem wyświetlają wszystkie edytowalne pola, a także przycisk z importem obrazka (obrazek jest dodawany do bazy,
+natomiast nie można się go usunąć z bazy z poziomu programu). Następnie przycisk dodania osoby powoduje przypisanie jej do bazy
+(jest możliwość występowania duplikatów danych).
+
+Zakładki z edytowaniem są możliwe do otwarcia tylko z poziomu przycisku "Modyfikuj". Automatycznie formularz jest uzupełniany dotychczasowymi danymi, które można zmienić.
+
+
+Zakładka ze skrótami klawiszowymi powinna na bieżąco umożliwiać edytowanie skrótów, a także ich wyświetlanie (Niezaimplementowane ze względu na brak czasu).
