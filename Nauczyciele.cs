@@ -10,6 +10,8 @@ namespace Sekretariat_szko³y_WPF
 {
     public partial class MainWindow : Window
     {
+        public object Parse { get; private set; }
+
         private List<Nauczyciel> GetTeachers()
         {
             teachers.Clear();
@@ -286,10 +288,7 @@ namespace Sekretariat_szko³y_WPF
             return teachers;
         }
 
-        private void Nauczyciele_ClearSortButtonClick(object sender, RoutedEventArgs e)
-        {
-            ClearSortNauczyciele();
-        }
+        private void Nauczyciele_ClearSortButtonClick(object sender, RoutedEventArgs e) => ClearSortNauczyciele();
 
         private void ClearSortNauczyciele()
         {
@@ -333,10 +332,7 @@ namespace Sekretariat_szko³y_WPF
             ReportUpdate();
         }
 
-        private void Nauczyciele_SortButtonClick(object sender, RoutedEventArgs e)
-        {
-            SortNauczyciele();
-        }
+        private void Nauczyciele_SortButtonClick(object sender, RoutedEventArgs e) => SortNauczyciele();
 
         private void SortNauczyciele()
         {
@@ -347,6 +343,50 @@ namespace Sekretariat_szko³y_WPF
                         ? ListSortDirection.Ascending
                         : ListSortDirection.Descending
                 );
+        }
+
+        private void AddTeacher()
+        {
+            List<string> properties = new List<string>()
+            {
+                Nauczyciel_DodajImie.Text,
+                Nauczyciel_DodajDrugieImie.Text,
+                Nauczyciel_DodajNazwisko.Text,
+                Nauczyciel_DodajNazwiskoRodowe.Text,
+                Nauczyciel_DodajImieMatki.Text,
+                Nauczyciel_DodajImieOjca.Text,
+                Nauczyciel_DodajDateUrodzenia.Text,
+                Nauczyciel_DodajPesel.Text,
+                Nauczyciel_DodajPlec.Text,
+                Nauczyciel_DodajWychowawstwo.IsChecked.ToString(),
+                Nauczyciel_DodajPrzedmioty.Text,
+                Nauczyciel_DodajIleNaucza.Text,
+                Nauczyciel_DodajDateZatrudnienia.Text
+            };
+
+            string teacherProperties = "";
+
+            foreach (string prop in properties)
+            {
+                if (prop == "")
+                {
+                    MessageBox.Show("Proszê wype³niæ wszystkie pola!");
+                    return;
+                }
+
+                teacherProperties += prop + "\t";
+            }
+
+            teacherProperties = teacherProperties.Trim();
+
+            string img = Nauczyciel_Zdjecie.Source.ToString()[(Nauczyciel_Zdjecie.Source.ToString().LastIndexOf("/") + 1)..];
+
+            if (img != "NO_IMAGE.png")
+                teacherProperties += "\t" + img;
+
+            SaveIntoDatabase("Nauczyciele", teacherProperties, true);
+
+            MessageBox.Show("Nauczyciel dodany do bazy danych!");
         }
     }
 }

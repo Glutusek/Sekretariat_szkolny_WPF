@@ -1,3 +1,4 @@
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -5,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Sekretariat_szko³y_WPF
 {
@@ -221,11 +223,6 @@ namespace Sekretariat_szko³y_WPF
             return students;
         }
 
-        private void Uczniowie_ClearSortButtonClick(object sender, RoutedEventArgs e)
-        {
-            ClearSortUczniowie();
-        }
-
         private void ClearSortUczniowie()
         {
             Uczniowie_SortColNum.SelectedIndex = 0;
@@ -264,11 +261,6 @@ namespace Sekretariat_szko³y_WPF
             ReportUpdate();
         }
 
-        private void Uczniowie_SortButtonClick(object sender, RoutedEventArgs e)
-        {
-            SortUczniowie();
-        }
-
         private void SortUczniowie()
         {
             if (Uczniowie_SortColNum.SelectedItem != null && Uczniowie_SortAscDesc.SelectedItem != null)
@@ -278,6 +270,48 @@ namespace Sekretariat_szko³y_WPF
                         ? ListSortDirection.Ascending
                         : ListSortDirection.Descending
                 );
+        }
+
+        private void AddStudent()
+        {
+            List<string> properties = new List<string>()
+            {
+                Uczen_DodajImie.Text,
+                Uczen_DodajDrugieImie.Text,
+                Uczen_DodajNazwisko.Text,
+                Uczen_DodajNazwiskoRodowe.Text,
+                Uczen_DodajImieMatki.Text,
+                Uczen_DodajImieOjca.Text,
+                Uczen_DodajDateUrodzenia.Text,
+                Uczen_DodajPesel.Text,
+                Uczen_DodajPlec.Text,
+                Uczen_DodajKlase.Text,
+                Uczen_DodajGrupy.Text
+            };
+
+            string studentProperties = "";
+
+            foreach (string prop in properties)
+            {
+                if(prop == "")
+                {
+                    MessageBox.Show("Proszê wype³niæ wszystkie pola!");
+                    return;
+                }
+
+                studentProperties += prop + "\t";
+            }
+
+            studentProperties = studentProperties.Trim();
+
+            string img = Uczen_Zdjecie.Source.ToString()[(Uczen_Zdjecie.Source.ToString().LastIndexOf("/") + 1)..];
+
+            if (img != "NO_IMAGE.png")
+                studentProperties += "\t" + img;
+
+            SaveIntoDatabase("Uczniowie", studentProperties, true);
+
+            MessageBox.Show("Uczeñ dodany do bazy danych!");
         }
     }
 }

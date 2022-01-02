@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Sekretariat_szkoły_WPF
 {
@@ -38,6 +39,15 @@ namespace Sekretariat_szkoły_WPF
             PracownicyObslugi_SearchColNum.SelectionChanged += PracownicyObslugi_ComboBoxChange;
             PracownicyObslugi_SearchButton.Click += SearchPracownicyObslugi;
             PracownicyObslugi_ClearSearchButton.Click += ClearSearchPracownicyObslugi;
+
+            SetDefaultImagesInAddingSection();
+        }
+
+        private void SetDefaultImagesInAddingSection()
+        {
+            Uczen_Zdjecie.Source = new ImageSourceConverter().ConvertFromString(NoImage) as ImageSource;
+            Nauczyciel_Zdjecie.Source = new ImageSourceConverter().ConvertFromString(NoImage) as ImageSource;
+            PracownikObslugi_Zdjecie.Source = new ImageSourceConverter().ConvertFromString(NoImage) as ImageSource;
         }
 
         private void ReportUpdate()
@@ -85,15 +95,12 @@ namespace Sekretariat_szkoły_WPF
             MessageBox.Show("Przerwano proces wczytywania pliku!");
         }
 
-        private static OpenFileDialog OpenTxtFileManually()
+        private static OpenFileDialog OpenTxtFileManually() => new OpenFileDialog()
         {
-            return new OpenFileDialog()
-            {
-                DefaultExt = "txt",
-                Filter = "Text Files (.txt)|*.txt|All files (*.*)|*.*",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-            };
-        }
+            DefaultExt = "txt",
+            Filter = "Text Files (.txt)|*.txt|All files (*.*)|*.*",
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        };
 
         private void SaveIntoDatabase(string type, string data, bool append)
         {
@@ -279,6 +286,67 @@ namespace Sekretariat_szkoły_WPF
                 default:
                     MessageBox.Show("Nie możesz dokonać raportu tego okna!");
                     break;
+            }
+        }
+
+        private void Uczniowie_ClearSortButtonClick(object sender, RoutedEventArgs e) => ClearSortUczniowie();
+
+        private void Uczniowie_SortButtonClick(object sender, RoutedEventArgs e) => SortUczniowie();
+
+        private void AddStudentButton_Click(object sender, RoutedEventArgs e) => AddStudent();
+        
+        private void AddTeacherButton_Click(object sender, RoutedEventArgs e) => AddTeacher();
+
+        private void AddStaffMemberButton_Click(object sender, RoutedEventArgs e) => AddStaffMember();
+
+        private void ImportStudentImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("Uczen");
+
+        private void ImportTeacherImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("Nauczyciel");
+
+        private void ImportStaffMemberImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("PracownikObslugi");
+
+        private void Sekretariat_TabChanged(object sender, RoutedEventArgs e)
+        {
+            var tab = sender as TabItem;
+            if(tab != null)
+            {
+                ReportUpdate();
+            }
+        }
+
+        private void ImportImage(string type)
+        {
+            OpenFileDialog OFD = new OpenFileDialog()
+            {
+                DefaultExt = "jpg",
+                Filter = "JPG Files (.jpg)|*.jpg|JPEG files (.jpeg)|*.jpeg|PNG Files (.png)|*.png|All files (*.*)|*.*",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+            };
+
+            if (OFD.ShowDialog() == true)
+            {
+                string destinationPath = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + OFD.FileName.Substring(OFD.FileName.LastIndexOf("\\") + 1));
+
+                if (!File.Exists(destinationPath))
+                    CopyFile(OFD.FileName, destinationPath);
+
+                switch (type)
+                {
+                    case "Uczen":
+                        Uczen_Zdjecie.Source = new ImageSourceConverter().ConvertFromString(destinationPath) as ImageSource;
+                        break;
+
+                    case "Nauczyciel":
+                        Nauczyciel_Zdjecie.Source = new ImageSourceConverter().ConvertFromString(destinationPath) as ImageSource;
+                        break;
+
+                    case "PracownikObslugi":
+                        PracownikObslugi_Zdjecie.Source = new ImageSourceConverter().ConvertFromString(destinationPath) as ImageSource;
+                        break;
+
+                    default:
+                        return;
+                }
             }
         }
     }

@@ -241,10 +241,7 @@ namespace Sekretariat_szko³y_WPF
             ReportUpdate();
         }
 
-        private void PracownicyObslugi_ClearSortButtonClick(object sender, RoutedEventArgs e)
-        {
-            ClearSortPracownicyObslugi();
-        }
+        private void PracownicyObslugi_ClearSortButtonClick(object sender, RoutedEventArgs e) => ClearSortPracownicyObslugi();
 
         private void ClearSortPracownicyObslugi()
         {
@@ -253,10 +250,7 @@ namespace Sekretariat_szko³y_WPF
             ClearSortDataGrid(DG_Dane_PracownicyObslugi);
         }
 
-        private void PracownicyObslugi_SortButtonClick(object sender, RoutedEventArgs e)
-        {
-            PracownicyObslugiSort();
-        }
+        private void PracownicyObslugi_SortButtonClick(object sender, RoutedEventArgs e) => PracownicyObslugiSort();
 
         private void PracownicyObslugiSort()
         {
@@ -267,6 +261,49 @@ namespace Sekretariat_szko³y_WPF
                         ? ListSortDirection.Ascending
                         : ListSortDirection.Descending
                 );
+        }
+
+        private void AddStaffMember()
+        {
+            List<string> properties = new List<string>()
+            {
+                PracownikObslugi_DodajImie.Text,
+                PracownikObslugi_DodajDrugieImie.Text,
+                PracownikObslugi_DodajNazwisko.Text,
+                PracownikObslugi_DodajNazwiskoRodowe.Text,
+                PracownikObslugi_DodajImieMatki.Text,
+                PracownikObslugi_DodajImieOjca.Text,
+                PracownikObslugi_DodajDateUrodzenia.Text,
+                PracownikObslugi_DodajPesel.Text,
+                PracownikObslugi_DodajPlec.Text,
+                PracownikObslugi_DodajEtat.Text,
+                PracownikObslugi_DodajOpisStanowiska.Text,
+                PracownikObslugi_DodajDateZatrudnienia.Text
+            };
+
+            string staffMemberProperties = "";
+
+            foreach (string prop in properties)
+            {
+                if (prop == "")
+                {
+                    MessageBox.Show("Proszê wype³niæ wszystkie pola!");
+                    return;
+                }
+
+                staffMemberProperties += prop + "\t";
+            }
+
+            staffMemberProperties = staffMemberProperties.Trim();
+
+            string img = PracownikObslugi_Zdjecie.Source.ToString()[(PracownikObslugi_Zdjecie.Source.ToString().LastIndexOf("/") + 1)..];
+
+            if (img != "NO_IMAGE.png")
+                staffMemberProperties += "\t" + img;
+
+            SaveIntoDatabase("Pracownicy_obslugi", staffMemberProperties, true);
+
+            MessageBox.Show("Pracownik obs³ugi dodany do bazy danych!");
         }
     }
 }
