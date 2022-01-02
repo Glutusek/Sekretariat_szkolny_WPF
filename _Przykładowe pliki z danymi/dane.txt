@@ -1,0 +1,4 @@
+U	Albert	Marek	Dencki	Dencki	Janina	Mariusz	01.02.2003	03222521251	Mężczyzna	3m	Angielski Gr.1, Niemiecki gr.2	albert_dencki.jpg
+N	Janina	Maria	Albercka	Kowalska	Antonina	Czesław	20.02.1967	67532215126	Kobieta	True	Geografia, Biologia	2m 3, 3pr 2	01.09.2000	janina_albercka.jpg
+P	Kamil	Zbigniew	Marecki	Marecki	Katarzyna	Bronisław	05.10.1988	88532592359	Mężczyzna	Pełny	Woźny	25.10.2015	kamil_marecki.jpg
+U	Cyprian	Kamil	Waldowski	Waldowski	Weronika	Bogusław	15.06.2004	04125125012	Mężczyzna	2c	Angielski Gr.1, Kółko szachowe
