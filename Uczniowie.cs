@@ -336,7 +336,70 @@ namespace Sekretariat_szko³y_WPF
 
         private void EditStudent(Uczen StudentToEdit)
         {
+            List<string> properties = new List<string>()
+            {
+                Uczen_EdytujImie.Text,
+                Uczen_EdytujDrugieImie.Text,
+                Uczen_EdytujNazwisko.Text,
+                Uczen_EdytujNazwiskoRodowe.Text,
+                Uczen_EdytujImieMatki.Text,
+                Uczen_EdytujImieOjca.Text,
+                Uczen_EdytujDateUrodzenia.Text,
+                Uczen_EdytujPesel.Text,
+                Uczen_EdytujPlec.Text,
+                Uczen_EdytujKlase.Text,
+                Uczen_EdytujGrupy.Text
+            };
 
+            foreach (string prop in properties)
+            {
+                if (prop == "")
+                {
+                    MessageBox.Show("Proszê wype³niæ wszystkie pola!");
+                    return;
+                }
+            }
+
+            string img = Uczen_EdytujZdjecie.Source.ToString()[(Uczen_EdytujZdjecie.Source.ToString().LastIndexOf("/") + 1)..];
+
+            if (img != "NO_IMAGE.png")
+                properties.Add(img);
+
+            List<Uczen> AllStudents = GetStudents();
+
+            string StudentsToSave = "";
+
+            foreach (Uczen tempStudent in AllStudents)
+            {
+                if (StudentToEdit.ToString() == tempStudent.ToString())
+                {
+                    tempStudent.Imie = properties[0];
+                    tempStudent.Imie_drugie = properties[1];
+                    tempStudent.Nazwisko = properties[2];
+                    tempStudent.Nazwisko_rodowe = properties[3];
+                    tempStudent.Imie_matki = properties[4];
+                    tempStudent.Imie_ojca = properties[5];
+                    tempStudent.Data_urodzenia = properties[6];
+                    tempStudent.Pesel = properties[7];
+                    tempStudent.Plec = properties[8];
+                    tempStudent.Klasa = properties[9];
+                    tempStudent.Grupy = properties[10];
+
+                    if (properties.Count == 12)
+                        tempStudent.Zdjecie_relative = properties[11];
+                }
+
+                StudentsToSave += tempStudent + Environment.NewLine;
+            }
+
+            StudentsToSave = StudentsToSave.Trim();
+
+            SaveIntoDatabase("Uczniowie", StudentsToSave, false);
+
+            MessageBox.Show("Uczeñ zosta³ zmodyfikowany!");
+
+            ReportUpdate();
+            Sekretariat.SelectedIndex = 0;
         }
     }
 }

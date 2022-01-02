@@ -301,11 +301,13 @@ namespace Sekretariat_szkoły_WPF
 
         private void AddStaffMemberButton_Click(object sender, RoutedEventArgs e) => AddStaffMember();
 
-        private void ImportStudentImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("Uczen");
+        private void ImportStudentImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("Uczen", Uczen_Zdjecie);
 
-        private void ImportTeacherImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("Nauczyciel");
+        private void EditStudentImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("Uczen", Uczen_EdytujZdjecie);
 
-        private void ImportStaffMemberImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("PracownikObslugi");
+        private void ImportTeacherImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("Nauczyciel", Nauczyciel_Zdjecie);
+
+        private void ImportStaffMemberImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("PracownikObslugi", PracownikObslugi_Zdjecie);
 
         private void Sekretariat_TabChanged(object sender, RoutedEventArgs e)
         {
@@ -316,7 +318,7 @@ namespace Sekretariat_szkoły_WPF
             }
         }
 
-        private void ImportImage(string type)
+        private void ImportImage(string type, Image imageToChange)
         {
             OpenFileDialog OFD = new OpenFileDialog()
             {
@@ -335,15 +337,15 @@ namespace Sekretariat_szkoły_WPF
                 switch (type)
                 {
                     case "Uczen":
-                        Uczen_Zdjecie.Source = new ImageSourceConverter().ConvertFromString(destinationPath) as ImageSource;
+                        imageToChange.Source = new ImageSourceConverter().ConvertFromString(destinationPath) as ImageSource;
                         break;
 
                     case "Nauczyciel":
-                        Nauczyciel_Zdjecie.Source = new ImageSourceConverter().ConvertFromString(destinationPath) as ImageSource;
+                        imageToChange.Source = new ImageSourceConverter().ConvertFromString(destinationPath) as ImageSource;
                         break;
 
                     case "PracownikObslugi":
-                        PracownikObslugi_Zdjecie.Source = new ImageSourceConverter().ConvertFromString(destinationPath) as ImageSource;
+                        imageToChange.Source = new ImageSourceConverter().ConvertFromString(destinationPath) as ImageSource;
                         break;
 
                     default:
@@ -373,9 +375,6 @@ namespace Sekretariat_szkoły_WPF
 
         private void EditStudentButton_Click(object sender, RoutedEventArgs e) => EditStudent(StudentToEdit);
 
-        private void EditStudent(Uczen StudentToEdit)
-        {
-            
-        }
+        private void DeleteStudentButton_Click(object sender, RoutedEventArgs e) => DeleteStudent(((FrameworkElement)sender).DataContext as Uczen);
     }
 }
