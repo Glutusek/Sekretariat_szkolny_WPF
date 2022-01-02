@@ -18,6 +18,7 @@ namespace Sekretariat_szkoły_WPF
 
         Uczen StudentToEdit;
         Nauczyciel TeacherToEdit;
+        Pracownik_obslugi StaffMemberToEdit;
 
         public MainWindow()
         {
@@ -312,6 +313,8 @@ namespace Sekretariat_szkoły_WPF
 
         private void ImportStaffMemberImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("PracownikObslugi", PracownikObslugi_Zdjecie);
 
+        private void EditStaffMemberImageButton_Click(object sender, RoutedEventArgs e) => ImportImage("PracownikObslugi", PracownikObslugi_EdytujZdjecie);
+
         private void Sekretariat_TabChanged(object sender, RoutedEventArgs e)
         {
             var tab = sender as TabItem;
@@ -404,5 +407,29 @@ namespace Sekretariat_szkoły_WPF
         private void EditTeacherButton_Click(object sender, RoutedEventArgs e) => EditTeacher(TeacherToEdit);
 
         private void DeleteTeacherButton_Click(object sender, RoutedEventArgs e) => DeleteTeacher(((FrameworkElement)sender).DataContext as Nauczyciel);
+
+        private void ModifyStaffMemberButton_Click(object sender, RoutedEventArgs e)
+        {
+            StaffMemberToEdit = ((FrameworkElement)sender).DataContext as Pracownik_obslugi;
+            Sekretariat.SelectedIndex = 8;
+
+            PracownikObslugi_EdytujImie.Text = StaffMemberToEdit.Imie;
+            PracownikObslugi_EdytujDrugieImie.Text = StaffMemberToEdit.Imie_drugie;
+            PracownikObslugi_EdytujNazwisko.Text = StaffMemberToEdit.Nazwisko;
+            PracownikObslugi_EdytujNazwiskoRodowe.Text = StaffMemberToEdit.Nazwisko_rodowe;
+            PracownikObslugi_EdytujImieMatki.Text = StaffMemberToEdit.Imie_matki;
+            PracownikObslugi_EdytujImieOjca.Text = StaffMemberToEdit.Imie_ojca;
+            PracownikObslugi_EdytujDateUrodzenia.Text = StaffMemberToEdit.Data_urodzenia;
+            PracownikObslugi_EdytujPesel.Text = StaffMemberToEdit.Pesel;
+            PracownikObslugi_EdytujPlec.Text = StaffMemberToEdit.Plec;
+            PracownikObslugi_EdytujEtat.Text = StaffMemberToEdit.Etat;
+            PracownikObslugi_EdytujOpisStanowiska.Text = StaffMemberToEdit.Opis_stanowiska;
+            PracownikObslugi_EdytujDateZatrudnienia.Text = StaffMemberToEdit.Data_zatrudnienia;
+            PracownikObslugi_EdytujZdjecie.Source = new ImageSourceConverter().ConvertFromString(StaffMemberToEdit.Zdjecie_absolute) as ImageSource;
+        }
+
+        private void EditStaffMemberButton_Click(object sender, RoutedEventArgs e) => EditStaffMember(StaffMemberToEdit);
+
+        private void DeleteStaffMemberButton_Click(object sender, RoutedEventArgs e) => DeleteStaffMember(((FrameworkElement)sender).DataContext as Pracownik_obslugi);
     }
 }

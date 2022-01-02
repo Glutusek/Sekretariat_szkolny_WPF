@@ -632,8 +632,8 @@
                                                 <RowDefinition/>
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
-                                            <Button Width="100" VerticalAlignment="Center">Modyfikuj</Button>
-                                            <Button Grid.Row="1" Width="100" VerticalAlignment="Center">Usuń</Button>
+                                            <Button Width="100" VerticalAlignment="Center" Click="ModifyStaffMemberButton_Click">Modyfikuj</Button>
+                                            <Button Grid.Row="1" Width="100" VerticalAlignment="Center" Click="DeleteStaffMemberButton_Click">Usuń</Button>
                                         </Grid>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -1144,6 +1144,80 @@
 
             <!--#endregion-->
 
+            <!--#region Edytuj pracownika obsługi-->
+
+            <TabItem Header="Edytuj pracownika obsługi" Selector.Selected="Sekretariat_TabChanged" IsEnabled="False" Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.ColumnSpan="2" FontSize="40" FontWeight="Black" Margin="10" HorizontalAlignment="Center">Edycja pracownika obsługi</TextBlock>
+                    <Grid Grid.Row="1" Width="600" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontSize="30" HorizontalAlignment="Center">Imię</TextBlock>
+                        <TextBox Name="PracownikObslugi_EdytujImie" Grid.Column="1" FontSize="25" VerticalAlignment="Center"></TextBox>
+                        <TextBlock Grid.Row="1" FontSize="30" HorizontalAlignment="Center">Drugie imię</TextBlock>
+                        <TextBox Name="PracownikObslugi_EdytujDrugieImie" Grid.Row="1" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" FontSize="30" HorizontalAlignment="Center">Nazwisko</TextBlock>
+                        <TextBox Name="PracownikObslugi_EdytujNazwisko" Grid.Row="2" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="3" FontSize="30" HorizontalAlignment="Center">Nazwisko rodowe</TextBlock>
+                        <TextBox Name="PracownikObslugi_EdytujNazwiskoRodowe" Grid.Row="3" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="4" FontSize="30" HorizontalAlignment="Center">Imię matki</TextBlock>
+                        <TextBox Name="PracownikObslugi_EdytujImieMatki" Grid.Row="4" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="5" FontSize="30" HorizontalAlignment="Center">Imię ojca</TextBlock>
+                        <TextBox Name="PracownikObslugi_EdytujImieOjca" Grid.Row="5" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="6" FontSize="30" HorizontalAlignment="Center">Data urodzenia</TextBlock>
+                        <DatePicker Name="PracownikObslugi_EdytujDateUrodzenia" Grid.Row="6" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="7" FontSize="30" HorizontalAlignment="Center">PESEL</TextBlock>
+                        <TextBox Name="PracownikObslugi_EdytujPesel" Grid.Row="7" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="8" FontSize="30" HorizontalAlignment="Center">Płeć</TextBlock>
+                        <TextBox Name="PracownikObslugi_EdytujPlec" Grid.Row="8" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="9" FontSize="30" HorizontalAlignment="Center">Etat</TextBlock>
+                        <TextBox Name="PracownikObslugi_EdytujEtat" Grid.Row="9" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="10" FontSize="30" HorizontalAlignment="Center">Opis stanowiska</TextBlock>
+                        <TextBox Name="PracownikObslugi_EdytujOpisStanowiska" Grid.Row="10" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="11" FontSize="30" HorizontalAlignment="Center">Data zatrudnienia</TextBlock>
+                        <DatePicker Name="PracownikObslugi_EdytujDateZatrudnienia" Grid.Row="11" Grid.Column="1" FontSize="25" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="12" FontSize="30" HorizontalAlignment="Center">Zdjęcie</TextBlock>
+                        <Button Grid.Row="12" Grid.Column="1" Width="200" Click="EditStaffMemberImageButton_Click">Zaimportuj zdjęcie</Button>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Image Name="PracownikObslugi_EdytujZdjecie" Width="300" Height="300" Margin="10"/>
+                        <Button Grid.Row="1" FontSize="30" Padding="20" HorizontalAlignment="Center" VerticalAlignment="Center" Click="EditStaffMemberButton_Click">Edytuj pracownika</Button>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!--#endregion-->
+            
             <!--#region Skróty klawiszowe-->
 
             <TabItem Header="Skróty klawiszowe" Selector.Selected="Sekretariat_TabChanged">

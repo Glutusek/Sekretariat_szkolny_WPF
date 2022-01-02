@@ -305,5 +305,94 @@ namespace Sekretariat_szko³y_WPF
 
             MessageBox.Show("Pracownik obs³ugi dodany do bazy danych!");
         }
+
+        private void DeleteStaffMember(Pracownik_obslugi StaffMemberToDelete)
+        {
+            List<Pracownik_obslugi> AllStaffMembers = GetStaffMembers();
+
+            string StaffMembersToSave = "";
+
+            foreach (Pracownik_obslugi tempStaffMember in AllStaffMembers)
+            {
+                if (StaffMemberToDelete.ToString() != tempStaffMember.ToString())
+                    StaffMembersToSave += tempStaffMember.ToString() + Environment.NewLine;
+            }
+
+            StaffMembersToSave = StaffMembersToSave.Trim();
+
+            SaveIntoDatabase("Pracownicy_obslugi", StaffMembersToSave, false);
+
+            ReportUpdate();
+        }
+
+        private void EditStaffMember(Pracownik_obslugi StaffMemberToEdit)
+        {
+            List<string> properties = new List<string>()
+            {
+                PracownikObslugi_EdytujImie.Text,
+                PracownikObslugi_EdytujDrugieImie.Text,
+                PracownikObslugi_EdytujNazwisko.Text,
+                PracownikObslugi_EdytujNazwiskoRodowe.Text,
+                PracownikObslugi_EdytujImieMatki.Text,
+                PracownikObslugi_EdytujImieOjca.Text,
+                PracownikObslugi_EdytujDateUrodzenia.Text,
+                PracownikObslugi_EdytujPesel.Text,
+                PracownikObslugi_EdytujPlec.Text,
+                PracownikObslugi_EdytujEtat.Text,
+                PracownikObslugi_EdytujOpisStanowiska.Text,
+                PracownikObslugi_EdytujDateZatrudnienia.Text
+            };
+
+            foreach (string prop in properties)
+            {
+                if (prop == "")
+                {
+                    MessageBox.Show("Proszê wype³niæ wszystkie pola!");
+                    return;
+                }
+            }
+
+            string img = PracownikObslugi_EdytujZdjecie.Source.ToString()[(PracownikObslugi_EdytujZdjecie.Source.ToString().LastIndexOf("/") + 1)..];
+
+            if (img != "NO_IMAGE.png")
+                properties.Add(img);
+
+            List<Pracownik_obslugi> AllStaffMembers = GetStaffMembers();
+
+            string StaffMembersToSave = "";
+
+            foreach (Pracownik_obslugi tempStaffMember in AllStaffMembers)
+            {
+                if (StaffMemberToEdit.ToString() == tempStaffMember.ToString())
+                {
+                    tempStaffMember.Imie = properties[0];
+                    tempStaffMember.Imie_drugie = properties[1];
+                    tempStaffMember.Nazwisko = properties[2];
+                    tempStaffMember.Nazwisko_rodowe = properties[3];
+                    tempStaffMember.Imie_matki = properties[4];
+                    tempStaffMember.Imie_ojca = properties[5];
+                    tempStaffMember.Data_urodzenia = properties[6];
+                    tempStaffMember.Pesel = properties[7];
+                    tempStaffMember.Plec = properties[8];
+                    tempStaffMember.Etat = properties[9];
+                    tempStaffMember.Opis_stanowiska = properties[10];
+                    tempStaffMember.Data_zatrudnienia = properties[11];
+
+                    if (properties.Count == 13)
+                        tempStaffMember.Zdjecie_relative = properties[12];
+                }
+
+                StaffMembersToSave += tempStaffMember.ToString() + Environment.NewLine;
+            }
+
+            StaffMembersToSave = StaffMembersToSave.Trim();
+
+            SaveIntoDatabase("Pracownicy_obslugi", StaffMembersToSave, false);
+
+            MessageBox.Show("Pracownik obs³ugi zosta³ zmodyfikowany!");
+
+            ReportUpdate();
+            Sekretariat.SelectedIndex = 2;
+        }
     }
 }
