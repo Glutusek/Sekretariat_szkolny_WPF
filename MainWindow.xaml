@@ -19,17 +19,29 @@
         <!--#region Menu-->
         
         <Menu>
-            <MenuItem Header="Test"/>
-            <MenuItem Header="Test2"/>
+            <MenuItem Header="_Wyświetlanie">
+                <MenuItem Name="UczniowieMenuItem" Header="_Uczniowie" Tag="U" Click="Wyswietlanie_MenuItem_Click"/>
+                <MenuItem Header="_Nauczyciele" Tag="N" Click="Wyswietlanie_MenuItem_Click"/>
+                <MenuItem Header="_Pracownicy obsługi" Tag="P" Click="Wyswietlanie_MenuItem_Click"/>
+                <MenuItem Header="_Skróty klawiszowe" Tag="S" Click="Wyswietlanie_MenuItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Dodawanie">
+                <MenuItem Header="Dodaj u_cznia" Tag="U" Click="Dodawanie_MenuItem_Click"/>
+                <MenuItem Header="Dodaj nac_zyciela" Tag="N" Click="Dodawanie_MenuItem_Click"/>
+                <MenuItem Header="Dodaj p_racownika obsługi" Tag="P" Click="Dodawanie_MenuItem_Click"/>
+            </MenuItem>
         </Menu>
         
         <!--#endregion-->
         
         <!--#region Toolbar-->
 
-        <ToolBarTray Grid.Row="1" >
-            <ToolBar ToolBarTray.IsLocked="True">
+        <ToolBarTray Grid.Row="1" ToolBarTray.IsLocked="True">
+            <ToolBar>
                 <Button Name="LoadFromFileButton"  Content="Wczytaj z pliku" Click="LoadFromFileToDB"/>
+                <Button Name="AddImageButton"  Content="Dodaj zdjęcie do bazy" Click="AddImageToDBButton_Click"/>
+            </ToolBar>
+            <ToolBar>
                 <Button Name="GenerateWindowReportButton"  Content="Generuj raport tego okna" Click="GenerateWindowReportButton_Click"/>
                 <Button Name="GenerateAllDBReportButton"  Content="Generuj raport całej bazy" Click="GenerateAllDBReportButton_Click"/>
             </ToolBar>

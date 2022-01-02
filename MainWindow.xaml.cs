@@ -214,7 +214,12 @@ namespace Sekretariat_szkoły_WPF
             if(SFD.ShowDialog() == true)
             {
                 string chosenName = SFD.FileName.Substring(SFD.FileName.LastIndexOf("\\"));
-                string destinationPath = Path.GetDirectoryName(SFD.FileName) + chosenName;
+                string destinationPath = Path.GetDirectoryName(SFD.FileName) + chosenName + @"\baza_danych\";
+
+                CopyDirectory(sourcePath, destinationPath);
+
+                sourcePath = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\");
+                destinationPath = Path.GetDirectoryName(SFD.FileName) + chosenName + @"\zdjecia\";
 
                 CopyDirectory(sourcePath, destinationPath);
             }
@@ -335,7 +340,14 @@ namespace Sekretariat_szkoły_WPF
 
             if (OFD.ShowDialog() == true)
             {
-                string destinationPath = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\" + OFD.FileName.Substring(OFD.FileName.LastIndexOf("\\") + 1));
+                string destinationPath = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\");
+
+                if (!Directory.Exists(destinationPath))
+                {
+                    CreateDirectory(destinationPath);
+                }
+
+                destinationPath += OFD.FileName.Substring(OFD.FileName.LastIndexOf("\\") + 1);
 
                 if (!File.Exists(destinationPath))
                     CopyFile(OFD.FileName, destinationPath);
@@ -357,6 +369,32 @@ namespace Sekretariat_szkoły_WPF
                     default:
                         return;
                 }
+            }
+        }
+
+        private void ImportImage()
+        {
+            OpenFileDialog OFD = new OpenFileDialog()
+            {
+                DefaultExt = "jpg",
+                Filter = "JPG Files (.jpg)|*.jpg|JPEG files (.jpeg)|*.jpeg|PNG Files (.png)|*.png|All files (*.*)|*.*",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+            };
+
+            if (OFD.ShowDialog() == true)
+            {
+                string destinationPath = Path.Combine(Directory.GetCurrentDirectory(), @"zdjecia\");
+
+                if (!Directory.Exists(destinationPath))
+                {
+                    CreateDirectory(destinationPath);
+                }
+
+                destinationPath += OFD.FileName.Substring(OFD.FileName.LastIndexOf("\\") + 1);
+
+                if (!File.Exists(destinationPath))
+                    CopyFile(OFD.FileName, destinationPath);
+
             }
         }
 
@@ -431,5 +469,46 @@ namespace Sekretariat_szkoły_WPF
         private void EditStaffMemberButton_Click(object sender, RoutedEventArgs e) => EditStaffMember(StaffMemberToEdit);
 
         private void DeleteStaffMemberButton_Click(object sender, RoutedEventArgs e) => DeleteStaffMember(((FrameworkElement)sender).DataContext as Pracownik_obslugi);
+
+        private void Wyswietlanie_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            string tag = (sender as MenuItem).Tag.ToString();
+
+            switch(tag)
+            {
+                case "U":
+                    Sekretariat.SelectedIndex = 0;
+                    break;
+                case "N":
+                    Sekretariat.SelectedIndex = 1;
+                    break;
+                case "P":
+                    Sekretariat.SelectedIndex = 2;
+                    break;
+                case "S":
+                    Sekretariat.SelectedIndex = 9;
+                    break;
+            }
+        }
+
+        private void Dodawanie_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            string tag = (sender as MenuItem).Tag.ToString();
+
+            switch(tag)
+            {
+                case "U":
+                    Sekretariat.SelectedIndex = 3;
+                    break;
+                case "N":
+                    Sekretariat.SelectedIndex = 5;
+                    break;
+                case "P":
+                    Sekretariat.SelectedIndex = 7;
+                    break;
+            }
+        }
+
+        private void AddImageToDBButton_Click(object sender, RoutedEventArgs e) => ImportImage();
     }
 }
