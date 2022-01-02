@@ -81,3 +81,5 @@ Testy nie były konkretnie zapisywane, ale były przeprowadzane przez niezależn
 Znane błędy lub wymagania poprawek:
 
 Program opiera się na danych z niezaszyfrowanych plikach tekstowych, które mogą być "pomieszane", np. użycie spacji jako rozgraniczanie poszczególnych pól zamiast tabulatora, które nie jest kontrolowane, co może doprowadzić do późniejszych błędów z odczytem danych (np. dane z kilku pól w jednym polu).
+
+Dodatkowo nie zostały zrobione skróty klawiszowe ze względu na brak czasu.
