@@ -3,12 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:self="clr-namespace:Sekretariat_szkoły_WPF"
         mc:Ignorable="d"
         Title="Sekretariat szkolny"
         Width="1220"
         Height="750"
         WindowStartupLocation="CenterScreen"
         FontSize="15">
+    <Window.CommandBindings>
+        <CommandBinding Command="self:CustomShortcuts.OpenStudents" CanExecute="Command_CanExecute" Executed="OpenStudentsCommand_Executed"/>
+        <CommandBinding Command="self:CustomShortcuts.OpenTeachers" CanExecute="Command_CanExecute" Executed="OpenTeachersCommand_Executed"/>
+        <CommandBinding Command="self:CustomShortcuts.OpenStaffMembers" CanExecute="Command_CanExecute" Executed="OpenStaffMembersCommand_Executed"/>
+        <CommandBinding Command="self:CustomShortcuts.OpenShortcuts" CanExecute="Command_CanExecute" Executed="OpenShortcutsCommand_Executed"/>
+        <CommandBinding Command="self:CustomShortcuts.OpenAddStudent" CanExecute="Command_CanExecute" Executed="OpenAddStudentCommand_Executed"/>
+        <CommandBinding Command="self:CustomShortcuts.OpenAddTeacher" CanExecute="Command_CanExecute" Executed="OpenAddTeacherCommand_Executed"/>
+        <CommandBinding Command="self:CustomShortcuts.OpenAddStaffMember" CanExecute="Command_CanExecute" Executed="OpenAddStaffMemberCommand_Executed"/>
+    </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -20,15 +30,15 @@
         
         <Menu>
             <MenuItem Header="_Wyświetlanie">
-                <MenuItem Name="UczniowieMenuItem" Header="_Uczniowie" Tag="U" Click="Wyswietlanie_MenuItem_Click"/>
-                <MenuItem Header="_Nauczyciele" Tag="N" Click="Wyswietlanie_MenuItem_Click"/>
-                <MenuItem Header="_Pracownicy obsługi" Tag="P" Click="Wyswietlanie_MenuItem_Click"/>
-                <MenuItem Header="_Skróty klawiszowe" Tag="S" Click="Wyswietlanie_MenuItem_Click"/>
+                <MenuItem Header="_Uczniowie" Tag="U" Click="Wyswietlanie_MenuItem_Click" Command="self:CustomShortcuts.OpenStudents"/>
+                <MenuItem Header="_Nauczyciele" Tag="N" Click="Wyswietlanie_MenuItem_Click" Command="self:CustomShortcuts.OpenTeachers"/>
+                <MenuItem Header="_Pracownicy obsługi" Tag="P" Click="Wyswietlanie_MenuItem_Click" Command="self:CustomShortcuts.OpenStaffMembers"/>
+                <MenuItem Header="_Skróty klawiszowe" Tag="S" Click="Wyswietlanie_MenuItem_Click" Command="self:CustomShortcuts.OpenShortcuts"/>
             </MenuItem>
             <MenuItem Header="_Dodawanie">
-                <MenuItem Header="Dodaj u_cznia" Tag="U" Click="Dodawanie_MenuItem_Click"/>
-                <MenuItem Header="Dodaj nac_zyciela" Tag="N" Click="Dodawanie_MenuItem_Click"/>
-                <MenuItem Header="Dodaj p_racownika obsługi" Tag="P" Click="Dodawanie_MenuItem_Click"/>
+                <MenuItem Header="Dodaj u_cznia" Tag="U" Click="Dodawanie_MenuItem_Click" Command="self:CustomShortcuts.OpenAddStudent"/>
+                <MenuItem Header="Dodaj nac_zyciela" Tag="N" Click="Dodawanie_MenuItem_Click" Command="self:CustomShortcuts.OpenAddTeacher"/>
+                <MenuItem Header="Dodaj p_racownika obsługi" Tag="P" Click="Dodawanie_MenuItem_Click" Command="self:CustomShortcuts.OpenAddStaffMember"/>
             </MenuItem>
         </Menu>
         
@@ -1246,8 +1256,8 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center" Padding="3">Wczytaj dane <LineBreak/>z pliku do bazy</TextBlock>
-                            <TextBox Grid.Row="0" Grid.Column="1"></TextBox>
+                            <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center" Padding="3">Otwórz uczniów</TextBlock>
+                            <TextBox Grid.Row="0" Grid.Column="1" ></TextBox>
                             <Button Grid.Row="0" Grid.Column="2" Content="Edytuj"/>
                         </Grid>
                     </GroupBox>

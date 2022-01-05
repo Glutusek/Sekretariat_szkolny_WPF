@@ -6,19 +6,20 @@ using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Sekretariat_szkoły_WPF
 {
     public partial class MainWindow : Window
     {
-        List<Uczen> students;
-        List<Nauczyciel> teachers;
-        List<Pracownik_obslugi> staffMembers;
+        private List<Uczen> students;
+        private List<Nauczyciel> teachers;
+        private List<Pracownik_obslugi> staffMembers;
 
-        Uczen StudentToEdit;
-        Nauczyciel TeacherToEdit;
-        Pracownik_obslugi StaffMemberToEdit;
+        private Uczen StudentToEdit;
+        private Nauczyciel TeacherToEdit;
+        private Pracownik_obslugi StaffMemberToEdit;
 
         public MainWindow()
         {
@@ -510,5 +511,45 @@ namespace Sekretariat_szkoły_WPF
         }
 
         private void AddImageToDBButton_Click(object sender, RoutedEventArgs e) => ImportImage();
+
+        private void Command_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void OpenStudentsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Sekretariat.SelectedIndex = 0;
+        }
+
+        private void OpenTeachersCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Sekretariat.SelectedIndex = 1;
+        }
+
+        private void OpenStaffMembersCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Sekretariat.SelectedIndex = 2;
+        }
+
+        private void OpenShortcutsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Sekretariat.SelectedIndex = 9;
+        }
+
+        private void OpenAddStudentCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Sekretariat.SelectedIndex = 3;
+        }
+
+        private void OpenAddTeacherCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Sekretariat.SelectedIndex = 5;
+        }
+
+        private void OpenAddStaffMemberCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Sekretariat.SelectedIndex = 7;
+        }
     }
 }

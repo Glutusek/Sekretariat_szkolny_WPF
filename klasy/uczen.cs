@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Sekretariat_szko³y_WPF
 {
     public class Uczen : Osoba
