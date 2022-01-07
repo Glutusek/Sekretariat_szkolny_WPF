@@ -56,7 +56,7 @@ namespace Sekretariat_szkoły_WPF
                 typeof(CustomShortcuts),
                 new InputGestureCollection()
                 {
-                    new KeyGesture(Key.U, ModifierKeys.Alt)
+                    new KeyGesture(Key.U, ModifierKeys.Control | ModifierKeys.Shift)
                 }
             );
 
@@ -67,7 +67,7 @@ namespace Sekretariat_szkoły_WPF
                 typeof(CustomShortcuts),
                 new InputGestureCollection()
                 {
-                    new KeyGesture(Key.N, ModifierKeys.Alt)
+                    new KeyGesture(Key.N, ModifierKeys.Control | ModifierKeys.Shift)
                 }
             );
 
@@ -78,7 +78,51 @@ namespace Sekretariat_szkoły_WPF
                 typeof(CustomShortcuts),
                 new InputGestureCollection()
                 {
-                    new KeyGesture(Key.P, ModifierKeys.Alt)
+                    new KeyGesture(Key.P, ModifierKeys.Control | ModifierKeys.Shift)
+                }
+            );
+
+        public static RoutedUICommand LoadFromFileToDB = new RoutedUICommand
+            (
+                "Wczytaj z pliku do bazy",
+                "LoadFromFileToDB",
+                typeof(CustomShortcuts),
+                new InputGestureCollection()
+                {
+                    new KeyGesture(Key.O, ModifierKeys.Control)
+                }
+            );
+
+        public static RoutedUICommand ImportImage = new RoutedUICommand
+            (
+                "Dodaj zdjęcie do bazy",
+                "ImportImage",
+                typeof(CustomShortcuts),
+                new InputGestureCollection()
+                {
+                    new KeyGesture(Key.I, ModifierKeys.Control)
+                }
+            );
+
+        public static RoutedUICommand GenerateWindowReport = new RoutedUICommand
+            (
+                "Generuj raport tego okna",
+                "GenerateWindowReport",
+                typeof(CustomShortcuts),
+                new InputGestureCollection()
+                {
+                    new KeyGesture(Key.L, ModifierKeys.Control)
+                }
+            );
+
+        public static RoutedUICommand GenerateAllDBReport = new RoutedUICommand
+            (
+                "Generuj raport całej bazy",
+                "GenerateAllDBReport",
+                typeof(CustomShortcuts),
+                new InputGestureCollection()
+                {
+                    new KeyGesture(Key.G, ModifierKeys.Control)
                 }
             );
     }

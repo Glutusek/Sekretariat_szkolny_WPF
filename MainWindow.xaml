@@ -18,6 +18,10 @@
         <CommandBinding Command="self:CustomShortcuts.OpenAddStudent" CanExecute="Command_CanExecute" Executed="OpenAddStudentCommand_Executed"/>
         <CommandBinding Command="self:CustomShortcuts.OpenAddTeacher" CanExecute="Command_CanExecute" Executed="OpenAddTeacherCommand_Executed"/>
         <CommandBinding Command="self:CustomShortcuts.OpenAddStaffMember" CanExecute="Command_CanExecute" Executed="OpenAddStaffMemberCommand_Executed"/>
+        <CommandBinding Command="self:CustomShortcuts.LoadFromFileToDB" CanExecute="Command_CanExecute" Executed="LoadFromFileToDBCommand_Executed"/>
+        <CommandBinding Command="self:CustomShortcuts.ImportImage" CanExecute="Command_CanExecute" Executed="ImportImageCommand_Executed"/>
+        <CommandBinding Command="self:CustomShortcuts.GenerateWindowReport" CanExecute="Command_CanExecute" Executed="GenerateWindowReportCommand_Executed"/>
+        <CommandBinding Command="self:CustomShortcuts.GenerateAllDBReport" CanExecute="Command_CanExecute" Executed="GenerateAllDBReportCommand_Executed"/>
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -30,15 +34,21 @@
         
         <Menu>
             <MenuItem Header="_Wyświetlanie">
-                <MenuItem Header="_Uczniowie" Tag="U" Click="Wyswietlanie_MenuItem_Click" Command="self:CustomShortcuts.OpenStudents"/>
-                <MenuItem Header="_Nauczyciele" Tag="N" Click="Wyswietlanie_MenuItem_Click" Command="self:CustomShortcuts.OpenTeachers"/>
-                <MenuItem Header="_Pracownicy obsługi" Tag="P" Click="Wyswietlanie_MenuItem_Click" Command="self:CustomShortcuts.OpenStaffMembers"/>
-                <MenuItem Header="_Skróty klawiszowe" Tag="S" Click="Wyswietlanie_MenuItem_Click" Command="self:CustomShortcuts.OpenShortcuts"/>
+                <MenuItem Header="_Uczniowie" Tag="U" Command="self:CustomShortcuts.OpenStudents"/>
+                <MenuItem Header="_Nauczyciele" Tag="N" Command="self:CustomShortcuts.OpenTeachers"/>
+                <MenuItem Header="_Pracownicy obsługi" Tag="P" Command="self:CustomShortcuts.OpenStaffMembers"/>
+                <MenuItem Header="_Skróty klawiszowe" Tag="S" Command="self:CustomShortcuts.OpenShortcuts"/>
             </MenuItem>
             <MenuItem Header="_Dodawanie">
-                <MenuItem Header="Dodaj u_cznia" Tag="U" Click="Dodawanie_MenuItem_Click" Command="self:CustomShortcuts.OpenAddStudent"/>
-                <MenuItem Header="Dodaj nac_zyciela" Tag="N" Click="Dodawanie_MenuItem_Click" Command="self:CustomShortcuts.OpenAddTeacher"/>
-                <MenuItem Header="Dodaj p_racownika obsługi" Tag="P" Click="Dodawanie_MenuItem_Click" Command="self:CustomShortcuts.OpenAddStaffMember"/>
+                <MenuItem Header="Dodaj u_cznia" Tag="U" Command="self:CustomShortcuts.OpenAddStudent"/>
+                <MenuItem Header="Dodaj nac_zyciela" Tag="N" Command="self:CustomShortcuts.OpenAddTeacher"/>
+                <MenuItem Header="Dodaj p_racownika obsługi" Tag="P" Command="self:CustomShortcuts.OpenAddStaffMember"/>
+            </MenuItem>
+            <MenuItem Header="_Operacje">
+                <MenuItem Header="_Wczytaj dane z pliku" Command="self:CustomShortcuts.LoadFromFileToDB"/>
+                <MenuItem Header="Dodaj _zdjęcie do bazy" Command="self:CustomShortcuts.ImportImage"/>
+                <MenuItem Header="Generuj _raport tego okna" Command="self:CustomShortcuts.GenerateWindowReport"/>
+                <MenuItem Header="_Generuj raport całej bazy" Command="self:CustomShortcuts.GenerateAllDBReport"/>
             </MenuItem>
         </Menu>
         
@@ -48,8 +58,8 @@
 
         <ToolBarTray Grid.Row="1" ToolBarTray.IsLocked="True">
             <ToolBar>
-                <Button Name="LoadFromFileButton"  Content="Wczytaj z pliku" Click="LoadFromFileToDB"/>
-                <Button Name="AddImageButton"  Content="Dodaj zdjęcie do bazy" Click="AddImageToDBButton_Click"/>
+                <Button Name="LoadFromFileButton" Content="Wczytaj z pliku" Click="LoadFromFileToDB_Click"/>
+                <Button Name="AddImageButton" Content="Dodaj zdjęcie do bazy" Click="AddImageToDBButton_Click"/>
             </ToolBar>
             <ToolBar>
                 <Button Name="GenerateWindowReportButton"  Content="Generuj raport tego okna" Click="GenerateWindowReportButton_Click"/>

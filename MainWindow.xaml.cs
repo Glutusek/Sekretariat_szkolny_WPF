@@ -70,7 +70,9 @@ namespace Sekretariat_szkoły_WPF
             DG_Dane_PracownicyObslugi.Items.Refresh();
         }
 
-        private void LoadFromFileToDB(object sender, RoutedEventArgs e)
+        private void LoadFromFileToDB_Click(object sender, RoutedEventArgs e) => LoadFromFileToDB();
+
+        private void LoadFromFileToDB()
         {
             OpenFileDialog LoadFile = OpenTxtFileManually();
 
@@ -96,7 +98,7 @@ namespace Sekretariat_szkoły_WPF
 
                 return;
             }
-            
+
             MessageBox.Show("Przerwano proces wczytywania pliku!");
         }
 
@@ -198,9 +200,11 @@ namespace Sekretariat_szkoły_WPF
 
         private string GetSelectedTabName() => ((TabItem)Sekretariat.SelectedItem).Header.ToString();
 
-        private void GenerateWindowReportButton_Click(object sender, RoutedEventArgs e) => GenerateReport(GetSelectedTabName());
+        private void GenerateWindowReportButton_Click(object sender, RoutedEventArgs e) => GenerateWindowReport();
 
-        private void GenerateAllDBReportButton_Click(object sender, RoutedEventArgs e)
+        private void GenerateAllDBReportButton_Click(object sender, RoutedEventArgs e) => GenerateAllDBReport();
+
+        private static void GenerateAllDBReport()
         {
             string sourcePath = Path.Combine(Directory.GetCurrentDirectory(), @"baza_danych\");
 
@@ -212,7 +216,7 @@ namespace Sekretariat_szkoły_WPF
 
             MessageBox.Show("Przy backupie bazy danych skup się tylko na miejscu docelowym zapisu oraz nazwaniu bazy. Zostanie utworzony specjalny folder z podaną nazwą!");
 
-            if(SFD.ShowDialog() == true)
+            if (SFD.ShowDialog() == true)
             {
                 string chosenName = SFD.FileName.Substring(SFD.FileName.LastIndexOf("\\"));
                 string destinationPath = Path.GetDirectoryName(SFD.FileName) + chosenName + @"\baza_danych\";
@@ -226,8 +230,10 @@ namespace Sekretariat_szkoły_WPF
             }
         }
 
-        private void GenerateReport(string type)
+        private void GenerateWindowReport()
         {
+            string type = GetSelectedTabName();
+
             MessageBox.Show("Pamiętaj, że raport będzie zawierać układ zgodny z wyświetlonym, tzn. może zawierać sortowanie lub wyszukiwanie dokonane przez Ciebie!");
 
             SaveFileDialog SFD = new SaveFileDialog()
@@ -329,6 +335,8 @@ namespace Sekretariat_szkoły_WPF
                 ReportUpdate();
             }
         }
+
+        private void ImportImage_Click(object sender, RoutedEventArgs e) => ImportImage();
 
         private void ImportImage(string type, Image imageToChange)
         {
@@ -550,6 +558,26 @@ namespace Sekretariat_szkoły_WPF
         private void OpenAddStaffMemberCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Sekretariat.SelectedIndex = 7;
+        }
+
+        private void LoadFromFileToDBCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            LoadFromFileToDB();
+        }
+
+        private void ImportImageCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ImportImage();
+        }
+
+        private void GenerateWindowReportCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            GenerateWindowReport();
+        }
+
+        private void GenerateAllDBReportCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            GenerateAllDBReport();
         }
     }
 }
