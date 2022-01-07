@@ -1254,21 +1254,60 @@
 
             <TabItem Header="Skróty klawiszowe" Selector.Selected="Sekretariat_TabChanged">
                 <Grid>
-                    <GroupBox Header="Edycja skrótów" Width="500" Height="300">
+                    <TextBlock Foreground="red" FontSize="40">Zakładka w trakcie budowy...</TextBlock>
+                    <GroupBox Header="Edycja skrótów" Width="500" Height="500" IsEnabled="False">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center" Padding="3">Otwórz uczniów</TextBlock>
-                            <TextBox Grid.Row="0" Grid.Column="1" ></TextBox>
+                            <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" Padding="3">Wyświetl uczniów</TextBlock>
+                            <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">CTRL + U</TextBox>
                             <Button Grid.Row="0" Grid.Column="2" Content="Edytuj"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Center" Padding="3">Wyświetl nauczycieli</TextBlock>
+                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">CTRL + N</TextBox>
+                            <Button Grid.Row="1" Grid.Column="2" Content="Edytuj"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Center" Padding="3">Wyświetl pracowników obsługi</TextBlock>
+                            <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">CTRL + P</TextBox>
+                            <Button Grid.Row="2" Grid.Column="2" Content="Edytuj"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Center" Padding="3">Wyświetl edytor skrótów klawiszowych</TextBlock>
+                            <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">CTRL + E</TextBox>
+                            <Button Grid.Row="3" Grid.Column="2" Content="Edytuj"/>
+                            <TextBlock Grid.Row="4" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Center" Padding="3">Otwórz dodawanie uczniów</TextBlock>
+                            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">CTRL + SHIFT + U</TextBox>
+                            <Button Grid.Row="4" Grid.Column="2" Content="Edytuj"/>
+                            <TextBlock Grid.Row="5" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Center" Padding="3">Otwórz dodawanie nauczycieli</TextBlock>
+                            <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">CTRL + SHIFT + N</TextBox>
+                            <Button Grid.Row="5" Grid.Column="2" Content="Edytuj"/>
+                            <TextBlock Grid.Row="6" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Center" Padding="3">Otwórz dodawanie pracowników obsługi</TextBlock>
+                            <TextBox Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">CTRL + SHIFT + P</TextBox>
+                            <Button Grid.Row="6" Grid.Column="2" Content="Edytuj"/>
+                            <TextBlock Grid.Row="7" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Center" Padding="3">Wczytaj z pliku do bazy</TextBlock>
+                            <TextBox Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">CTRL + O</TextBox>
+                            <Button Grid.Row="7" Grid.Column="2" Content="Edytuj"/>
+                            <TextBlock Grid.Row="8" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Center" Padding="3">Dodaj zdjęcie do bazy</TextBlock>
+                            <TextBox Grid.Row="8" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">CTRL + I</TextBox>
+                            <Button Grid.Row="8" Grid.Column="2" Content="Edytuj"/>
+                            <TextBlock Grid.Row="9" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Center" Padding="3">Generuj raport wyświetlonego okna</TextBlock>
+                            <TextBox Grid.Row="9" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">CTRL + L</TextBox>
+                            <Button Grid.Row="9" Grid.Column="2" Content="Edytuj"/>
+                            <TextBlock Grid.Row="10" Grid.Column="0" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Center" Padding="3">Generuj raport całej bazy</TextBlock>
+                            <TextBox Grid.Row="10" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">CTRL + G</TextBox>
+                            <Button Grid.Row="10" Grid.Column="2" Content="Edytuj"/>
                         </Grid>
                     </GroupBox>
                 </Grid>

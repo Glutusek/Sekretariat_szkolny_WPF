@@ -1,7 +1,7 @@
 Sekretariat szkolny
 
-Główne okno składa się z: 2 Menu, Toolbar'a oraz TabControl posiadającego 10 zakładek (3 ukryte dla użytkownika).
-
+Główne okno składa się z: 3 Menu, Toolbar'a oraz TabControl posiadającego 10 zakładek (3 ukryte dla użytkownika).
+Do każdej zakładki można odnieść się z góry przypisanym skrótem klawiszowym.
 
 Menu:
 - Wyświetlanie:
@@ -15,12 +15,13 @@ Menu:
 	- Dodaj nauczyciela - wyświetla zakładkę Dodaj nauczyciela w TabControl
 	- Dodaj pracownika obsługi - wyświetla zakładkę Dodaj pracownika obsługi w TabControl
 
-Toolbar:
+- Menu Operacje oraz Toolbar:
 	- Wczytaj z pliku - przycisk pozwalający na wczytanie pliku z danymi uczniów, nauczycieli i pracowników obsługi
 	- Dodaj zdjęcie do bazy - przycisk pozwalający na dodanie zdjęcia do bazy danych
 	- Generuj raport tego okna - przycisk pozwalający na wygenerowanie raportu 
 	  z wyświetlanego okna uczniów lub nauczycieli lub pracowników obsługi wraz z zastosowanymi sortowaniami i wyszukiwaniami
-	- Generuj raport całej bazy - przycisk powzwalający na wygenerowanie kopii bazy danych
+	- Generuj raport całej bazy - przycisk pozwalający na wygenerowanie kopii bazy danych
+
 
 TabControl:
 - Uczniowie - podstawowe okno wyświetlające bazę uczniów z możliwością sortowania i wyszukiwania
@@ -59,4 +60,4 @@ natomiast nie można się go usunąć z bazy z poziomu programu). Następnie prz
 Zakładki z edytowaniem są możliwe do otwarcia tylko z poziomu przycisku "Modyfikuj". Automatycznie formularz jest uzupełniany dotychczasowymi danymi, które można zmienić.
 
 
-Zakładka ze skrótami klawiszowymi powinna na bieżąco umożliwiać edytowanie skrótów, a także ich wyświetlanie (Niezaimplementowane ze względu na brak czasu).
+Zakładka ze skrótami klawiszowymi powinna na bieżąco umożliwiać edytowanie skrótów, a także ich wyświetlanie (Niezaimplementowane ze względu na brak wiedzy i chęci z powodu licznych prób).

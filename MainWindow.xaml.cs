@@ -74,6 +74,15 @@ namespace Sekretariat_szkoły_WPF
 
         private void LoadFromFileToDB()
         {
+            string announcement = "\nLicz się z tym, że dane muszą posiadać odpowiedni układ, aby zostały poprawnie zapisane!.\n\n" +
+                "1. Każde dane, które mają znajdować się w oddzielnych kolumnach, MUSZĄ być oddzielone TABULATOREM! Dane w tej samej kolumnie MUSZĄ być oddzielone ', ' (przecinek i spacja)!\n\n" +
+                "2. Każda kolejna osoba musi znajdować się w oddzielnej linii (musi zostać użyty znak końca linii)!\n\n" +
+                "3. Pierwsza kolumna musi zawierać oznaczenie czy jest to Uczeń, czy Nauczyciel, czy Pracownik obsługi - odpowiednio literka U, N lub P (po tym ważny jest tabulator!)\n\n" +
+                "4. Dalsze dane muszą być wypisywane po kolei, tak jak są opisane kolumny (oprócz kolumny ZDJĘCIE!!!).\n\n" +
+                "5. Dane o zdjęciu muszą znaleźć się na końcu linii za tabulatorem. Jeżeli dana osoba nie posiada zdjęcia, to zostanie ona uzupełniona automatycznym zdjęciem. Należy zakończyć linię po poprzedniej kolumnie - bez wpisywania tabulatora i jakiekolwiek nazwy, tylko znak nowej linii!\n\n" +
+                "6. Zapoznaj się z przykładowymi danymi z folderu '_Przykładowe pliki z danymi' - dodaj najpierw zdjęcia przyciskiem importu zdjęć, a następnie dodaj wskazane tam dane oraz przyjrzyj się jak są ułożone!\n";
+
+            MessageBox.Show(announcement);
             OpenFileDialog LoadFile = OpenTxtFileManually();
 
             if (LoadFile.ShowDialog() == true)
@@ -404,6 +413,7 @@ namespace Sekretariat_szkoły_WPF
                 if (!File.Exists(destinationPath))
                     CopyFile(OFD.FileName, destinationPath);
 
+                ReportUpdate();
             }
         }
 
@@ -520,64 +530,28 @@ namespace Sekretariat_szkoły_WPF
 
         private void AddImageToDBButton_Click(object sender, RoutedEventArgs e) => ImportImage();
 
-        private void Command_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
+        private void Command_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
 
-        private void OpenStudentsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Sekretariat.SelectedIndex = 0;
-        }
+        private void OpenStudentsCommand_Executed(object sender, ExecutedRoutedEventArgs e) => Sekretariat.SelectedIndex = 0;
 
-        private void OpenTeachersCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Sekretariat.SelectedIndex = 1;
-        }
+        private void OpenTeachersCommand_Executed(object sender, ExecutedRoutedEventArgs e) => Sekretariat.SelectedIndex = 1;
 
-        private void OpenStaffMembersCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Sekretariat.SelectedIndex = 2;
-        }
+        private void OpenStaffMembersCommand_Executed(object sender, ExecutedRoutedEventArgs e) => Sekretariat.SelectedIndex = 2;
 
-        private void OpenShortcutsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Sekretariat.SelectedIndex = 9;
-        }
+        private void OpenShortcutsCommand_Executed(object sender, ExecutedRoutedEventArgs e) => Sekretariat.SelectedIndex = 9;
 
-        private void OpenAddStudentCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Sekretariat.SelectedIndex = 3;
-        }
+        private void OpenAddStudentCommand_Executed(object sender, ExecutedRoutedEventArgs e) => Sekretariat.SelectedIndex = 3;
 
-        private void OpenAddTeacherCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Sekretariat.SelectedIndex = 5;
-        }
+        private void OpenAddTeacherCommand_Executed(object sender, ExecutedRoutedEventArgs e) => Sekretariat.SelectedIndex = 5;
 
-        private void OpenAddStaffMemberCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Sekretariat.SelectedIndex = 7;
-        }
+        private void OpenAddStaffMemberCommand_Executed(object sender, ExecutedRoutedEventArgs e) => Sekretariat.SelectedIndex = 7;
 
-        private void LoadFromFileToDBCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            LoadFromFileToDB();
-        }
+        private void LoadFromFileToDBCommand_Executed(object sender, ExecutedRoutedEventArgs e) => LoadFromFileToDB();
 
-        private void ImportImageCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            ImportImage();
-        }
+        private void ImportImageCommand_Executed(object sender, ExecutedRoutedEventArgs e) => ImportImage();
 
-        private void GenerateWindowReportCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            GenerateWindowReport();
-        }
+        private void GenerateWindowReportCommand_Executed(object sender, ExecutedRoutedEventArgs e) => GenerateWindowReport();
 
-        private void GenerateAllDBReportCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            GenerateAllDBReport();
-        }
+        private void GenerateAllDBReportCommand_Executed(object sender, ExecutedRoutedEventArgs e) => GenerateAllDBReport();
     }
 }

@@ -72,6 +72,20 @@ Ogólne rozpisanie etapów pracy:
 	- Naprawa błędów związanych z niedomykającymi się plikami
 	- Dodatkowy przycisk na dodawanie zdjęć do bazy
 
+==== Edit ===
+
+05.01.2022
+... Jednak jeszcze została chwila czasu ...
+	- Stworzenie klasy CustomShortcuts odpowiadającej za skróty klawiszowe
+	- Przypisanie skrótów klawiszowych do istniejących menu
+
+07.01.2022
+... Nienawidzę skrótów klawiszowych ...
+	- Stworzenie dodatkowego menu "Operacje", posiadającego wszystkie button'y z toolbar'a
+	- Przypisanie do nich skrótów klawiszowych
+	- Wypisanie skrótów klawiszowych w zakładce "Skróty klawiszowe" (brak możliwości ich edycji)
+
+=============
 
 Testowanie:
 
@@ -82,4 +96,4 @@ Znane błędy lub wymagania poprawek:
 
 Program opiera się na danych z niezaszyfrowanych plikach tekstowych, które mogą być "pomieszane", np. użycie spacji jako rozgraniczanie poszczególnych pól zamiast tabulatora, które nie jest kontrolowane, co może doprowadzić do późniejszych błędów z odczytem danych (np. dane z kilku pól w jednym polu).
 
-Dodatkowo nie zostały zrobione skróty klawiszowe ze względu na brak czasu.
+Brak możliwości edycji skrótów klawiszowych z powodu braku wiedzy i niechęci związanej z wieloma próbami oraz nieudanym szukaniem pomocy w internecie.
