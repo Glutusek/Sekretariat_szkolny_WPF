@@ -84,6 +84,9 @@ Ogólne rozpisanie etapów pracy:
 	- Stworzenie dodatkowego menu "Operacje", posiadającego wszystkie button'y z toolbar'a
 	- Przypisanie do nich skrótów klawiszowych
 	- Wypisanie skrótów klawiszowych w zakładce "Skróty klawiszowe" (brak możliwości ich edycji)
+	
+11.01.2022
+	- Naprawa błędnego sortowania po wprowadzeniu kolumny z przyciskami do modyfikacji i usuwania danych
 
 =============
 
