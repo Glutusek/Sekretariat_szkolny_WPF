@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Sekretariat_szko³y_WPF
+namespace Sekretariat_szkoÂ³y_WPF
 {
     public partial class MainWindow : Window
     {
@@ -67,7 +67,7 @@ namespace Sekretariat_szko³y_WPF
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Chwilka na domkniêcie pliku!");
+                    MessageBox.Show("Chwilka na domkniÃªcie pliku!");
                 }
 
                 if (clearFile)
@@ -249,7 +249,7 @@ namespace Sekretariat_szko³y_WPF
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Chwilka na domkniêcie pliku!");
+                    MessageBox.Show("Chwilka na domkniÃªcie pliku!");
                 }
 
                 if (clearFile)
@@ -300,7 +300,7 @@ namespace Sekretariat_szko³y_WPF
         {
             if (Uczniowie_SortColNum.SelectedItem != null && Uczniowie_SortAscDesc.SelectedItem != null)
                 SortDataGrid(DG_Dane_Uczniowie,
-                    Uczniowie_SortColNum.SelectedIndex + 1,
+                    Uczniowie_SortColNum.SelectedIndex + 2,
                     (Uczniowie_SortAscDesc.SelectedIndex == 0)
                         ? ListSortDirection.Ascending
                         : ListSortDirection.Descending
@@ -330,7 +330,7 @@ namespace Sekretariat_szko³y_WPF
             {
                 if(prop == "")
                 {
-                    MessageBox.Show("Proszê wype³niæ wszystkie pola!");
+                    MessageBox.Show("ProszÃª wypeÂ³niÃ¦ wszystkie pola!");
                     return;
                 }
 
@@ -346,7 +346,7 @@ namespace Sekretariat_szko³y_WPF
 
             SaveIntoDatabase("Uczniowie", studentProperties, true);
 
-            MessageBox.Show("Uczeñ dodany do bazy danych!");
+            MessageBox.Show("UczeÃ± dodany do bazy danych!");
         }
 
         private void DeleteStudent(Uczen StudentToDelete)
@@ -389,7 +389,7 @@ namespace Sekretariat_szko³y_WPF
             {
                 if (prop == "")
                 {
-                    MessageBox.Show("Proszê wype³niæ wszystkie pola!");
+                    MessageBox.Show("ProszÃª wypeÂ³niÃ¦ wszystkie pola!");
                     return;
                 }
             }
@@ -430,7 +430,7 @@ namespace Sekretariat_szko³y_WPF
 
             SaveIntoDatabase("Uczniowie", StudentsToSave, false);
 
-            MessageBox.Show("Uczeñ zosta³ zmodyfikowany!");
+            MessageBox.Show("UczeÃ± zostaÂ³ zmodyfikowany!");
 
             ReportUpdate();
             Sekretariat.SelectedIndex = 0;
