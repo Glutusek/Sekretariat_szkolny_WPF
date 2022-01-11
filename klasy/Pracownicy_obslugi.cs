@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Sekretariat_szko³y_WPF
+namespace Sekretariat_szkoÂ³y_WPF
 {
     public partial class MainWindow : Window
     {
@@ -66,7 +66,7 @@ namespace Sekretariat_szko³y_WPF
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Chwilka na domkniêcie pliku!");
+                    MessageBox.Show("Chwilka na domkniÃªcie pliku!");
                 }
 
                 if (clearFile)
@@ -237,7 +237,7 @@ namespace Sekretariat_szko³y_WPF
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Chwilka na domkniêcie pliku!");
+                    MessageBox.Show("Chwilka na domkniÃªcie pliku!");
                 }
 
                 if (clearFile)
@@ -292,7 +292,7 @@ namespace Sekretariat_szko³y_WPF
         {
             if (PracownicyObslugi_SortColNum.SelectedItem != null && PracownicyObslugi_SortAscDesc.SelectedItem != null)
                 SortDataGrid(DG_Dane_PracownicyObslugi,
-                    PracownicyObslugi_SortColNum.SelectedIndex + 1,
+                    PracownicyObslugi_SortColNum.SelectedIndex + 2,
                     (PracownicyObslugi_SortAscDesc.SelectedIndex == 0)
                         ? ListSortDirection.Ascending
                         : ListSortDirection.Descending
@@ -323,7 +323,7 @@ namespace Sekretariat_szko³y_WPF
             {
                 if (prop == "")
                 {
-                    MessageBox.Show("Proszê wype³niæ wszystkie pola!");
+                    MessageBox.Show("ProszÃª wypeÂ³niÃ¦ wszystkie pola!");
                     return;
                 }
 
@@ -339,7 +339,7 @@ namespace Sekretariat_szko³y_WPF
 
             SaveIntoDatabase("Pracownicy_obslugi", staffMemberProperties, true);
 
-            MessageBox.Show("Pracownik obs³ugi dodany do bazy danych!");
+            MessageBox.Show("Pracownik obsÂ³ugi dodany do bazy danych!");
         }
 
         private void DeleteStaffMember(Pracownik_obslugi StaffMemberToDelete)
@@ -383,7 +383,7 @@ namespace Sekretariat_szko³y_WPF
             {
                 if (prop == "")
                 {
-                    MessageBox.Show("Proszê wype³niæ wszystkie pola!");
+                    MessageBox.Show("ProszÃª wypeÂ³niÃ¦ wszystkie pola!");
                     return;
                 }
             }
@@ -425,7 +425,7 @@ namespace Sekretariat_szko³y_WPF
 
             SaveIntoDatabase("Pracownicy_obslugi", StaffMembersToSave, false);
 
-            MessageBox.Show("Pracownik obs³ugi zosta³ zmodyfikowany!");
+            MessageBox.Show("Pracownik obsÂ³ugi zostaÂ³ zmodyfikowany!");
 
             ReportUpdate();
             Sekretariat.SelectedIndex = 2;
