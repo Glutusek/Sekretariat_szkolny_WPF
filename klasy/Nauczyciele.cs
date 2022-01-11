@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Sekretariat_szko³y_WPF
+namespace Sekretariat_szkoÅ‚y_WPF
 {
     public partial class MainWindow : Window
     {
@@ -67,7 +67,7 @@ namespace Sekretariat_szko³y_WPF
                 }
                 catch(Exception)
                 {
-                    MessageBox.Show("Chwilka na domkniêcie pliku!");
+                    MessageBox.Show("Chwilka na domkniÄ™cie pliku!");
                 }
                 
                 if (clearFile)
@@ -192,7 +192,7 @@ namespace Sekretariat_szko³y_WPF
                                             }
                                             catch (FormatException)
                                             {
-                                                MessageBox.Show("Wychowawstwo przyjmuje tylko wartoœci True lub False!");
+                                                MessageBox.Show("Wychowawstwo przyjmuje tylko wartoÂœci True lub False!");
                                                 error = true;
                                             }
                                             break;
@@ -310,7 +310,7 @@ namespace Sekretariat_szko³y_WPF
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Chwilka na domkniêcie pliku!");
+                    MessageBox.Show("Chwilka na domkniÄ™cie pliku!");
                 }
 
                 if (clearFile)
@@ -370,7 +370,7 @@ namespace Sekretariat_szko³y_WPF
         {
             if (Nauczyciele_SortColNum.SelectedItem != null && Nauczyciele_SortAscDesc.SelectedItem != null)
                 SortDataGrid(DG_Dane_Nauczyciele,
-                    Nauczyciele_SortColNum.SelectedIndex + 1,
+                    Nauczyciele_SortColNum.SelectedIndex + 2,
                     (Nauczyciele_SortAscDesc.SelectedIndex == 0)
                         ? ListSortDirection.Ascending
                         : ListSortDirection.Descending
@@ -402,7 +402,7 @@ namespace Sekretariat_szko³y_WPF
             {
                 if (prop == "")
                 {
-                    MessageBox.Show("Proszê wype³niæ wszystkie pola!");
+                    MessageBox.Show("ProszÄ™ wypeÅ‚niÄ‡ wszystkie pola!");
                     return;
                 }
 
@@ -463,7 +463,7 @@ namespace Sekretariat_szko³y_WPF
             {
                 if (prop == "")
                 {
-                    MessageBox.Show("Proszê wype³niæ wszystkie pola!");
+                    MessageBox.Show("ProszÄ™ wypeÅ‚niÄ‡ wszystkie pola!");
                     return;
                 }
             }
@@ -506,7 +506,7 @@ namespace Sekretariat_szko³y_WPF
 
             SaveIntoDatabase("Nauczyciele", TeachersToSave, false);
 
-            MessageBox.Show("Nauczyciel zosta³ zmodyfikowany!");
+            MessageBox.Show("Nauczyciel zostaÅ‚ zmodyfikowany!");
 
             ReportUpdate();
             Sekretariat.SelectedIndex = 1;
