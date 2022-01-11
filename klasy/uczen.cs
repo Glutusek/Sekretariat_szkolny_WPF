@@ -1,4 +1,4 @@
-namespace Sekretariat_szko³y_WPF
+namespace Sekretariat_szkolny_WPF
 {
     public class Uczen : Osoba
     {

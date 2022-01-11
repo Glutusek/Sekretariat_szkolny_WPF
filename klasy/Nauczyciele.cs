@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Sekretariat_szkoły_WPF
+namespace Sekretariat_szkolny_WPF
 {
     public partial class MainWindow : Window
     {

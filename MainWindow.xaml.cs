@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Sekretariat_szkoły_WPF
+namespace Sekretariat_szkolny_WPF
 {
     public partial class MainWindow : Window
     {

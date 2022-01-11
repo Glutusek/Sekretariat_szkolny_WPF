@@ -1,7 +1,6 @@
-﻿using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
-namespace Sekretariat_szkoły_WPF
+namespace Sekretariat_szkolny_WPF
 {
     public static class CustomShortcuts
     {

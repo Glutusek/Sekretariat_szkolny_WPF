@@ -1,4 +1,3 @@
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,9 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
-namespace Sekretariat_szko³y_WPF
+namespace Sekretariat_szkolny_WPF
 {
     public partial class MainWindow : Window
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Sekretariat_szko³y_WPF
+namespace Sekretariat_szkolny_WPF
 {
     public class Pracownik_obslugi : Osoba
     {

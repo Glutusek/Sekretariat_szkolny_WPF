@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Sekretariat_szkoły_WPF
+namespace Sekretariat_szkolny_WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml
